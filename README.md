@@ -2,3 +2,4 @@
 
 Componentes del grupo:
 -Carlos Fernández Donate
+-Jose F. Rodríguez Hernández
