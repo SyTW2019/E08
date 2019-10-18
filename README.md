@@ -1,6 +1,5 @@
 # E08
 
-<<<<<<< HEAD
 ## Proyecto final - SyTW
 ### Componentes del grupo:
 - Carlos Fernández Donate
