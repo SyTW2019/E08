@@ -1,4 +1,7 @@
 # E08
 
 Componentes del grupo:
--Carlos Fernández Donate
+- Ariane Zanardi Francisco
+- Carlos Fernandez Donate
+- Jose Francisco Rodriguez Hernandez
+- Daniel Nuez Wehbe
