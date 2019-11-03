@@ -40,6 +40,9 @@ export default function AlertDialogSlide() {
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         iniciar sesión
       </Button>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Registrarse
+      </Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -48,7 +51,7 @@ export default function AlertDialogSlide() {
         aria-labelledby="iniciar_sesion"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="iniciar_sesion">{"Inicio de sesión"}</DialogTitle>
+        <DialogTitle id="Registro">{"Registro"}</DialogTitle>
         <DialogContent>
         <Grid>
         <TextField
@@ -77,13 +80,27 @@ export default function AlertDialogSlide() {
           }}
         />
         </Grid>
+        <Grid>
+        <TextField
+          id="password_verify"
+          label="Repita la contraseña"
+          type="password"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockOutlinedIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+        </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
           <Button onClick={handleClose} color="primary">
-            Continuar
+            Registrarse
           </Button>
         </DialogActions>
       </Dialog>
