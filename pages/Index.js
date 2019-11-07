@@ -27,7 +27,6 @@ export default function FullWidthGrid() {
     <div >
       <Grid container spacing={3}>
         <Grid item xs={3}>
-          <AccountCircleIcon /> Registro
           <Login />
           <StatList />
           <Paper >Aqui Irian las STATS</Paper>

@@ -35,9 +35,10 @@ export default function AlertDialogSlide() {
     setOpen(false);
   };
 
-  const Login = () => (
+  return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <AccountCircle />
         iniciar sesión
       </Button>
       <Dialog
@@ -54,13 +55,13 @@ export default function AlertDialogSlide() {
         <TextField
           id="email"
           label="Email"
-          InputProps={
+          InputProps={{
             startAdornment: (
               <InputAdornment position="start">
                 <AccountCircle />
               </InputAdornment>
             ),
-          }
+          }}
         />
         </Grid>
         <Grid>
@@ -89,5 +90,4 @@ export default function AlertDialogSlide() {
       </Dialog>
     </div>
   );
-
-  export default Login;
+}
