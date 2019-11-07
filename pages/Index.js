@@ -8,7 +8,6 @@ import ItemList from '../components/ItemList';
 import Money from '../components/Money';
 import StatList from '../components/StatList';
 import Login from '../components/Login';
-import Registro from '../components/Registro';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,13 +24,10 @@ export default function FullWidthGrid() {
   const classes = useStyles();
 
   return (
-    <div>
+    <div >
       <Grid container spacing={3}>
         <Grid item xs={3}>
-          <Grid>
-            <Login />
-            <Registro />
-          </Grid>
+          <Login />
           <StatList />
           <Paper >Aqui Irian las STATS</Paper>
         </Grid>

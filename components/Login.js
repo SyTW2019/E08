@@ -36,7 +36,7 @@ export default function AlertDialogSlide() {
   };
 
   return (
-    <Grid>
+    <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
       <AccountCircle />
         iniciar sesión
@@ -88,6 +88,6 @@ export default function AlertDialogSlide() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Grid>
+    </div>
   );
 }
