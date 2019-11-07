@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -36,11 +37,9 @@ export default function AlertDialogSlide() {
   };
 
   return (
-    <div>
+    <Grid>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        iniciar sesión
-      </Button>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <AssignmentIndIcon/>
         Registrarse
       </Button>
       <Dialog
@@ -104,6 +103,6 @@ export default function AlertDialogSlide() {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Grid>
   );
 }
