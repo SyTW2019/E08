@@ -59,5 +59,9 @@ typings/
 
 # next.js build output
 .next
+<<<<<<< HEAD
 #Mac files
+=======
+#Mac
+>>>>>>> 24925d8dccaf4e1e7efccab2a5f874322d0594cd
 .DS_Store

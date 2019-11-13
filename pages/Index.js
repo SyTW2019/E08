@@ -9,6 +9,7 @@ import Money from '../components/Money';
 import StatList from '../components/StatList';
 import Login from '../components/Login';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -37,6 +38,7 @@ export default function FullWidthGrid() {
         <Grid item xs={3}>
           <Money />
           <ItemList />
+          
         </Grid>
       </Grid>
     </div>
