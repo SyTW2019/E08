@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -38,8 +39,8 @@ export default function AlertDialogSlide() {
   return (
     <Grid>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-      <AccountCircle />
-        iniciar sesión
+      <AssignmentIndIcon/>
+        Registrarse
       </Button>
       <Dialog
         open={open}
@@ -49,7 +50,7 @@ export default function AlertDialogSlide() {
         aria-labelledby="iniciar_sesion"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="iniciar_sesion">{"Inicio de sesión"}</DialogTitle>
+        <DialogTitle id="Registro">{"Registro"}</DialogTitle>
         <DialogContent>
         <Grid>
         <TextField
@@ -78,13 +79,27 @@ export default function AlertDialogSlide() {
           }}
         />
         </Grid>
+        <Grid>
+        <TextField
+          id="password_verify"
+          label="Repita la contraseña"
+          type="password"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockOutlinedIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+        </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
           <Button onClick={handleClose} color="primary">
-            Continuar
+            Registrarse
           </Button>
         </DialogActions>
       </Dialog>
