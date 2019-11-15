@@ -7,6 +7,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ItemList from '../components/ItemList';
 import Money from '../components/Money';
 import StatList from '../components/StatList';
+import Login from '../components/Login';
+import Registro from '../components/Registro';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,10 +26,13 @@ export default function FullWidthGrid() {
   const classes = useStyles();
 
   return (
-    <div >
+    <div>
       <Grid container spacing={3}>
         <Grid item xs={3}>
-          <AccountCircleIcon /> Registro
+          <Grid>
+            <Login />
+            <Registro />
+          </Grid>
           <StatList />
           <Paper >Aqui Irian las STATS</Paper>
         </Grid>
@@ -36,6 +42,7 @@ export default function FullWidthGrid() {
         <Grid item xs={3}>
           <Money />
           <ItemList />
+          
         </Grid>
       </Grid>
     </div>
