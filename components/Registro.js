@@ -15,10 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-<<<<<<< HEAD
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-=======
->>>>>>> 67635e1f1d2f9ebd6b3510e02a4b6feabff3c146
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -42,13 +39,8 @@ export default function AlertDialogSlide() {
   return (
     <Grid>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-<<<<<<< HEAD
       <AssignmentIndIcon/>
         Registrarse
-=======
-      <AccountCircle />
-        iniciar sesión
->>>>>>> 67635e1f1d2f9ebd6b3510e02a4b6feabff3c146
       </Button>
       <Dialog
         open={open}
@@ -58,11 +50,7 @@ export default function AlertDialogSlide() {
         aria-labelledby="iniciar_sesion"
         aria-describedby="alert-dialog-slide-description"
       >
-<<<<<<< HEAD
         <DialogTitle id="Registro">{"Registro"}</DialogTitle>
-=======
-        <DialogTitle id="iniciar_sesion">{"Inicio de sesión"}</DialogTitle>
->>>>>>> 67635e1f1d2f9ebd6b3510e02a4b6feabff3c146
         <DialogContent>
         <Grid>
         <TextField
@@ -91,7 +79,6 @@ export default function AlertDialogSlide() {
           }}
         />
         </Grid>
-<<<<<<< HEAD
         <Grid>
         <TextField
           id="password_verify"
@@ -106,19 +93,13 @@ export default function AlertDialogSlide() {
           }}
         />
         </Grid>
-=======
->>>>>>> 67635e1f1d2f9ebd6b3510e02a4b6feabff3c146
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
           <Button onClick={handleClose} color="primary">
-<<<<<<< HEAD
             Registrarse
-=======
-            Continuar
->>>>>>> 67635e1f1d2f9ebd6b3510e02a4b6feabff3c146
           </Button>
         </DialogActions>
       </Dialog>
