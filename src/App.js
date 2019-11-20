@@ -25,11 +25,15 @@ class App extends Component {
   render() {
     return (
       <div >
-        <Grid container spacing={3}>
+        <Grid container spacing={3} justify="space-evenly" alignItems="flex-start">
           <Grid item xs={3}>
-            <Login />
-            <Registro/>
-            <Paper >Aqui Irian las STATS</Paper>
+            <Paper>
+              <Grid container>
+                <Login />
+                <Registro />
+              </Grid>
+              Aqui Irian las STATS
+            </Paper>
             <StatList />
           </Grid>
           <Grid item xs={6}>
@@ -39,6 +43,7 @@ class App extends Component {
             <ItemList/>
           </Grid>
         </Grid>
+        
       </div>
     );
   }
