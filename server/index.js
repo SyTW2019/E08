@@ -1,6 +1,7 @@
 const express  = require('express');
 const mongoose  = require('mongoose');
 const bodyParser  = require('body-parser');
+const path = require('path');
 
 const users = require('./routes/api/users');
 
@@ -18,7 +19,13 @@ mongoose.connect(db)
   .catch(err => console.log(err));
 
 //Use routes
-app.use('/api/users', users);
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.get('/', function(req,res){
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
+app.use('/user', user);
 
 const port = process.env.PORT || 3000;
 
