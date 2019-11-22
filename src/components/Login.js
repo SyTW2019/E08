@@ -98,7 +98,7 @@ class Login extends React.Component{
       get_value(){
         console.log("en get_values")
         
-        if(this.validateEmail)
+        if(validateEmail())
         {
           //console.log(this.state.emailValue)
           if(this.state.emailValue)
