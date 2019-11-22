@@ -55,9 +55,7 @@ class Login extends React.Component{
       }
     
       handleError = event => {
-        this.setState({
-          [event.target.name]: event.taget.value
-        })
+        this.get_value()
         console.log("en el handleError")
       }
     
@@ -81,7 +79,8 @@ class Login extends React.Component{
         this.props.userPostFetch(this.state);
       }
 
-      validateEmail = () => {
+      validateEmail(){
+        console.log(this.state.emailValue)
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
         {
           this.setState({emailError: false})
@@ -96,19 +95,25 @@ class Login extends React.Component{
         }
       }
     
-      get_value = () => {
+      get_value(){
         console.log("en get_values")
-        if(this.validateEmail())
-            if(this.state.emailValue)
-            {
-              this.setState({emailError: false})
-              //setPwdError(false);
-              console.log("Trying to log in")
-              //handleClose()
-            }
-            else
-              this.setState({emailError: true})
-              //setPwdError(true);
+        
+        if(this.validateEmail)
+        {
+          //console.log(this.state.emailValue)
+          if(this.state.emailValue)
+          {
+            console.log("algo")
+            this.setState({emailError: false})
+            //setPwdError(false);
+            console.log("Trying to log in")
+            //handleClose()
+          }
+          else
+            this.setState({emailError: true})
+            //setPwdError(true);
+        }
+            
       }
 
       render() {
@@ -171,7 +176,7 @@ class Login extends React.Component{
                 <Button  value={this.state.open} onClick={this.handleClose} color="primary">
                   Cancelar
                 </Button>
-                <Button onClick={this.get_values} color="primary">
+                <Button onClick={this.handleError} color="primary">
                   Continuar
                 </Button>
               </DialogActions>
