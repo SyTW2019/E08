@@ -33,6 +33,8 @@ class Registro extends React.Component{
         this.handleClose = this.handleClose.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleError = this.handleError.bind(this);
+        this.handleErrorEmail = this.handleErrorEmail.bind(this);
+        this.handleErrorPwd = this.handleErrorPwd.bind(this);
 
     }
 
@@ -47,14 +49,35 @@ class Registro extends React.Component{
         });
     }
 
-    handleError = event => {
-        if(this.get_values())
+    handleError= event =>{
+        console.log("Errores")
+        this.handleErrorEmail()
+        this.handleErrorPwd()
+    }
+
+    handleErrorEmail = event => {
+        if(this.validateEmail())
             this.setState({
                 emailError:false,
+               
             })
         else
             this.setState({
                 emailError:true,
+                
+            })
+        
+    }
+    handleErrorPwd = event => {
+        if(this.check_pwd())
+            this.setState({
+               
+                pwdError:false,
+            })
+        else
+            this.setState({
+                
+                pwdError:true,
             })
         
     }
@@ -81,39 +104,39 @@ class Registro extends React.Component{
 
     check_pwd(){
         console.log("en el check")
-        if(this.state.pwdValue != this.state.pwdConfValue){
-            this.setState({
-                pwdError: true,
-            })
-            return false;
+        if(this.state.pwdValue === this.state.pwdConfValue){
+            if(this.state.pwdValue.length >= 8)
+                if((/^(?=.*[a-z])(?=.*[A-Z])/).test(this.state.pwdValue)){
+                    return true;
+                }
+                else{
+                    console.log("Error mayuscula y minuscula")
+                    return false;
+                }
+            else{
+                console.log("Error tamaño contraseña")
+                return false;
+            }
         }
         else if(this.state.pwdValue && this.state.pwdConfValue){
-            this.setState({
-                pwdError: false,
-            })
-            return true;
+            return false;
         }
 
 
     }
 
-    get_values(){
+   /* get_values(){
         console.log("en el get_values")
-        if(this.validateEmail()){
-            if(this.state.emailValue)
+        if(this.validateEmail()&& this.check_pwd()){
+
+            if(this.state.emailValue&&this.state.pwdValue)
                 return true;
             else
                 return false;
-            /*if(this.check_pwd())
-            {
-                return true
-            }
-            
-            else
-                return false*/
+           
         }
             
-    }
+    }*/
 
     render() {
     return (
@@ -197,7 +220,7 @@ class Registro extends React.Component{
                 label="Verificación de contraseña"
                 type="password"
                 value={this.state.pwdConfValue}
-                //error={this.state.pwdError}
+                error={this.state.pwdError}
                 ref={(input) => this.input = input}
                 onChange={this.handleChange}
                 InputProps={{
