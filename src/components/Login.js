@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -25,15 +25,6 @@ class Login extends React.Component{
             pwdError: "",
         }
 
-        /*this.error_state = {
-            emailError: "",
-            pwdError: "",
-        }*/
-
-        /*this.dialog = {
-            open: "",
-        }*/
-
         this.handleChange = this.handleChange.bind(this);
         this.handleError = this.handleError.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
@@ -51,12 +42,17 @@ class Login extends React.Component{
         this.setState({
           [name]: value
         });
-        console.log("en el handleChange " + event.target.value)
       }
     
       handleError = event => {
-        this.get_value()
-        console.log("en el handleError")
+        if(this.get_value())
+          this.setState({
+            emailError:false,
+          })
+        else
+          this.setState({
+            emailError:true,
+          })
       }
     
       handleOpen = event => {
@@ -80,40 +76,22 @@ class Login extends React.Component{
       }
 
       validateEmail(){
-        console.log(this.state.emailValue)
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
-        {
-          this.setState({emailError: false})
-          //setEmailError(false);
           return true;
-        }
         else 
-        {
-          this.setState({emailError: true})
-          //setEmailError(true);
           return false;
-        }
       }
     
       get_value(){
-        console.log("en get_values")
         
-        if(validateEmail())
+        
+        if(this.validateEmail())
         {
-          //console.log(this.state.emailValue)
           if(this.state.emailValue)
-          {
-            console.log("algo")
-            this.setState({emailError: false})
-            //setPwdError(false);
-            console.log("Trying to log in")
-            //handleClose()
-          }
+            return true;
           else
-            this.setState({emailError: true})
-            //setPwdError(true);
-        }
-            
+            return false
+        }   
       }
 
       render() {
@@ -141,7 +119,7 @@ class Login extends React.Component{
                 value={this.state.emailValue}
                 ref={(input) => this.input = input}
                 onChange={this.handleChange}
-                //error={this.handleError}
+                error={this.state.emailError}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -173,7 +151,7 @@ class Login extends React.Component{
               </Grid>
               </DialogContent>
               <DialogActions>
-                <Button  value={this.state.open} onClick={this.handleClose} color="primary">
+                <Button  onClick={this.handleClose} color="primary">
                   Cancelar
                 </Button>
                 <Button onClick={this.handleError} color="primary">
