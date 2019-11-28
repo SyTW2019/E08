@@ -100,7 +100,7 @@ class Registro extends React.Component{
     get_values(){
         console.log("en el get_values")
         if(this.validateEmail()){
-            if(this.emailValue)
+            if(this.state.emailValue)
                 return true;
             else
                 return false;
