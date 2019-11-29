@@ -13,168 +13,236 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-const useStyles = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}));
 
-export default function AlertDialogSlide() {
-  const [open, setOpen] = React.useState(false);
-  //Variables para los datos de los usuarios
-  const [emailValue, setEmailValue] = React.useState('');
-  const [userValue, setUserValue] = React.useState('');
-  const [pwdValue, setPwdValue] = React.useState('');
-  const [pwdConfValue, setPwdConfValue] = React.useState('');
+class Registro extends React.Component{
+    
+    constructor(props){
+        super(props);
 
+        this.state={
+            emailValue: "",
+            userValue: "",
+            pwdValue: "",
+            pwdConfValue: "",
+            emailError: "",
+            pwdError: "",
+            open: "",
+        }
 
-  const [emailError, setEmailError] = React.useState(false);
-  const [pwdError, setPwdError] = React.useState(false);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleError = this.handleError.bind(this);
+        this.handleErrorEmail = this.handleErrorEmail.bind(this);
+        this.handleErrorPwd = this.handleErrorPwd.bind(this);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const validateEmail = () => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailValue))
-    {
-      setEmailError(false);
-      return true;
     }
-    else 
-    {
-      setEmailError(true);
-      return false;
-    }
-  }
 
-  const check_pwd = () => {
-    if(pwdValue != pwdConfValue)
-    {
-      setPwdError(true);
-      return false;
+    handleChange = event => {
+        event.preventDefault();
+        
+        const target = event.target;
+        const value = target.value;
+        const name = target.name
+        this.setState({
+          [name]: value
+        });
     }
-    else if(pwdValue && pwdConfValue)
-    {
-      setPwdError(false);
-      return true;
-    }
-      
-  }
 
-  const get_values = () => {
-    if(validateEmail())
-      if(check_pwd())
-      {
-        console.log("Esta todo bien");
-        //handleClose()
+    handleError= event =>{
+        console.log("Errores")
+        this.handleErrorEmail()
+        this.handleErrorPwd()
+    }
+
+    handleErrorEmail = event => {
+        if(this.validateEmail())
+            this.setState({
+                emailError:false,
+               
+            })
+        else
+            this.setState({
+                emailError:true,
+                
+            })
+        
+    }
+    handleErrorPwd = event => {
+        if(this.check_pwd())
+            this.setState({
+               
+                pwdError:false,
+            })
+        else
+            this.setState({
+                
+                pwdError:true,
+            })
+        
+    }
+
+    handleClickOpen = event => {
+        this.setState({
+            open: true,
+          })
+    }
+
+    handleClose = event => {
+        this.setState({
+            open: false,
+          })
+    }
+
+    validateEmail(){
+        console.log(this.state.emailValue)
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
+          return true;
+        else 
+          return false;
       }
-    else
-      console.log("Something went wrong");
-  }
 
-  return (
-    <Grid>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-      <AssignmentIndIcon/>
-        Registrarse
-      </Button>
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="iniciar_sesion"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="Registro">{"Registro"}</DialogTitle>
-        <DialogContent>
+    check_pwd(){
+        console.log("en el check")
+        if(this.state.pwdValue === this.state.pwdConfValue){
+            if(this.state.pwdValue.length >= 8)
+                if((/^(?=.*[a-z])(?=.*[A-Z])/).test(this.state.pwdValue)){
+                    return true;
+                }
+                else{
+                    console.log("Error mayuscula y minuscula")
+                    return false;
+                }
+            else{
+                console.log("Error tamaño contraseña")
+                return false;
+            }
+        }
+        else if(this.state.pwdValue && this.state.pwdConfValue){
+            return false;
+        }
+    }
+
+   /* get_values(){
+        console.log("en el get_values")
+        if(this.validateEmail()&& this.check_pwd()){
+
+            if(this.state.emailValue&&this.state.pwdValue)
+                return true;
+            else
+                return false;
+           
+        }
+            
+    }*/
+
+    render() {
+    return (
         <Grid>
-        <TextField
-          required
-          id="email"
-          label="Correo Electrónico"
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
-          error={emailError}
-          helperText="Correo Electrónico Incorrecto"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            ),
-          }}
-        />
-        </Grid>
-        <Grid>
-        <TextField
-          required
-          id="username"
-          label="Nombre de Usuario"
-          value={userValue}
-          onChange={(e) => setUserValue(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            ),
-          }}
-        />
-        </Grid>
-        <Grid>
-        <TextField
-          required
-          id="password"
-          label="Contraseña"
-          type="password"
-          value={pwdValue}
-          onChange={(e) => setPwdValue(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <LockOutlinedIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        </Grid>
-        <Grid>
-        <TextField
-          required
-          id="password_verify"
-          label="Verificación de contraseña"
-          type="password"
-          value={pwdConfValue}
-          error={pwdError}
-          onChange={(e) => setPwdConfValue(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <LockOutlinedIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={get_values} color="primary">
-            Registrarse
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Grid>
-  );
+          <Button variant="outlined" color="primary" value={this.state.open} onClick={this.handleClickOpen}>
+            <AssignmentIndIcon/>
+                Registrarse
+            </Button>
+            <Dialog
+                open={this.state.open}
+                //TransitionComponent={Transition}
+                keepMounted
+                onClose={this.handleClose}
+                aria-labelledby="iniciar_sesion"
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogTitle id="Registro">{"Registro"}</DialogTitle>
+                <DialogContent>
+                <Grid>
+                <TextField
+                required
+                id="email"
+                name = "emailValue"
+                label="Correo Electrónico"
+                value={this.state.emailValue}
+                ref={(input) => this.input = input}
+                onChange={this.handleChange}
+                error={this.state.emailError}
+                helperText="Correo Electrónico Incorrecto"
+                InputProps={{
+                    startAdornment: (
+                    <InputAdornment position="start">
+                        <AccountCircle />
+                    </InputAdornment>
+                    ),
+                }}
+                />
+                </Grid>
+                <Grid>
+                <TextField
+                required
+                id="username"
+                label="Nombre de Usuario"
+                name = "userValue"
+                value={this.state.userValue}
+                ref={(input) => this.input = input}
+                onChange={this.handleChange}
+                InputProps={{
+                    startAdornment: (
+                    <InputAdornment position="start">
+                        <AccountCircle />
+                    </InputAdornment>
+                    ),
+                }}
+                />
+                </Grid>
+                <Grid>
+                <TextField
+                required
+                id="password"
+                name = "pwdValue"
+                label="Contraseña"
+                type="password"
+                value={this.state.pwdValue}
+                ref={(input) => this.input = input}
+                onChange={this.handleChange}
+                InputProps={{
+                    startAdornment: (
+                    <InputAdornment position="start">
+                        <LockOutlinedIcon />
+                    </InputAdornment>
+                    ),
+                }}
+                />
+                </Grid>
+                <Grid>
+                <TextField
+                required
+                id="password_verify"
+                name= "pwdConfValue"
+                label="Verificación de contraseña"
+                type="password"
+                value={this.state.pwdConfValue}
+                error={this.state.pwdError}
+                ref={(input) => this.input = input}
+                onChange={this.handleChange}
+                InputProps={{
+                    startAdornment: (
+                    <InputAdornment position="start">
+                        <LockOutlinedIcon />
+                    </InputAdornment>
+                    ),
+                }}
+                />
+                </Grid>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                    Cancelar
+                </Button>
+                <Button onClick={this.handleError} color="primary">
+                    Registrarse
+                </Button>
+                </DialogActions>
+            </Dialog>
+            </Grid>
+      )
+    }
 }
+
+export default Registro;
