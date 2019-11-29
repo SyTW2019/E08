@@ -121,8 +121,6 @@ class Registro extends React.Component{
         else if(this.state.pwdValue && this.state.pwdConfValue){
             return false;
         }
-
-
     }
 
    /* get_values(){
