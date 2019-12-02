@@ -12,6 +12,15 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import { connect } from "react-redux";
+import { addUser } from "../js/actions/index";
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addUser: user => dispatch(addUser(user))
+    };
+}
+
 
 
 class Registro extends React.Component{
@@ -46,8 +55,15 @@ class Registro extends React.Component{
         const name = target.name
         this.setState({
           [name]: value
-        });
+        });    
     }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        const {}
+    }
+
+
 
     handleError= event =>{
         console.log("Errores")
@@ -245,4 +261,3 @@ class Registro extends React.Component{
     }
 }
 
-export default Registro;
