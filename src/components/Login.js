@@ -4,22 +4,22 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import { makeStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import ReduxThunk from 'redux-thunk'
 import {connect} from 'react-redux';
-import {loginUser} from '../js/actions/index';
+import {userLoginFetch} from '../js/actions/index';
 
 
 function mapDispatchToProps(dispatch) {
   return {
-      loginUser: user => dispatch(loginUser(user))
+      userLoginFetch: user => dispatch(userLoginFetch(user))
   };
 }
+
 
 class Login extends React.Component{
 
@@ -38,7 +38,7 @@ class Login extends React.Component{
         this.handleError = this.handleError.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+      
 
     }
 
@@ -55,10 +55,14 @@ class Login extends React.Component{
       }
     
       handleError = event => {
-        if(this.get_value())
+        if(this.get_value()){
           this.setState({
             emailError:false,
+
           })
+          event.preventDefault()
+          this.props.userLoginFetch(this.state)
+        }
         else
           this.setState({
             emailError:true,
@@ -77,12 +81,6 @@ class Login extends React.Component{
         this.setState({
           open: false,
         })
-      }
-    
-      handleSubmit = event => {
-        event.preventDefault()
-        
-        this.props.userPostFetch(this.state);
       }
 
       validateEmail(){
