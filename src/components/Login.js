@@ -11,9 +11,15 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {connect} from 'react-redux';
+import {loginUser} from '../js/actions/index';
 
 
-
+function mapDispatchToProps(dispatch) {
+  return {
+      loginUser: user => dispatch(loginUser(user))
+  };
+}
 
 class Login extends React.Component{
 
@@ -168,4 +174,4 @@ class Login extends React.Component{
       }
     } 
       
-    export default Login;
+    export default connect(null,mapDispatchToProps)(Login);

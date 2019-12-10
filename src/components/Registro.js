@@ -60,7 +60,6 @@ class Registro extends React.Component{
 
     handleSubmit = event => {
         event.preventDefault();
-        const {}
     }
 
 
@@ -261,3 +260,4 @@ class Registro extends React.Component{
     }
 }
 
+export default connect(null, mapDispatchToProps)(Registro);
