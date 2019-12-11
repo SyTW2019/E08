@@ -8,6 +8,7 @@ import ItemList from './components/ItemList';
 import Login from './components/Login';
 import Registro from './components/Registro';
 import {connect} from 'react-redux'
+import Game from './components/Game';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,7 @@ class App extends Component {
             <StatList />
           </Grid>
           <Grid item xs={6}>
-            <Paper>El video game</Paper>
+            <Game />
           </Grid>
           <Grid item xs={3}>
             <ItemList/>

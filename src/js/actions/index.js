@@ -73,7 +73,7 @@ export const userDataFetch = user => {
                     //Comparar si lo q devuelve el servidor es lo mismo q el usuario metio.
                 } else {
                     localStorage.setItem("token", data.jwt)
-                    dispatch(UserData(data.user))
+                    dispatch(userData(data.user))
                 }
             })
         
