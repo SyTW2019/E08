@@ -21,10 +21,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
     "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "eject": "react-scripts eject",
+    "test:watch": "npm test -- --watch",
     "start-server": "pm2 start server/index.js",
     "server": "nodemon server/index.js"
   }
