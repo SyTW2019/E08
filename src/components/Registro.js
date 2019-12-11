@@ -12,6 +12,16 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import ReduxThunk from 'redux-thunk'
+import { connect } from "react-redux";
+import { userPostFetch } from "../js/actions/index";
+
+function mapDispatchToProps(dispatch) {
+    return {
+        userPostFetch: userInfo => dispatch(userPostFetch(userInfo))
+    };
+}
+
 
 
 class Registro extends React.Component{
@@ -46,13 +56,24 @@ class Registro extends React.Component{
         const name = target.name
         this.setState({
           [name]: value
-        });
+        });    
     }
+
+    handleSubmit = event => {
+        event.preventDefault();
+    }
+
+
 
     handleError= event =>{
         console.log("Errores")
         this.handleErrorEmail()
         this.handleErrorPwd()
+        if( this.state.pwdError == false && this.state.emailError == false)
+        {
+            event.preventDefault();
+            this.props.userPostFetch(this.state);
+        }
     }
 
     handleErrorEmail = event => {
@@ -71,7 +92,6 @@ class Registro extends React.Component{
     handleErrorPwd = event => {
         if(this.check_pwd())
             this.setState({
-               
                 pwdError:false,
             })
         else
@@ -245,4 +265,4 @@ class Registro extends React.Component{
     }
 }
 
-export default Registro;
+export default connect(null, mapDispatchToProps)(Registro);
