@@ -13,11 +13,11 @@ router.get('/', (req, res) => {
 });
 
 // @route POST user
-router.post('/', (req, res) => {
+router.post('/registro', (req, res) => {
   const newUser = new User({
-    nombre: req.body.nombre,
-    password: req.body.password,
-    email: req.body.email
+    nombre: req.body.emailValue,
+    password: req.body.pwdValue,
+    email: req.body.emailValue
   });
   console.log(`valor de newuser: ${newUser}`);
   newUser.save()

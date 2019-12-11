@@ -2,7 +2,7 @@
 
 export const userPostFetch = user => {
     return async function (dispatch){
-        const resp = await fetch("10.6.128.58:8080/user", {
+        const resp = await fetch("10.6.129.162:80/user/registro", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ const registUser = userObj => ({
 
 export const userLoginFetch = user => {
     return async function (dispatch){
-        const resp = await fetch("10.6.128.58:8080/login", {
+        const resp = await fetch("10.6.129.162:80/user/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const userLoginFetch = user => {
         })
 
             .then(resp => resp.json())
-            .then(data => { 
+            .then(data => {
                 if(data.message)
                 {
                     //Comparar si lo q devuelve el servidor es lo mismo q el usuario metio.
@@ -57,7 +57,7 @@ const loginUser = userObj => ({
 
 export const userDataFetch = user => {
     return async function (dispatch){
-        const resp = await fetch("10.6.128.58:8080/login", {
+        const resp = await fetch("10.6.129.162:80/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export const userDataFetch = user => {
         })
 
             .then(resp => resp.json())
-            .then(data => { 
+            .then(data => {
                 if(data.message)
                 {
                     //Comparar si lo q devuelve el servidor es lo mismo q el usuario metio.
@@ -76,7 +76,7 @@ export const userDataFetch = user => {
                     dispatch(userData(data.user))
                 }
             })
-        
+
         const data = await resp.json()
         localStorage.setItem("token", data.jwt)
         dispatch(userData(data.user))
@@ -89,7 +89,7 @@ const userData = dataObj => ({
 
 export const saveData = gameData => {
     return async function(dispatch){
-        const resp = await fetch("10.6.128.58:8080/user", {
+        const resp = await fetch("10.6.129.162:80/user", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
