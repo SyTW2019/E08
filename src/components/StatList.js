@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
                         <ListItemText primary="Stat nº2"/>
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary ="Stat nº3"/>
+                        <ListItemText primary="Stat nº3"/>
                     </ListItem>
                 </List>
             </div>
