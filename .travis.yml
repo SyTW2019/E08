@@ -10,4 +10,4 @@ true:
   branch: master
 notifications:
   slack:
-    rooms:- sytw:BElmeEnhTSiVAJDcPdn51obH#2019-e08
+    rooms: sytw:BElmeEnhTSiVAJDcPdn51obH#2019-e08
