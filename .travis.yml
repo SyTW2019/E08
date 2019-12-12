@@ -10,5 +10,4 @@ true:
   branch: master
 notifications:
   slack:
-    rooms:
-      secure: xoKruHFOT0snaMXQE5BRMplZZ/lWVf7wQMBidQkLF8MK+idufY8hYiIB24/+2p/pcG1j3VKIAbOa1KdUTFQDNIYhfs/VAHNHB/iRFKinSs9m2Ss4S/YuKhG5hKaYB+qXTMvRUnoys7jyjax69rai+Ss4OuBkdy/E/yhJmP63WuOrJnGUjGf2iu6IeUOXaBnD2Dv/zTzwlaPu0MTSiA4uLErOYOavZCXNopI+XXxgqFOVxi9cJahRfImDk/6gPk1zSA57NDhIdsddcRj70QVAi1hB68syVW+YTJ48nTPlF4YSAPU5mQSxiZbz6BQWh+VZcEEICjeabpzDNt7kkXczUYHpT6bR+IgvkvaFU0bDbPp9KciOlouT+N4VjRKbM9psw1m4CXVKGRKm3mUATeGKgA1eAGO7BdnomwS9Oh6WgaDW3LnL/rKq6LukpisCnn33Fcs0268bvfz1m5O+faVQ3SdlaPsywelBXVT4fIvNRWuaqvXo5ia7dEvslcpqk/G/aLtq/YdLw6PI0UkG/blTObkzuBhiPly/YSj31Y2WtiGwbmh85DMofoVvqXA1x3bylBRE1qzPXxfGdd2eMi7PwsgLoWUs6rcW4vyBGq6UCMaGG8Lr7fUDJCfWDNOMC/sMJk9zNZIYtpG39w0AtMK4RsmnRvwzXu/zWdrhDv+0h5w=
+    rooms:- sytw:BElmeEnhTSiVAJDcPdn51obH#2019-e08
