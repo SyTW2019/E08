@@ -1,7 +1,9 @@
 //import { ADD_USER } from "../constants/action-types";
 
 const initialState = {
-    users: []
+    users: [],
+    items: [0,0,0,0],
+
 };
 
 export default function reducer(state = initialState, action){
@@ -16,6 +18,7 @@ export default function reducer(state = initialState, action){
             return {...state, users: action.payload}
         case 'SAVE_DATA':
             return {...state, users: action.payload}
+        
         default:
             return state;
     }

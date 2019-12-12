@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux';
 import pcimg from '../../public/img/pc.png';
-
+import ItemList from './ItemList';
 
 class Game extends React.Component{
     constructor(props){
@@ -13,8 +13,9 @@ class Game extends React.Component{
             oro: 0,
             i:0,
             currentLvl: 1,
-            
+            count:0
         }
+        this.output = this.output.bind(this);
     }
 
     monster = {
@@ -69,6 +70,10 @@ class Game extends React.Component{
         //quitarle vida al bicho 
     }
 
+    output(evt){
+        console.log("Probando la función");
+        this.setState({ count: this.state.count+evt})
+    }
     gameLoop = (event) =>{
         console.log(pcimg);
         this.state.i++;
@@ -87,6 +92,12 @@ class Game extends React.Component{
                     <h1>ORO ACTUAL: {this.state.oro} </h1>
                     <h2>VIDA: {this.monster.hp}</h2>
                     <img src={pcimg} onClick={this.handleClick} alt="PC"/>
+                </Grid>
+                <Grid>
+                    <ItemList
+                        func={this.output}
+                    />
+                    <h1>{this.state.count}</h1>
                 </Grid>
             </div>
         )
