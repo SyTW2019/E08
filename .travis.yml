@@ -6,7 +6,7 @@ cache:
   - node_modules
 script:
 - npm test
-- CI=false npm run build
+- unset CI npm run build
 true:
   branch: master
 notifications:
