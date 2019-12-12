@@ -7,6 +7,7 @@ import StatList from './components/StatList';
 import ItemList from './components/ItemList';
 import Login from './components/Login';
 import Registro from './components/Registro';
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,6 +19,10 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
   },
 }));
+
+const mapDispatchToProps = dispatch => ({
+  //getProfileFetch: () => dispatch(getProfileFetch())
+})
 
 class App extends Component {
 
@@ -49,4 +54,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null,mapDispatchToProps)(App);
