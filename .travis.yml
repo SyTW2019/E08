@@ -6,6 +6,7 @@ cache:
   - node_modules
 script:
 - npm test
+- npm run-script build
 true:
   branch: master
 notifications:
