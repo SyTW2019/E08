@@ -18,8 +18,11 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@babel/core": "*",
+    "@babel/preset-react": "*",
     "nodemon": "^1.19.4",
     "@babel/preset-env": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "*",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0"
   },

@@ -1,16 +1,15 @@
 language: node_js
 node_js:
-  - "stable"
+- stable
 cache:
   directories:
-    - node_modules
+  - node_modules
 script:
-  - npm test
-#  - npm run build
-#deploy:
-#  provider: surge
-#  skip_cleanup: true
-#  domain: <my_name_here>.surge.sh
-#  project: ./build/
-on:
+- npm test
+- unset CI npm run build
+true:
   branch: master
+notifications:
+  slack:
+    rooms:
+      - sytw:ow2Sf6wUNpEMbn6dabaRRUNF#2019-e08
