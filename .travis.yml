@@ -1,4 +1,5 @@
 language: node_js
+dist: trusty
 node_js:
 - stable
 cache:
@@ -6,6 +7,7 @@ cache:
   - node_modules
 script:
 - npm test
+- sonar-scanner
 - unset CI npm run build
 true:
   branch: master
@@ -13,3 +15,8 @@ notifications:
   slack:
     rooms:
       - sytw:ow2Sf6wUNpEMbn6dabaRRUNF#2019-e08
+addons:
+  sonarcloud:
+    organization: "sytw2019"
+    token:
+      secure: "iVx3lV9OR/z6/vUSxSIS7Su1tArlrlhjdTn5jS7G5HkuRx1EjlK6K0pxDo0LV0kHdoadJ71RPYtoLko93G7vjmPLA/Rdsxv2hFES8FKCBZs1oNdv3ejoOGhg1YiXWnLJ+YzxUwuhQ156RcJIkworM9cp15cl7od3JyQ9qkmR3SyJK1GNCzvc8tWQz1DMWO4p8gOBXfalPSTMTQBFyzt9zy1DtgglW8d8KMoQwqWS1zjisjBljn8LC6yekehyOyIcecCV3KfdzvFFcbEzl3L+0ch0Ij/xEQqp5Ln2fCkG9/0ckD81xo7k1msOtlqbcJ9Xdqo3G+r7V4d45bJbx1Dfv5IHz00wXv58Ar6cr9sVqPv7qRWyOf9YFOPLFmWQUynafHBK8wB3fP5bzUCKwp/RyKDjWw0VLLOcnBGsZOhhvaA7eFXsSsp/+GWRN53L0rF7ja9DGamw2H5cq8EUeXnzNcHXiZfL4hhiW02GR7Uxow5BR5ax+B+MsQgdClGw9r/A3NaN70KuZ+iAh/wd4TaB4hVEyz//jScLrELm9nILbdj0U5a9nk879NyoMCbwzMQLKLtkBRGRawNiz+jaiavcXMsFPrcKqDpBsxhwlTFIu5Dx8RMvtrgEi0QCyATSr6sh+rSS1DB0Je91z0k1ibBS05nSRKRmw7RWQzVO1tFktTs="
