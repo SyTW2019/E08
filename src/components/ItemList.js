@@ -22,10 +22,16 @@ const rows = [
 ];
 
 class ItemList extends React.Component{
+    constructor(props){
+        super(props);
+    }
     render()
     {
         return(
             <div>
+                <button onClick={(evt) => this.props.func(1)}>
+                    Testme
+                </button>
                 <Paper >
                     <Table >
                         <TableHead>

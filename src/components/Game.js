@@ -21,8 +21,9 @@ class Game extends React.Component{
             oro: 0,
             i:0,
             currentLvl: 1,
-            
+            count:0
         }
+        this.output = this.output.bind(this);
     }
 
     monster = {
@@ -77,6 +78,10 @@ class Game extends React.Component{
         //quitarle vida al bicho 
     }
 
+    output(evt){
+        console.log("Probando la función");
+        this.setState({ count: this.state.count+evt})
+    }
     gameLoop = (event) =>{
         console.log(pcimg);
         console.log(store.getState());
@@ -96,6 +101,12 @@ class Game extends React.Component{
                     <h1>ORO ACTUAL: {this.state.oro} </h1>
                     <h2>VIDA: {this.monster.hp}</h2>
                     <img src={pcimg} onClick={this.handleClick} alt="PC"/>
+                </Grid>
+                <Grid>
+                    <ItemList
+                        func={this.output}
+                    />
+                    <h1>{this.state.count}</h1>
                 </Grid>
             </div>
         )
