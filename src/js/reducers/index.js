@@ -1,7 +1,8 @@
 //import { ADD_USER } from "../constants/action-types";
 
 const initialState = {
-    users: []
+    users: [],
+    logged: false,
 };
 
 export default function reducer(state = initialState, action){
@@ -16,6 +17,9 @@ export default function reducer(state = initialState, action){
             return {...state, users: action.payload}
         case 'SAVE_DATA':
             return {...state, users: action.payload}
+        
+        case 'GET_LOGGED':
+            return {...state, logged}
         default:
             return state;
     }

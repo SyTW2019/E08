@@ -107,3 +107,7 @@ const gameSave = dataObj => ({
     type: 'SAVE_DATA',
     payload: dataObj
 })
+
+export function getLogged(logged){
+    return {type: GET_LOGGED , logged}
+}
