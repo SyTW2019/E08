@@ -7,8 +7,8 @@ cache:
   - node_modules
 script:
 - npm test
-- sonar-scanner
 - unset CI npm run build
+- sonar-scanner
 true:
   branch: master
 notifications:
