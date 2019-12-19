@@ -1,8 +1,16 @@
 import React, {Component, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux';
+import {saveData} from '../js/actions/index';
 import pcimg from '../../public/img/pc.png';
+import store from '../js/store/index';
+window.store =store;
 
+console.log(store.users)
+
+function mapStateToProps(state) {
+    return {user: state.user}
+  }
 
 class Game extends React.Component{
     constructor(props){
@@ -71,6 +79,7 @@ class Game extends React.Component{
 
     gameLoop = (event) =>{
         console.log(pcimg);
+        console.log(store.getState());
         this.state.i++;
         this.setState({
             i: this.state.i,
@@ -93,4 +102,4 @@ class Game extends React.Component{
     }
 }
 
-export default Game;
+export default connect(mapStateToProps,null)(Game);

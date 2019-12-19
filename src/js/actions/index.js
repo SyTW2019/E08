@@ -2,7 +2,7 @@
 
 export const userPostFetch = user => {
     return async function (dispatch){
-        const resp = await fetch("10.6.128.58:8080/user", {
+        const resp = await fetch("/user/registro", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -108,6 +108,9 @@ const gameSave = dataObj => ({
     payload: dataObj
 })
 
-export function getLogged(logged){
-    return {type: GET_LOGGED , logged}
+export const saveDataTest = gameData => {
+    return function(dispatch){
+
+
+    }
 }
