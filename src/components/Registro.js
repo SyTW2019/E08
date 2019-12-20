@@ -25,7 +25,7 @@ function mapDispatchToProps(dispatch) {
 
 
 class Registro extends React.Component{
-    
+
     constructor(props){
         super(props);
 
@@ -51,13 +51,13 @@ class Registro extends React.Component{
 
     handleChange = event => {
         event.preventDefault();
-        
+
         const target = event.target;
         const value = target.value;
         const name = target.name
         this.setState({
           [name]: value
-        });    
+        });
     }
 
     handleSubmit = event => {
@@ -87,14 +87,14 @@ class Registro extends React.Component{
         if(this.validateEmail())
             this.setState({
                 emailError:false,
-               
+
             })
         else
             this.setState({
                 emailError:true,
-                
+
             })
-        
+
     }
     handleErrorPwd = event => {
         if(this.check_pwd())
@@ -103,10 +103,10 @@ class Registro extends React.Component{
             })
         else
             this.setState({
-                
+
                 pwdError:true,
             })
-        
+
     }
 
     handleClickOpen = event => {
@@ -125,7 +125,7 @@ class Registro extends React.Component{
         console.log(this.state.emailValue)
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
           return true;
-        else 
+        else
           return false;
       }
 
@@ -158,9 +158,9 @@ class Registro extends React.Component{
                 return true;
             else
                 return false;
-           
+
         }
-            
+
     }*/
 
     render() {
@@ -271,5 +271,5 @@ class Registro extends React.Component{
       )
     }
 }
-
-export default connect(null, mapDispatchToProps)(Registro);
+export default Registro;
+//export default connect(null, mapDispatchToProps)(Registro);
