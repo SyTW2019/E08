@@ -26,7 +26,13 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class App extends Component {
+  constructor(props){
+    super(props);
 
+    this.state = {
+      logged: false,
+    }
+  }
 
   render() {
     return (
@@ -35,8 +41,12 @@ class App extends Component {
           <Grid item xs={3}>
             <Paper>
               <Grid container>
-                <Login />
-                <Registro />
+                <Login
+                  logged={this.state.logged}
+                 />
+                <Registro
+                  logged={this.state.logged}
+                />
               </Grid>
               Aqui Irian las STATS
             </Paper>

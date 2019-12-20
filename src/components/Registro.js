@@ -65,7 +65,7 @@ class Registro extends React.Component{
 
 
 
-    handleError= event =>{
+    handleError = event =>{
         console.log("Errores")
         this.handleErrorEmail()
         this.handleErrorPwd()
