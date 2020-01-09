@@ -37,29 +37,9 @@ class App extends Component {
   render() {
     return (
       <div >
-        <Grid container spacing={3} justify="space-evenly" alignItems="flex-start">
-          <Grid item xs={3}>
-            <Paper>
-              <Grid container>
-                <Login
-                  logged={this.state.logged}
-                 />
-                <Registro
-                  logged={this.state.logged}
-                />
-              </Grid>
-              Aqui Irian las STATS
-            </Paper>
-            <StatList />
-          </Grid>
-          <Grid item xs={6}>
+        <Grid>
             <Game />
-          </Grid>
-          <Grid item xs={3}>
-            <ItemList/>
-          </Grid>
         </Grid>
-        
       </div>
     );
   }

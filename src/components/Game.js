@@ -4,7 +4,11 @@ import {connect} from 'react-redux';
 import {saveData} from '../js/actions/index';
 import pcimg from '../../public/img/pc.png';
 import store from '../js/store/index';
-import ItemList from '../components/ItemList';
+import ItemList from './ItemList';
+import StatList from './StatList';
+import Login from './Login';
+import Registro from './Registro';
+import Paper from '@material-ui/core/Paper';
 window.store =store;
 
 console.log(store.users)
@@ -94,18 +98,33 @@ class Game extends React.Component{
         //var currentTime = this.state.i++;
         return(
             <div id="Game">
-                
-                <Grid >
-                    <p>Contador del juego -> {this.state.i}</p>
-                    <h1>ORO ACTUAL: {this.state.oro} </h1>
-                    <h2>VIDA: {this.monster.hp}</h2>
-                    <img src={pcimg} onClick={this.handleClick} alt="PC"/>
-                </Grid>
-                <Grid>
-                    <ItemList
-                        func={this.output}
-                    />
-                    <h1>{this.state.count}</h1>
+                <Grid container spacing={3} justify="space-evenly" alignItems="flex-start">
+                    <Grid item xs={3}>
+                        <Paper>
+                            <Grid container>
+                                <Login
+                                    logged={this.state.logged}
+                                />
+                                <Registro
+                                    logged={this.state.logged}
+                                />
+                            </Grid>
+                            STATS
+                        </Paper>
+                        <StatList />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <p>Contador del juego -> {this.state.i}</p>
+                        <h1>ORO ACTUAL: {this.state.oro} </h1>
+                        <h2>VIDA: {this.monster.hp}</h2>
+                        <img src={pcimg} onClick={this.handleClick} alt="PC"/>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <ItemList
+                            func={this.output}
+                        />
+                        <h1>{this.state.count}</h1>
+                    </Grid>
                 </Grid>
             </div>
         )

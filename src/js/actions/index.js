@@ -49,15 +49,17 @@ export const userLoginFetch = user => {
             body: JSON.stringify(user)
         })
         const data = await resp.json()
-        if(data.id == 1)
+        if(data.id == 2)
         {
+            localStorage.setItem("id", data.id);
             localStorage.setItem("token", data.jwt)
             dispatch(loginUser(data.user))
             dispatch(userData(user))
         }
         else
         {
-            
+            //0 Email no existe 1 Constraseña mal puesta
+            localStorage.setItem("id", data.id);
         }
         //Pendiente lo del token para el localStorage
         //Gestionar los datos del juego para actualizarlos
