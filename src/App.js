@@ -8,6 +8,7 @@ import ItemList from './components/ItemList';
 import Login from './components/Login';
 import Registro from './components/Registro';
 import {connect} from 'react-redux'
+import Game from './components/Game';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +26,13 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class App extends Component {
+  constructor(props){
+    super(props);
 
+    this.state = {
+      logged: false,
+    }
+  }
 
   render() {
     return (
@@ -34,15 +41,19 @@ class App extends Component {
           <Grid item xs={3}>
             <Paper>
               <Grid container>
-                <Login />
-                <Registro />
+                <Login
+                  logged={this.state.logged}
+                 />
+                <Registro
+                  logged={this.state.logged}
+                />
               </Grid>
               Aqui Irian las STATS
             </Paper>
             <StatList />
           </Grid>
           <Grid item xs={6}>
-            <Paper>El video game</Paper>
+            <Game />
           </Grid>
           <Grid item xs={3}>
             <ItemList/>
@@ -54,4 +65,4 @@ class App extends Component {
   }
 }
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(null,null)(App);
