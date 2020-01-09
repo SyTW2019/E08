@@ -84,8 +84,6 @@ class Game extends React.Component{
         this.setState({ count: this.state.count+evt})
     }
     gameLoop = (event) =>{
-        console.log(pcimg);
-        console.log(store.getState());
         this.state.i++;
         this.setState({
             i: this.state.i,

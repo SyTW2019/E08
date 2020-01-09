@@ -13,7 +13,9 @@ export const userPostFetch = user => {
         })
         const data = await resp.json()
 	localStorage.setItem("token", data.jwt)
+	console.log(data);
         dispatch(registUser(data.user))
+	console.log(registUser);
 	user.logged = true;
     }
         

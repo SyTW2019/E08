@@ -78,7 +78,6 @@ class Registro extends React.Component{
             event.preventDefault();
             this.props.userPostFetch(this.state);
 	    console.log("Handleerror, peticion hecha");
-	    console.log(this.props.userPostFetch(this.state));
         }
     }
 

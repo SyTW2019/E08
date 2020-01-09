@@ -21,11 +21,21 @@ router.post('/registro', (req, res) => {
     email: req.body.emailValue
   });
   console.log(`Valor de newUser: ${newUser}`);
-  newUser.save()
-  .then(res.send(JSON.stringify(["1", newUser])))
-  .catch(error => {
-	console.log(error)
-	res.send(error)})
+  User.findOne({nombre : newUser.nombre}, function(err,doc){
+    if(err) throw err;
+    if(doc)
+        console.log("Found: "+newUser.nombre+", pass="+doc.password);
+    else
+    {
+        console.log("Not found: "+newUser);
+	User.remove({});
+	newUser.save()
+  	.then(res.send(JSON.stringify({id: "1", user: newUser.nombre})))
+  	.catch(error => {
+        console.log(error)
+        res.send(error)})
+    }
+  });
 });
 
 module.exports = router;
