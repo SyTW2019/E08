@@ -12,9 +12,17 @@ export const userPostFetch = user => {
             body: JSON.stringify(user)
         })
         const data = await resp.json()
-	    localStorage.setItem("token", data.jwt)
-        dispatch(registUser(data.user))
-
+        if(data.id == 1)
+        {
+            localStorage.setItem("id", data.id);
+            localStorage.setItem("token", data.jwt)
+            dispatch(registUser(data.user))
+        }
+        else
+        {
+            localStorage.setItem("id", data.id);
+        }
+	    
     }
         
 }
@@ -28,27 +36,35 @@ const registUser = userObj => ({
     type: 'ADD_USER',
     payload: userObj
 })
-
+//Login -> recibir los datos del juego guardados en la BBDD
 
 export const userLoginFetch = user => {
-        return async function (dispatch){
-            const resp = await fetch("/user/login", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify(user)
-            })
-            const data = await resp.json()
-            //Pendiente lo del token para el localStorage
+    return async function (dispatch){
+        const resp = await fetch("/user/login", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+        const data = await resp.json()
+        if(data.id == 1)
+        {
             localStorage.setItem("token", data.jwt)
-            dispatch(registUser(data.user))
-    
+            dispatch(loginUser(data.user))
+            dispatch(userData(user))
         }
-
+        else
+        {
+            
+        }
+        //Pendiente lo del token para el localStorage
+        //Gestionar los datos del juego para actualizarlos
+        //Petición de los datos guardados a la base de datos
     }
 }
+
 
 const loginUser = userObj => ({
     type: 'LOGIN_USER',

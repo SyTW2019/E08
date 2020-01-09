@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action){
         case 'LOGIN_USER':
             return {...state, users: action.payload}
         case 'GET_DATA':
-            return {...state, users: action.payload}
+            return {...state, items: action.payload}
         case 'SAVE_DATA':
             return {...state, users: action.payload}
         case 'UPDATE_LOGGED':

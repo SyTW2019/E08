@@ -37,7 +37,7 @@ class Registro extends React.Component{
             emailError: "",
             pwdError: "",
             open: "",
-	    logged: false,
+	        logged: false,
         }
 
         this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -67,17 +67,21 @@ class Registro extends React.Component{
 
 
     handleError = event =>{
-        console.log("Errores")
         this.handleErrorEmail()
         this.handleErrorPwd()
-	console.log("PwdError" + this.state.pwdError);
-	console.log("PwdError" + this.state.emailError);
         if( this.state.pwdError == false && this.state.emailError == false)
         {
-	    console.log("Handleerror, haciendo peticion");
             event.preventDefault();
-            this.props.userPostFetch(this.state);
-	    console.log("Handleerror, peticion hecha");
+            //this.props.userPostFetch(this.state);
+            this.props.userPostFetch({email: this.state.emailValue,
+                                      nombre: this.state.userValue,
+                                      contraseña: this.state.pwdValue                            
+            });
+            if(localStorage.id == 1)
+                console.log("//Usuario logeado correctamente")
+                //Usuario logeado correctamente
+            else   
+            console.log("//Fallo en el registro")
         }
     }
 

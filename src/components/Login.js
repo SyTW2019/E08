@@ -59,10 +59,13 @@ class Login extends React.Component{
         if(this.get_value()){
           this.setState({
             emailError:false,
-
           })
+          
           event.preventDefault()
-          this.props.userLoginFetch(this.state)
+          //this.props.userLoginFetch(this.state)
+          this.props.userLoginFetch({ email: this.state.emailValue,
+                                      contraseña: this.state.pwdValue
+          })
         }
         else
           this.setState({

@@ -1,0 +1,21 @@
+COSAS  QUE DEBEMOS HACER RESPECTO A LAS ACCIONES:
+
+    1.registrar usuario -> petición a la apirest para crear el usuario en la BBDD
+    2.logear usuario -> Comprobar las credenciales en la BBDD y cargar los datos del juego.
+        2.2 Mandar usuario al servidor con el email y la contraseña
+        2.3 Ver que dicho usuario existe y devolver el nombre del usuario y los datos del juego.
+        2.4 Cargar esos datos en el juego.
+            2.4.1 Cargar itemlist (acción (?))
+            2.4.2 Cargar statlist (acción (?))
+            2.4.3 Poner nombre usuario
+
+    3. Guardar datos del juego -> Guardar el progreso del juego en la store de redux y mandarlos al servidor.
+
+JSON DEVUELTA LOGIN USUARIO 1.0
+{ 
+    user: username,
+    game_data : {
+        itemlist: [0,0,0,0],
+        statlist: [nivel,bichosmatados,oro] 
+    }
+}
