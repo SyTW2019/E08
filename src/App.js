@@ -65,4 +65,4 @@ class App extends Component {
   }
 }
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(null,null)(App);

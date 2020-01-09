@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {saveData} from '../js/actions/index';
 import pcimg from '../../public/img/pc.png';
 import store from '../js/store/index';
+import ItemList from '../components/ItemList';
 window.store =store;
 
 console.log(store.users)

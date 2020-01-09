@@ -73,6 +73,7 @@ class Registro extends React.Component{
         {
             event.preventDefault();
             this.props.userPostFetch(this.state);
+            this.props.getLogged(this.props.logged)
         }
     }
 
