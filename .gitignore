@@ -16,3 +16,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#temporalmente no se llevara control de versiones de este fichero
+package-lock.json

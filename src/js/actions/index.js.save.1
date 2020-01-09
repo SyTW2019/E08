@@ -2,7 +2,7 @@
 
 export const userPostFetch = user => {
     console.log("Entro a peticion");
-    return async function (dispatch){
+    async function (dispatch){
         const resp = await fetch('/user/registro', {
             method: 'POST',
             headers: {
@@ -11,17 +11,13 @@ export const userPostFetch = user => {
             },
             body: JSON.stringify(user)
         })
-        const data = await resp.json()
+        
 	localStorage.setItem("token", data.jwt)
         dispatch(registUser(data.user))
-	user.logged = true;
+	console.log("Final de fetch");
+	return data;
     }
 }
-
-const updateLogged = userobj => ({
-    type: 'UPDATE_LOGGED',
-    payload: userobj
-})
 
 const registUser = userObj => ({
     type: 'ADD_USER',
