@@ -12,11 +12,9 @@ export const userPostFetch = user => {
             body: JSON.stringify(user)
         })
         const data = await resp.json()
-	localStorage.setItem("token", data.jwt)
-	console.log(data);
+	    localStorage.setItem("token", data.jwt)
         dispatch(registUser(data.user))
-	console.log(registUser);
-	user.logged = true;
+
     }
         
 }
@@ -33,29 +31,21 @@ const registUser = userObj => ({
 
 
 export const userLoginFetch = user => {
-    return async function (dispatch){
-        const resp = await fetch("/user/login", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({user})
-        })
-
-            .then(resp => resp.json())
-            .then(data => {
-                if(data.message)
-                {
-                    //Comparar si lo q devuelve el servidor es lo mismo q el usuario metio.
-                } else {
-                    localStorage.setItem("token", data.jwt)
-                    dispatch(loginUser(data.user))
-                }
+        return async function (dispatch){
+            const resp = await fetch("/user/login", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(user)
             })
-        const data = await resp.json()
-        localStorage.setItem("token", data.jwt)
-        dispatch(loginUser(data.user))
+            const data = await resp.json()
+            //Pendiente lo del token para el localStorage
+            localStorage.setItem("token", data.jwt)
+            dispatch(registUser(data.user))
+    
+        }
 
     }
 }
