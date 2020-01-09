@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import ReduxThunk from 'redux-thunk'
 import {connect} from 'react-redux';
 import {userLoginFetch} from '../js/actions/index';
 
@@ -18,6 +17,10 @@ function mapDispatchToProps(dispatch) {
   return {
       userLoginFetch: user => dispatch(userLoginFetch(user))
   };
+}
+
+function mapStateToProps(state) {
+  return {user: state.user}
 }
 
 
@@ -38,8 +41,6 @@ class Login extends React.Component{
         this.handleError = this.handleError.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-      
-
     }
 
     
@@ -172,4 +173,4 @@ class Login extends React.Component{
       }
     } 
       
-    export default connect(null,mapDispatchToProps)(Login);
+    export default connect(mapStateToProps,mapDispatchToProps)(Login);
