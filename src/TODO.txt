@@ -8,7 +8,6 @@ COSAS  QUE DEBEMOS HACER RESPECTO A LAS ACCIONES:
             2.4.1 Cargar itemlist (acción (?))
             2.4.2 Cargar statlist (acción (?))
             2.4.3 Poner nombre usuario
-
     3. Guardar datos del juego -> Guardar el progreso del juego en la store de redux y mandarlos al servidor.
 
 JSON DEVUELTA LOGIN USUARIO 1.0
