@@ -9,6 +9,7 @@ import StatList from './StatList';
 import Login from './Login';
 import Registro from './Registro';
 import Paper from '@material-ui/core/Paper';
+import User from './User';
 window.store =store;
 
 console.log(store.users)
@@ -96,18 +97,24 @@ class Game extends React.Component{
 
     render(){
         //var currentTime = this.state.i++;
+        var logged = (localStorage.id ? true:false)
         return(
             <div id="Game">
                 <Grid container spacing={3} justify="space-evenly" alignItems="flex-start">
                     <Grid item xs={3}>
                         <Paper>
                             <Grid container>
-                                <Login
-                                    logged={this.state.logged}
-                                />
-                                <Registro
-                                    logged={this.state.logged}
-                                />
+                                {logged == false && (
+                                    <Grid>
+                                        <User/>
+                                    </Grid>
+                                )}
+                                { logged == true && (
+                                    <Grid>
+                                        <Login/>
+                                        <Registro/>
+                                    </Grid>
+                                )}                                
                             </Grid>
                             STATS
                         </Paper>

@@ -49,7 +49,7 @@ export const userLoginFetch = user => {
             body: JSON.stringify(user)
         })
         const data = await resp.json()
-        if(data.id == 2)
+        if(data.id == 1)
         {
             localStorage.setItem("id", data.id);
             localStorage.setItem("token", data.jwt)
