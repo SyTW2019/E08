@@ -66,7 +66,9 @@ class Login extends React.Component{
           //this.props.userLoginFetch(this.state)
           this.props.userLoginFetch({ email: this.state.emailValue,
                                       contrasena: this.state.pwdValue
-          })/*
+          })
+
+          console.log(localStorage.id)
           if(localStorage.id == 1)
             console.log("Usuario logeado correctamente");
           else if(localStorage.id == 2)
@@ -76,7 +78,8 @@ class Login extends React.Component{
           else if(localStorage.id == 0)
             console.log("Email mal");
 	  else
-	    console.log("Error desconocido");*/
+      console.log("Error desconocido");
+      
         }
         else
           this.setState({
