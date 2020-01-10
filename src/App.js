@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+//import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import './App.css';
-import StatList from './components/StatList';
-import ItemList from './components/ItemList';
-import Login from './components/Login';
-import Registro from './components/Registro';
 import {connect} from 'react-redux'
 import Game from './components/Game';
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
@@ -19,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-}));
+}));*/
 
 const mapDispatchToProps = dispatch => ({
   //getProfileFetch: () => dispatch(getProfileFetch())

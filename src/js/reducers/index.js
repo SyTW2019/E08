@@ -1,5 +1,4 @@
 //import { ADD_USER } from "../constants/action-types";
-import store from '../store/';
 
 const initialState = {
     users: [],

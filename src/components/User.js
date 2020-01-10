@@ -17,14 +17,6 @@ class User extends React.Component {
         }
     }
 
-    getInitialState = function() {
-        return  (this.state.show_component = false)
-    }
-
-    show_component = function () {
-        this.setState({show_component: true})
-    }
-
     render() {
         return(
             <Grid>

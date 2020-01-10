@@ -1,7 +1,7 @@
-import React, {Component, useState} from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux';
-import {saveData} from '../js/actions/index';
+//import {saveData} from '../js/actions/index';
 import pcimg from '../../public/img/pc.png';
 import store from '../js/store/index';
 import ItemList from './ItemList';
@@ -57,7 +57,7 @@ class Game extends React.Component{
 
     handleClick = () => {
 
-        if(this.state.dps == 0)
+        if(this.state.dps === 0)
             this.clickpower = 1;
         else    
             this.clickpower = 0.5*this.state.dps;
@@ -104,12 +104,12 @@ class Game extends React.Component{
                     <Grid item xs={3}>
                         <Paper>
                             <Grid container>
-                                {logged == false && (
+                                {logged === false && (
                                     <Grid>
                                         <User/>
                                     </Grid>
                                 )}
-                                { logged == true && (
+                                { logged === true && (
                                     <Grid>
                                         <Login/>
                                         <Registro/>
