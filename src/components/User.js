@@ -2,7 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import configureStore from "../js/store/index";
-//import store from "../js/store/index";
+import { connect } from 'react-redux';
+
 var store = configureStore();
 
 //console.log(store.getState().users[1])
@@ -33,4 +34,4 @@ class User extends React.Component {
     }
 }
 
-export default User;
+export default connect(null,null)(User);
