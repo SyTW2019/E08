@@ -26,7 +26,7 @@ router.post('/registro', (req, res) => {
   console.log(`Valor de newUser: ${newUser}`);
   User.findOne({email : newUser.email}, function(err,doc){
     if(err) throw err;
-    if(doc) return.status(400).json({ msg: 'El usuario no existe' });
+    if(doc) return res.status(400).json({ msg: 'El usuario no existe' });
 
     // Crear el salt & hash, el 10 es el número de veces que se ejecuta
     bcrypt.genSalt(10, (err, salt) => {
@@ -73,7 +73,7 @@ router.post('/login', (req, res) => {
 
   User.findOne({email : newUser.email}, function(err,doc){
     if(err) throw err;
-    if(!doc) return.status(400).json({ msg: 'El usuario no existe' })
+    if(!doc) return res.status(400).json({ msg: 'El usuario no existe' })
 
     //Validar contraseña
     // Crear el salt & hash, el 10 es el número de veces que se ejecuta
