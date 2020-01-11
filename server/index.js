@@ -1,21 +1,18 @@
 const express  = require('express');
 const mongoose  = require('mongoose');
-//const bodyParser  = require('body-parser');
 const path = require('path');
+const config = require('config');
 var cors = require('cors');
 
 const users = require('./routes/api/users');
 
 const app = express().use("*", cors());
 
-//Bodyparser middleware
-//app.use(bodyParser.json());
-
 //Express middleware
 app.use(express.json());
 
 //DB config
-const db = require('./config/keys').mongoURI;
+const db = config.get('mongoURI');
 
 //Connect to mongo
 mongoose.connect(db, {
