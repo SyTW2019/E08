@@ -54,7 +54,7 @@ router.post('/registro', (req, res) => {
                   res.send(JSON.stringify({
                     token,
                     id: 1,
-                    nombre: usuario.nombre
+                    user: usuario.nombre
                   }))
                 })
             })

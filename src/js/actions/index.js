@@ -15,7 +15,7 @@ export const userPostFetch = user => {
         console.log("Datos recibidos");
         console.log(data.token);
         console.log(data.id);
-        console.log(data.nombre);
+        console.log(data.user);
         if(data.id == 1)
         {
             localStorage.setItem("id", data.id);
