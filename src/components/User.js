@@ -6,7 +6,11 @@ import { connect } from 'react-redux';
 
 var store = configureStore();
 
-//console.log(store.getState().users[1])
+function mapStateToProps(dispatch) {
+    return{
+        users: state.username
+    }
+}
 
 class User extends React.Component {
     constructor(props){
@@ -28,11 +32,10 @@ class User extends React.Component {
     render() {
         return(
             <Grid>
-                
-                <h1><AccountCircle />Hola: {this.state.username}</h1>
+                <h1><AccountCircle />Hola: {this.props.username}</h1>
             </Grid>
         )
     }
 }
 
-export default connect(null,null)(User);
+export default connect(mapStateToProps)(User);
