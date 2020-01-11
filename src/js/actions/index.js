@@ -57,7 +57,7 @@ export const userLoginFetch = user => {
         console.log(data.token);
         console.log(data.id);
         console.log(data.user);
-        if(data.id === 1)
+        if(data.id == 1)
         {
             localStorage.setItem("id", data.id);
 	        localStorage.setItem("user", data.user);
