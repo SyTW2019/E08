@@ -12,6 +12,10 @@ export const userPostFetch = user => {
             body: JSON.stringify(user)
         })
         const data = await resp.json()
+        console.log("Datos recibidos");
+        console.log(data.token);
+        console.log(data.id);
+        console.log(data.nombre);
         if(data.id == 1)
         {
             localStorage.setItem("id", data.id);
@@ -22,9 +26,9 @@ export const userPostFetch = user => {
         {
             localStorage.setItem("id", data.id);
         }
-	    
+
     }
-        
+
 }
 
 const updateLogged = userobj => ({
@@ -55,7 +59,7 @@ export const userLoginFetch = user => {
             localStorage.setItem("id", data.id);
 	        localStorage.setItem("user", data.user);
 	        localStorage.setItem("token", data.jwt);
-		
+
             dispatch(loginUser(data.user))
             //dispatch(userData(user))
 	        return true;

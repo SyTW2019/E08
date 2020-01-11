@@ -44,7 +44,7 @@ router.post('/registro', (req, res) => {
               //firmamos el token, es asincrono
               jwt.sign(
                 { id: usuario.id },
-                config.get('uc_myJwtSecret'),
+                config.get('jwtSecret'),
                 { expiresIn: 3600 },   //expira en una hora
                 (err, token) => {
                   if(err) throw err;
