@@ -53,7 +53,10 @@ export const userLoginFetch = user => {
             body: JSON.stringify(user)
         })
         const data = await resp.json()
-	    console.log(data);
+        console.log("Datos recibidos");
+        console.log(data.token);
+        console.log(data.id);
+        console.log(data.user);
         if(data.id === 1)
         {
             localStorage.setItem("id", data.id);
