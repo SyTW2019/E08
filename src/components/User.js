@@ -17,13 +17,14 @@ class User extends React.Component {
             show_component: false,
         };
 
-        store.subscribe(() => {
-            this.setState({
-                username: store.getState().users
-            });
-        });
+        
     	console.log("probando el componente User " + this.state.users)
     }
+    handleChange = (evt) => store.subscribe(() => {
+        this.setState({
+            username: store.getState().users
+        });
+    });
     render() {
         return(
             <Grid>
