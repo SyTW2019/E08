@@ -42,7 +42,7 @@ router.post('/registro', (req, res) => {
               res.send(JSON.stringify({
                 id: 1, user: newUser.nombre
               }))
-            }
+            })
             .catch(error => {
           console.log(error)
           res.send(error)})
