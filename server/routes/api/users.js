@@ -25,17 +25,31 @@ router.post('/registro', (req, res) => {
   User.findOne({nombre : newUser.nombre}, function(err,doc){
     if(err) throw err;
     if(doc)
-        console.log("Found: "+newUser.nombre+", pass="+doc.password);
+      console.log("Found: "+newUser.nombre+", pass="+doc.password);
     else
     {
-        console.log("Not found: "+newUser);
-	newUser.save()
-  	.then(res.send(JSON.stringify({id: 1, user: newUser.nombre})))
-  	.catch(error => {
-        console.log(error)
-        res.send(error)})
+      console.log("Not found: "+newUser);
+
+      // Crear el salt & hash, el 10 es el número de veces que se ejecuta
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if(err) throw err;
+
+          newUser.password = hash;
+
+          newUser.save()
+            .then(user => {
+              res.send(JSON.stringify({
+                id: 1, user: newUser.nombre
+              }))
+            }
+            .catch(error => {
+          console.log(error)
+          res.send(error)})
+        })
+      })
     }
-  });
+});
 });
 
 // @route POST login user
@@ -47,7 +61,7 @@ router.post('/login', (req, res) => {
 
   User.findOne({email: req.body.email}, function(err, usuario){
     if(err) throw err;
-    
+
     if(usuario.email == req.body.email)
     {
       if(usuario.password == req.body.contrasena)
