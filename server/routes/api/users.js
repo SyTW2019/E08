@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 //Item model
 
 const User = require('../../models/Users');
 
-// @route GET user
+// @route GET users
 router.get('/', (req, res) => {
   console.log('Entrando al get...');
   User.find()
@@ -28,7 +29,6 @@ router.post('/registro', (req, res) => {
     else
     {
         console.log("Not found: "+newUser);
-	User.remove({});
 	newUser.save()
   	.then(res.send(JSON.stringify({id: 1, user: newUser.nombre})))
   	.catch(error => {
@@ -47,11 +47,7 @@ router.post('/login', (req, res) => {
 
   User.findOne({email: req.body.email}, function(err, usuario){
     if(err) throw err;
-    console.log(usuario.nombre);
-    console.log(usuario.email);
-    console.log(req.body.email);
-    console.log(usuario.password);
-    console.log(req.body.contrasena);
+    
     if(usuario.email == req.body.email)
     {
       if(usuario.password == req.body.contrasena)
