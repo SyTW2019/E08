@@ -65,7 +65,7 @@ router.post('/registro', (req, res) => {
 
 // @route POST login user
 router.post('/login', (req, res) => {
-  console.log("Entrando al registro....");
+  console.log("Entrando al login....");
   const newUser = new User({
     password: req.body.contrasena,
     email: req.body.email
