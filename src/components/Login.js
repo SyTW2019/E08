@@ -65,16 +65,22 @@ class Login extends React.Component{
           event.preventDefault()
           //this.props.userLoginFetch(this.state)
           this.props.userLoginFetch({ email: this.state.emailValue,
-                                      contraseña: this.state.pwdValue
-          })
-          if(localStorage.id == 2)
-            console.log("Usuario logeado correctamente");
-          else if(localStorage.id)
-          {
-            console.log("Contraseña mal puesta")
-          }
-          else
-            console.log("Email mal");
+                                      contrasena: this.state.pwdValue
+          }).then((success) => {
+		          
+             
+              if(localStorage.id == 1)
+                console.log("Usuario logeado correctamente");
+              else if(localStorage.id == 2)
+              {
+                console.log("Contraseña mal puesta")
+              }
+              else if(localStorage.id == 0)
+                console.log("Email mal");
+	            else
+      	        console.log("Error desconocido");
+	            
+	            })	
         }
         else
           this.setState({

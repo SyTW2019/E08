@@ -70,13 +70,13 @@ class Registro extends React.Component{
             //this.props.userPostFetch(this.state);
             this.props.userPostFetch({email: this.state.emailValue,
                                       nombre: this.state.userValue,
-                                      contraseña: this.state.pwdValue                            
+                                      contrasena: this.state.pwdValue                            
             });
-            if(localStorage.id == 1)
-                console.log("//Usuario logeado correctamente")
+//            if(localStorage.id == 1)
+//                console.log("Usuario logeado correctamente")
                 //Usuario logeado correctamente
-            else   
-            console.log("//Fallo en el registro")
+//            else   
+//            console.log("Fallo en el registro")
         }
     }
 

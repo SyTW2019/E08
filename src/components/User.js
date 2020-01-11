@@ -6,18 +6,24 @@ import { connect } from 'react-redux';
 
 var store = configureStore();
 
-console.log(store.getState().users[1])
+//console.log(store.getState().users[1])
 
 class User extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            username: store.getState().users[1],
+            username: "",
             show_component: false,
-        }
-    }
+        };
 
+        store.subscribe(() => {
+            this.setState({
+                username: store.getState().users
+            });
+        });
+    	console.log("probando el componente User " + this.state.users)
+    }
     render() {
         return(
             <Grid>

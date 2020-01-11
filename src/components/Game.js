@@ -104,12 +104,12 @@ class Game extends React.Component{
                     <Grid item xs={3}>
                         <Paper>
                             <Grid container>
-                                {logged === false && (
+                                {logged === true && (
                                     <Grid>
                                         <User/>
                                     </Grid>
                                 )}
-                                { logged === true && (
+                                { logged === false && (
                                     <Grid>
                                         <Login/>
                                         <Registro/>
