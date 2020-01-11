@@ -23,7 +23,7 @@ router.post('/registro', (req, res) => {
     password: req.body.contrasena,
     email: req.body.email
   });
-  console.log(`Valor de newUser: ${newUser}`);
+
   User.findOne({email : newUser.email}, function(err,doc){
     if(err) throw err;
     if(doc) return res.status(400).json({ msg: 'El usuario no existe' });
@@ -77,12 +77,12 @@ router.post('/login', (req, res) => {
 
     //Validar contraseña
     // Crear el salt & hash, el 10 es el número de veces que se ejecuta
-    bcrypt.compare(newUser.password, user.password)
+    bcrypt.compare(newUser.password, doc.password)
       .then(isMatch => {
         if(!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
         jwt.sign(
-          { id: usuario.id },
+          { id: doc.id },
           config.get('jwtSecret'),
           { expiresIn: 3600 },   //expira en una hora
           (err, token) => {
@@ -93,7 +93,7 @@ router.post('/login', (req, res) => {
             res.send(JSON.stringify({
               token,
               id: 1,
-              user: usuario.nombre
+              user: doc.nombre
             }))
           }
         )
