@@ -40,14 +40,28 @@ router.post('/registro', (req, res) => {
           newUser.password = hash;
 
           newUser.save()
-            .then(user => {
-              res.send(JSON.stringify({
-                id: 1, user: newUser.nombre
-              }))
+            .then(usuario => {
+              //firmamos el token, es asincrono
+              jwt.sign(
+                { id: usuario.id },
+                config.get('uc_myJwtSecret'),
+                { expiresIn: 3600 },   //expira en una hora
+                (err, token) => {
+                  if(err) throw err;
+
+                  console.log(token);
+
+                  res.send(JSON.stringify({
+                    token,
+                    id: 1,
+                    user: usuario.nombre
+                  }))
+                })
             })
             .catch(error => {
-          console.log(error)
-          res.send(error)})
+              console.log(error)
+              res.send(error)
+            })
         })
       })
     }
