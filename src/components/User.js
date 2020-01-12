@@ -12,15 +12,9 @@ class User extends React.Component {
         super(props);
 
         this.state = {
-            username: "",
+            username: store.getState().users[1],
             show_component: false,
-        };
-
-        store.subscribe(() => {
-            this.setState({
-                username: store.getState().users;
-            });
-        });
+        }
     }
 
     render() {

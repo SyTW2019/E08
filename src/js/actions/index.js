@@ -54,7 +54,7 @@ export const userLoginFetch = user => {
         {
             localStorage.setItem("id", data.id);
 	        localStorage.setItem("user", data.user);
-	        localStorage.setItem("token", data.jwt)
+            localStorage.setItem("token", data.jwt)
             dispatch(loginUser(data.user))
             //dispatch(userData(user))
 	        return true;
@@ -75,6 +75,7 @@ export const userLoginFetch = user => {
 const loginUser = userObj => ({
     type: 'LOGIN_USER',
     payload: userObj
+    
 })
 
 export const userDataFetch = user => {
