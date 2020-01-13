@@ -141,9 +141,9 @@ export const userDataFetch = user => {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
+                'x-auth-token': user.token,
                 Accept: 'application/json',
-            },
-            body: JSON.stringify({user})
+            }
         })
 
             .then(resp => resp.json())
