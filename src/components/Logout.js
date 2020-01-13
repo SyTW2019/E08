@@ -77,7 +77,7 @@ class Logout extends React.Component{
           <Button variant="outlined" color="primary">
             Cerrar sesión
           </Button>
-          <Grid/>
+          </Grid>
         )
       }
     }
