@@ -10,6 +10,7 @@ import Login from './Login';
 import Registro from './Registro';
 import Paper from '@material-ui/core/Paper';
 import User from './User';
+import Logout from './Logout';
 window.store =store;
 
 console.log(store.users)
@@ -59,13 +60,13 @@ class Game extends React.Component{
 
         if(this.state.dps === 0)
             this.clickpower = 1;
-        else    
+        else
             this.clickpower = 0.5*this.state.dps;
 
         if(this.monster.hp > 0)
         {
             this.monster.hp -= this.clickpower;
-            
+
         }
         else
         {
@@ -79,9 +80,9 @@ class Game extends React.Component{
                 currentLvl: this.state.currentLvl,
             })
         }
-            
 
-        //quitarle vida al bicho 
+
+        //quitarle vida al bicho
     }
 
     output(evt){
@@ -107,6 +108,7 @@ class Game extends React.Component{
                                 {logged === true && (
                                     <Grid>
                                         <User/>
+                                        <Logout/>
                                     </Grid>
                                 )}
                                 { logged === false && (
@@ -114,7 +116,7 @@ class Game extends React.Component{
                                         <Login/>
                                         <Registro/>
                                     </Grid>
-                                )}                                
+                                )}
                             </Grid>
                             STATS
                         </Paper>
@@ -129,7 +131,7 @@ class Game extends React.Component{
                     <Grid item xs={3}>
                         <ItemList
                             func={this.output}
-                           
+
                         />
                         <h1>{this.state.count}</h1>
                     </Grid>
