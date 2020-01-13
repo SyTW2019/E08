@@ -1,0 +1,10 @@
+<testExecutions version="1">
+<file path="test/App.test.js">
+<testCase name="Sample Test should test that true === true" duration="4" />
+</file>
+<file path="test/Login.test.js">
+<testCase name="renderiza correctamente el login" duration="54" />
+</file>
+<file path="test/registro.test.js">
+</file>
+</testExecutions>

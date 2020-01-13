@@ -12,3 +12,6 @@ describe('Sample Test', () => {
     expect(true).toBe(true)
   })
 });
+
+
+//https://create-react-app.dev/docs/running-tests/

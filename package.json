@@ -31,17 +31,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "jest --silent --coverage",
     "eject": "react-scripts eject",
-    "test:watch": "npm test -- --watch",
+    "test:watch": "npm test -- --watchAll",
     "start-server": "pm2 start server/index.js",
     "server": "nodemon server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "jest": {
-    "testEnvironment": "node"
   },
   "browserslist": {
     "production": [
@@ -54,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-sonar": "^0.2.4"
   }
 }
