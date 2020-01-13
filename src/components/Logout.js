@@ -39,7 +39,7 @@ class Logout extends React.Component{
             logout: false
         }
 
-        this.handleChange = this.handleChange.bind(this);
+//        this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
