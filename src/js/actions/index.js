@@ -25,6 +25,7 @@ export const userPostFetch = user => {
 
             dispatch(registUser(data.user));
             dispatch(registEmail(data.email));
+            dispatch(registToken(data.token));
         }
         else
         {
@@ -45,6 +46,11 @@ const registUser = userObj => ({
 
 const registEmail = userObj => ({
   type: 'ADD_EMAIL',
+  payload: userObj
+})
+
+const registToken = userObj => ({
+  type: 'ADD_TOKEN',
   payload: userObj
 })
 //Login -> recibir los datos del juego guardados en la BBDD
@@ -73,6 +79,7 @@ export const userLoginFetch = user => {
 
             dispatch(loginUser(data.user))
             dispatch(registEmail(data.email));
+            dispatch(registToken(data.token));
             //dispatch(userData(user))
 	          return true;
         }
@@ -119,6 +126,7 @@ export const userLogoutFetch = user => {
     dispatch(logoutUser(false));
     dispatch(registUser(""));
     dispatch(registEmail(""));
+    dispatch(registToken(""));
   }
 }
 

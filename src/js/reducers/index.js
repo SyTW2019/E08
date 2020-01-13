@@ -4,7 +4,8 @@ const initialState = {
     users: [],
     items: [0,0,0,0],
     logged: false,
-    email: []
+    email: [],
+    token: []
 };
 
 export default function reducer(state = initialState, action){
@@ -21,6 +22,8 @@ export default function reducer(state = initialState, action){
             return {...state, logged: action.payload}
         case 'ADD_EMAIL':
             return {...state, email: action.payload}
+        case 'ADD_TOKEN':
+            return {...state, token: action.payload}
         case 'GET_LOGGED':
             return {...state, }
         default:

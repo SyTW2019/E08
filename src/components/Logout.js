@@ -23,7 +23,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return{
-        email: state.email
+        email: state.email,
+        token: state.token
     }
 }
 
@@ -34,6 +35,7 @@ class Logout extends React.Component{
 
         this.state = {
             emailValue: "",
+            tokenValue: "",
             logout: false
         }
 
@@ -46,9 +48,13 @@ class Logout extends React.Component{
     handleChange = event => {
         store.subscribe(() => {
           this.setState({
-            emailValue: store.getState().email
+            emailValue: store.getState().email,
+            tokenValue: store.getState().token
           });
         });
+        console.log('Valores de logout');
+        console.log(this.state.emailValue);
+        console.log(this.state.tokenValue);
       }
 
       handleClick = event => {
@@ -56,6 +62,24 @@ class Logout extends React.Component{
         this.setState({
           logout: true
         })
+
+        this.props.userLogoutFetch({ email: this.state.emailValue,
+                                    token: this.state.tokenValue
+        })
+        .then((success) => {
+
+
+            if(localStorage.id == 1)
+              console.log("Usuario logeado correctamente");
+            else if(localStorage.id == 2)
+            {
+              console.log("Contraseña mal puesta")
+            }
+            else if(localStorage.id == 0)
+              console.log("Email mal");
+            else
+              console.log("Error desconocido");
+            })
       }
 
       render() {
