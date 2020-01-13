@@ -108,7 +108,7 @@ class Game extends React.Component{
                                 {logged === true && (
                                     <Grid>
                                         <User/>
-                                        <Logout/>
+                                        // <Logout/>
                                     </Grid>
                                 )}
                                 { logged === false && (

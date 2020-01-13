@@ -50,7 +50,8 @@ router.post('/registro', (req, res) => {
                 res.send(JSON.stringify({
                   token,
                   id: 1,
-                  user: usuario.nombre
+                  user: usuario.nombre,
+                  email: usuario.email
                 }))
               })
           })
@@ -93,7 +94,8 @@ router.post('/login', (req, res) => {
             res.send(JSON.stringify({
               token,
               id: 1,
-              user: doc.nombre
+              user: doc.nombre,
+              email: doc.email
             }))
           }
         )
