@@ -15,11 +15,11 @@ import configureStore from "../js/store/index";
 
 var store = configureStore();
 
-function mapDispatchToProps(dispatch) {
-  return {
-      userLogoutFetch: user => dispatch(userLogoutFetch(user))
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//       userLogoutFetch: user => dispatch(userLogoutFetch(user))
+//   };
+// }
 
 const mapStateToProps = (state) => {
     return{
