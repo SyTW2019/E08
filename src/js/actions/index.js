@@ -103,6 +103,8 @@ const loginUser = userObj => ({
 
 export const userLogoutFetch = user => {
   return async function (dispatch){
+    console.log('Valor del token en la accion');
+    console.log(user.token);
     const resp = await fetch("/user/logout", {
       method: "GET",
       headers: {

@@ -62,7 +62,7 @@ class Logout extends React.Component{
         this.setState({
           logout: true
         })
-
+        console.log(this.state.tokenValue);
         this.props.userLogoutFetch({ email: this.state.emailValue,
                                     token: this.state.tokenValue
         })
