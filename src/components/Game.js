@@ -129,6 +129,7 @@ class Game extends React.Component{
                     <Grid item xs={3}>
                         <ItemList
                             func={this.output}
+                           
                         />
                         <h1>{this.state.count}</h1>
                     </Grid>
