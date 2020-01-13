@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 import configureStore from "../js/store/index";
 import { connect } from 'react-redux';
 
+
+
 const mapStateToProps = (state) => {
     return{
         items: state.items
@@ -18,12 +20,26 @@ function createData(name, precio, cantidad, id) {
   return { name, precio,cantidad, id };
 }
 
+
+
 const rows = [
   createData('Bebida Energética', 10, 0, 1),
   createData('Colegas', 20, 0, 2),
   createData('Asistir a Clase', 30, 0, 3),
   createData('Tutorias', 50, 0, 4)
 ];
+
+function comprar(id){
+    console.log("en la funcion comprar " + id);
+   rows.map(function(row){
+    if(row.id === id){
+        console.log("comparando los id " + row.id)
+        row.cantidad += 1;
+        console.log("cantidad " + row.cantidad);
+    }
+   })
+
+}
 
 class ItemList extends React.Component{
     constructor(props){
@@ -49,7 +65,7 @@ class ItemList extends React.Component{
                             {rows.map(row => (
                                 <TableRow key={row.name}>
                                     <TableCell component="th" scope="row">
-                                        <Button color= "primary">
+                                        <Button color= "primary" onClick={()=> comprar(row.id)}>
                                             {row.name}
                                         </Button>
                                     </TableCell>
