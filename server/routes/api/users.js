@@ -106,7 +106,7 @@ router.post('/login', (req, res) => {
 });
 
 // @route POST logout user
-router.post('/logout', auth, (req, res) => {
+router.get('/logout', auth, (req, res) => {
   console.log("Entrando al logout....");
 
   User.findById(req.user.id)
