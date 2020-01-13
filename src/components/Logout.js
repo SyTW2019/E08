@@ -34,8 +34,8 @@ class Logout extends React.Component{
         super(props);
 
         this.state = {
-            emailValue: "",
-            tokenValue: "",
+            emailValue: this.props.email,
+            tokenValue: this.props.token,
             logout: false
         }
 
@@ -44,21 +44,25 @@ class Logout extends React.Component{
     }
 
 
-
-    handleChange = event => {
-        store.subscribe(() => {
-          this.setState({
-            emailValue: store.getState().email,
-            tokenValue: store.getState().token
-          });
-        });
-        console.log('Valores de logout');
-        console.log(this.state.emailValue);
-        console.log(this.state.tokenValue);
-      }
+    // handleChange = event => {
+    //     store.subscribe(() => {
+    //       this.setState({
+    //         emailValue: store.getState().email,
+    //         tokenValue: store.getState().token
+    //       });
+    //     });
+    //     console.log('Valores de logout');
+    //     console.log(this.state.emailValue);
+    //     console.log(this.state.tokenValue);
+    //   }
 
       handleClick = event => {
         console.log('En el handle click');
+        console.log('Valores de logout');
+        console.log(this.state.emailValue);
+        console.log(this.state.tokenValue);
+        console.log(this.props.email);
+        console.log(this.props.token);
         this.setState({
           logout: true
         })
