@@ -5,6 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 
 function createData(name, precio, cantidad) {
@@ -34,19 +35,22 @@ class ItemList extends React.Component{
                         <TableHead>
                             <TableRow>
                             <TableCell>Item</TableCell>
-                            <TableCell align="right">Precio</TableCell>
-                            <TableCell align="right">Cantidad</TableCell>
+                            <TableCell>Precio</TableCell>
+                            <TableCell>Cantidad</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {rows.map(row => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                {row.name}
-                                </TableCell>
-                                <TableCell align="right">{row.precio}</TableCell>
-                                <TableCell align="right">{row.cantidad}</TableCell>
-                            </TableRow>
+                            	<Button color= "primary">
+				    <TableRow key={row.name}>
+                                	<TableCell component="th" scope="row">
+                                	{row.name}
+                                	</TableCell>
+                                	<TableCell>{row.precio}</TableCell>
+                                	<TableCell>{row.cantidad}</TableCell>
+                            	    </TableRow>
+				 </Button>
+
                             ))}
                         </TableBody>
                     </Table>
