@@ -110,7 +110,6 @@ export const userLogoutFetch = user => {
           'x-auth-token': user.token,
           Accept: 'application/json',
       },
-      body: JSON.stringify({user})  //En user tiene que estar email y token
     })
     .then(resp => resp.json())
     .then(data => {
