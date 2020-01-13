@@ -3,8 +3,8 @@
 export const userPostFetch = user => {
     console.log("Entro a peticion");
     return async function (dispatch){
-        const resp = await fetch('/user/registro', {
-            method: 'POST',
+        const resp = await fetch("/user/registro", {
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -13,9 +13,12 @@ export const userPostFetch = user => {
         })
         const data = await resp.json()
 	localStorage.setItem("token", data.jwt)
+	console.log(data);
         dispatch(registUser(data.user))
+	console.log(registUser);
 	user.logged = true;
     }
+        
 }
 
 const updateLogged = userobj => ({
@@ -31,7 +34,7 @@ const registUser = userObj => ({
 
 export const userLoginFetch = user => {
     return async function (dispatch){
-        const resp = await fetch("10.6.129.162:80/user/login", {
+        const resp = await fetch("/user/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -64,8 +67,8 @@ const loginUser = userObj => ({
 
 export const userDataFetch = user => {
     return async function (dispatch){
-        const resp = await fetch("10.6.129.162:80/login", {
-            method: "POST",
+        const resp = await fetch("/user/save", {
+            method: "GET",
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
@@ -96,7 +99,7 @@ const userData = dataObj => ({
 
 export const saveData = gameData => {
     return async function(dispatch){
-        const resp = await fetch("10.6.129.162:80/user", {
+        const resp = await fetch("/user/save", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
