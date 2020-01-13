@@ -111,11 +111,11 @@ router.post('/logout', auth, (req, res) => {
 
   User.findById(req.user.id)
     .select('-password')
-    .then(user => res.json(
+    .then(user => res.json({
       id: 1,
       user: user.nombre,
       email: user.email
-    ));
+    }));
 });
 
 module.exports = router;
