@@ -10,20 +10,20 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {connect} from 'react-redux';
-import {userLoginFetch} from '../js/actions/index';
+import {userLogoutFetch} from '../js/actions/index';
 import configureStore from "../js/store/index";
 
 var store = configureStore();
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//       userLogoutFetch: user => dispatch(userLogoutFetch(user))
-//   };
-// }
+function mapDispatchToProps(dispatch) {
+  return {
+      userLogoutFetch: user => dispatch(userLogoutFetch(user))
+  };
+}
 
 const mapStateToProps = (state) => {
     return{
-        users: state.users
+        email: state.email
     }
 }
 
@@ -38,7 +38,6 @@ class Logout extends React.Component{
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleError = this.handleError.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -47,49 +46,9 @@ class Logout extends React.Component{
     handleChange = event => {
         store.subscribe(() => {
           this.setState({
-            emailValue: store.getState().users
+            emailValue: store.getState().email
           });
         });
-
-        event.preventDefault();
-
-        const target = event.target;
-        const value = target.value;
-        const name = target.name
-        this.setState({
-          [name]: value
-        });
-      }
-
-      handleError = event => {
-        if(this.get_value()){
-          this.setState({
-            emailError:false,
-          })
-
-          event.preventDefault()
-          this.props.userLogoutFetch({ email: this.state.emailValue,
-                                      token: this.state.token
-          }).then((success) => {
-
-
-              if(localStorage.id == 1)
-                console.log("Usuario logeado correctamente");
-              else if(localStorage.id == 2)
-              {
-                console.log("Contraseña mal puesta")
-              }
-              else if(localStorage.id == 0)
-                console.log("Email mal");
-	            else
-      	        console.log("Error desconocido");
-
-	            })
-        }
-        else
-          this.setState({
-            emailError:true,
-          })
       }
 
       handleClick = event => {
@@ -110,4 +69,4 @@ class Logout extends React.Component{
       }
     }
 
-    export default Logout;
+    export default connect(mapStateToProps, mapDispatchToProps)(Logout);

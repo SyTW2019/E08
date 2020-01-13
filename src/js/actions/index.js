@@ -20,7 +20,7 @@ export const userPostFetch = user => {
         {
             localStorage.setItem("id", data.id);
             localStorage.setItem("user", data.user);
-            localStorage.setItem("token", data.jwt);
+            localStorage.setItem("token", data.token);
             localStorage.setItem("email", data.email);
 
             dispatch(registUser(data.user));
@@ -68,7 +68,7 @@ export const userLoginFetch = user => {
         {
             localStorage.setItem("id", data.id);
 	          localStorage.setItem("user", data.user);
-	          localStorage.setItem("token", data.jwt);
+	          localStorage.setItem("token", data.token);
             localStorage.setItem("email", data.email);
 
             dispatch(loginUser(data.user))
@@ -117,6 +117,8 @@ export const userLogoutFetch = user => {
       }
     })
     dispatch(logoutUser(false));
+    dispatch(registUser(""));
+    dispatch(registEmail(""));
   }
 }
 
