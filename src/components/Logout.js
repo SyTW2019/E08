@@ -85,7 +85,7 @@ class Logout extends React.Component{
       render() {
         return(
           <Grid>
-            <Button variant="outlined" color="primary" value={this.state.logout} onCLick={this.handleClick}>
+            <Button variant="outlined" color="primary" value={this.state.logout} onClick={this.handleClick}>
               Cerrar sesión
             </Button>
           </Grid>
