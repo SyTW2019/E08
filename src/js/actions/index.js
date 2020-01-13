@@ -104,9 +104,10 @@ const loginUser = userObj => ({
 export const userLogoutFetch = user => {
   return async function (dispatch){
     const resp = await fetch("/user/logout", {
-      method: "POST",
+      method: "GET",
       headers: {
           'Content-Type': 'application/json',
+          'x-auth-token': user.token,
           Accept: 'application/json',
       },
       body: JSON.stringify({user})  //En user tiene que estar email y token
@@ -141,9 +142,9 @@ export const userDataFetch = user => {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
-                'x-auth-token': user.token,
                 Accept: 'application/json',
-            }
+            },
+            body: JSON.stringify({user})
         })
 
             .then(resp => resp.json())
