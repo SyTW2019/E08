@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import configureStore from "../js/store/index";
 import { connect } from 'react-redux';
-
+import Item from './Item';
 
 
 const mapStateToProps = (state) => {
@@ -34,9 +34,11 @@ function comprar(id){
    rows.map(function(row){
     if(row.id === id){
         console.log("comparando los id " + row.id)
+    
         row.cantidad += 1;
         console.log("cantidad " + row.cantidad);
     }
+    
    })
 
 }
@@ -65,19 +67,23 @@ class ItemList extends React.Component{
                             {rows.map(row => (
                                 <TableRow key={row.name}>
                                     <TableCell component="th" scope="row">
-                                        <Button color= "primary" onClick={()=> comprar(row.id)}>
-                                            {row.name}
+                                       <Button onClick={() => comprar(row.id)}>
+                                            <Item name={row.name} cantidad={row.cantidad} />
+                                            
                                         </Button>
                                     </TableCell>
                                     <TableCell>{row.precio}</TableCell>
-                                    <TableCell>{row.cantidad}</TableCell>
+                                    <TableCell id = {row.id} >{row.cantidad}</TableCell>
                                     <TableCell>{row.id}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
                 </Paper>
+                
+               
             </div>
+           
         )
     }
 }

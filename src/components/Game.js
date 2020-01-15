@@ -10,6 +10,7 @@ import Login from './Login';
 import Registro from './Registro';
 import Paper from '@material-ui/core/Paper';
 import User from './User';
+import ItemList2 from './ItemList2';
 window.store =store;
 
 console.log(store.users)
@@ -131,6 +132,7 @@ class Game extends React.Component{
                             func={this.output}
                            
                         />
+                        <ItemList2></ItemList2>
                         <h1>{this.state.count}</h1>
                     </Grid>
                 </Grid>
