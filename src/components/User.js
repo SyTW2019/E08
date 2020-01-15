@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 var store = configureStore();
 
-function mapStateToProps(dispatch) {
+const mapStateToProps = (state) => {
     return{
         users: state.username
     }
