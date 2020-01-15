@@ -8,7 +8,7 @@ var store = configureStore();
 
 const mapStateToProps = (state) => {
     return{
-        users: state.username
+        users: state.users
     }
 }
 
@@ -17,7 +17,7 @@ class User extends React.Component {
         super(props);
 
         this.state = {
-            username: "",
+            username: store.getState().users[1],
             show_component: false,
         };
 
@@ -32,7 +32,7 @@ class User extends React.Component {
     render() {
         return(
             <Grid>
-                <h1><AccountCircle />Hola: {this.props.username}</h1>
+                <h1><AccountCircle />Hola: {this.props.users}</h1>
             </Grid>
         )
     }
