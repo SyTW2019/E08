@@ -138,3 +138,15 @@ const gameSave = dataObj => ({
     type: 'SAVE_DATA',
     payload: dataObj
 })
+
+const addItemIndex = dataObj => ({
+    type: 'ADD_ITEM',
+    payload: dataObj
+})
+
+export const addItem = itemData =>{
+    return function(dispatch)
+    {
+        dispatch(addItemIndex(itemData));
+    }
+} 

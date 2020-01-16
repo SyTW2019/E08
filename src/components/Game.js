@@ -132,7 +132,6 @@ class Game extends React.Component{
                             func={this.output}
                            
                         />
-                        <ItemList2></ItemList2>
                         <h1>{this.state.count}</h1>
                     </Grid>
                 </Grid>

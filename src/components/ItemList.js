@@ -1,12 +1,5 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import configureStore from "../js/store/index";
+import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import Item from './Item';
 
@@ -16,20 +9,8 @@ const mapStateToProps = (state) => {
         items: state.items
     }
 }
-function createData(name, precio, cantidad, id) {
-  return { name, precio,cantidad, id };
-}
 
-
-
-const rows = [
-  createData('Bebida Energética', 10, 0, 1),
-  createData('Colegas', 20, 0, 2),
-  createData('Asistir a Clase', 30, 0, 3),
-  createData('Tutorias', 50, 0, 4)
-];
-
-function comprar(id){
+/*function comprar(id){
     console.log("en la funcion comprar " + id);
    rows.map(function(row){
     if(row.id === id){
@@ -41,7 +22,7 @@ function comprar(id){
     
    })
 
-}
+}*/
 
 class ItemList extends React.Component{
     constructor(props){
@@ -49,43 +30,14 @@ class ItemList extends React.Component{
     }
     render()
     {
+        console.log("This props item "+this.props.items[0].cantidad)
+        var current_item;
         return(
-            <div>
-                <button onClick={(evt) => this.props.func(1)}>
-                    Testme
-                </button>
-                <Paper >
-                    <Table >
-                        <TableHead>
-                            <TableRow>
-                            <TableCell>Item</TableCell>
-                            <TableCell>Precio</TableCell>
-                            <TableCell>Cantidad</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map(row => (
-                                <TableRow key={row.name}>
-                                    <TableCell component="th" scope="row">
-                                       <Button onClick={() => comprar(row.id)}>
-                                            <Item name={row.name} cantidad={row.cantidad} />
-                                            
-                                        </Button>
-                                    </TableCell>
-                                    <TableCell>{row.precio}</TableCell>
-                                    <TableCell id = {row.id} >{row.cantidad}</TableCell>
-                                    <TableCell>{row.id}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Paper>
-                
-               
-            </div>
-           
+            <Grid>
+                <Item id={this.props.items[0].id}/>
+            </Grid>
         )
     }
 }
 
-export default connect(mapStateToProps)(ItemList);
+export default connect(mapStateToProps,null)(ItemList);

@@ -1,64 +1,52 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import { ListItem } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import { withStyles } from '@material-ui/core/styles';
-import ListItemText from '@material-ui/core/ListItemText';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
+import {addItem} from '../js/actions/index';
 
-const styles = theme => ({
-    root: {
-      width: '100%',
-      maxWidth: 360,
-      backgroundColor: theme.palette.background.paper,
-    },
-    inline: {
-      display: 'inline',
-    },
-  });
+function mapDispatchToProps(dispatch) {
+    return {
+        addItem: items => dispatch(addItem(items))
+    };
+  }
+
+const mapStateToProps = (state) => {
+    return{
+        items: state.items
+    }
+}
+
 class Item extends React.Component{
 
     constructor(props){
         super(props);
-    
-        this.state = {
-
-            name: "",
-            precio: "",
-            cantidad: "",
-            id: "",
-        }
-
-
-    
-    
-    
+        this.additem = this.additem.bind(this);
     }
 
-    
+    additem(){
+        this.props.items[this.props.id].cantidad+=1;
+        this.props.addItem(this.props.items)
+    }
 
     render(){
         return(
-
-            <div>
-                <List >
-                    <ListItem alignItems="flex-start">
-                        <ListItemText
-                            primary = {this.props.name}  
-                            secondary={this.props.cantidad}
-                           
-                        ></ListItemText>
-                       
-                    </ListItem>    
-                </List>
-            </div>   
-          
-            
-           
-           
-           
+            <Grid onClick={this.additem} Item alignContent='stretch'>
+                <Paper>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {this.props.items[this.props.id].name}
+                    </Typography>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        -{this.props.items[this.props.id].precio}-
+                    </Typography>
+                    <Typography gutterBottom variant="h5" component="h2">
+                    {this.props.items[this.props.id].cantidad}
+                    </Typography>
+                </Paper>
+            </Grid>
         )
     }
 
     
 }
-export default withStyles(styles) (Item);
+export default connect(mapStateToProps,mapDispatchToProps)(Item);
