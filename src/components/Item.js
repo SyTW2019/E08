@@ -42,8 +42,12 @@ class Item extends React.Component{
             <div>
                 <List >
                     <ListItem alignItems="flex-start">
-                        <ListItemText>{this.props.name}</ListItemText>
-                        <ListItemText>{this.props.cantidad}</ListItemText>
+                        <ListItemText
+                            primary = {this.props.name}  
+                            secondary={this.props.cantidad}
+                           
+                        ></ListItemText>
+                       
                     </ListItem>    
                 </List>
             </div>   
