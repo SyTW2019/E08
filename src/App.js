@@ -16,10 +16,6 @@ import Game from './components/Game';
   },
 }));*/
 
-const mapDispatchToProps = dispatch => ({
-  //getProfileFetch: () => dispatch(getProfileFetch())
-})
-
 class App extends Component {
   constructor(props){
     super(props);

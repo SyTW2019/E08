@@ -1,15 +1,24 @@
-import React, {Component, useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-import CircularProgress from '@material-ui/core/CircularProgress';
+//import { makeStyles } from '@material-ui/core/styles';
+//import LinearProgress from '@material-ui/core/LinearProgress';
+//import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+//import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper'
 import Monster from '../../public/img/monster.png';
+import {saveData, saveStats} from '../js/actions/index'
 
 const mapStateToProps = state => {
   return{
     data: state.data,
+    stats: state.stats,
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    saveData: data => dispatch(saveData(data)),
+    saveStats: stats => dispatch(saveStats(stats))
   }
 }
 
@@ -20,11 +29,13 @@ const monsterType = {
   },
   boss: {
     hp: 35,
-    gold: 10 
+    gold: 10, 
   }
 }
 
-const useStyles = makeStyles(theme => ({
+var currentMonster = {...monsterType.regular};
+
+/*const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
       '& > * + *': {
@@ -33,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-function LinearDeterminate() {
+/*function LinearDeterminate() {
     const classes = useStyles();
     const [completed, setCompleted] = React.useState(0);
   
@@ -70,49 +81,67 @@ function CircularDeterminate() {
         clearInterval(timer);
       };
     }, []);
-}
+}*/
 
 class Monstruo extends React.Component{
 
     constructor(props){
         super(props);
     }
-
     componentDidMount = () =>{      
       this.dps_cycle = setInterval(this.dps_cycle, 1000)
     }
 
     dps_cycle = () =>{
-      console.log("Monster= "+this.props.dps_data.cpower)
-      if(monsterType.regular.hp > 0 && this.props.dps_data.current_dps != 0)
-        monsterType.regular.hp-=this.props.dps_data.current_dps;
-        else{
-          monsterType.regular.hp = 15;
-          //sumar oro y avanzar nivel
-        }
+      if(currentMonster.hp > 0)
+        currentMonster.hp-=this.props.dps_data.current_dps;
+      else{
+          this.props.saveData({
+            currentLvl: this.props.data.currentLvl+=1,
+            money: this.props.data.money+=currentMonster.gold,
+          })
+          this.calc_monster();
+      }
+    }
+    calc_monster = () =>{
+      currentMonster = (this.props.data.currentLvl%10 === 0)? {...monsterType.boss} : {...monsterType.regular};
+      currentMonster.hp*= this.props.data.currentLvl;
+      currentMonster.gold*= this.props.data.currentLvl;
     }
 
     dmg_monster = () =>{
-      //Basado en el current lvl TODO
-      //console.log("DMG_MONSTER"+this.props.dps_data.cpower)
-      if(monsterType.regular.hp > 0)
-        monsterType.regular.hp-=this.props.dps_data.cpower;
+     
+      this.props.saveStats({
+        kills: this.props.stats.kills,
+        clicks: this.props.stats.clicks +=1,
+        tiempo_juego: this.props.stats.tiempo_jugado,
+      })
+      
+      if(currentMonster.hp > 0)
+        currentMonster.hp-=this.props.dps_data.cpower;
       else{
-        monsterType.regular.hp = 15;
-        //sumar oro y avanzar nivel
+        this.props.saveData({
+          currentLvl: this.props.data.currentLvl+=1,
+          money: this.props.data.money+=currentMonster.gold,
+        })
+        this.props.saveStats({
+          kills: this.props.stats.kills +=1,
+          clicks: this.props.stats.clicks,
+          tiempo_juego: this.props.stats.tiempo_jugado,
+        })
+        this.calc_monster();
       }
     }
 
     render(){
+      var vida = currentMonster.hp;
         return (
           <Paper>
-            <h1>VIDA: {monsterType.regular.hp}</h1>
-            Aqui podriamos poner la vida del bicho con lo del linear
+            <h1>VIDA:{vida}</h1>
             <img src={Monster} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
           </Paper>
         )
     }
-
 }
 
-export default connect(mapStateToProps)(Monstruo)
+export default connect(mapStateToProps,mapDispatchToProps)(Monstruo)

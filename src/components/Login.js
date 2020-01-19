@@ -32,9 +32,9 @@ class Login extends React.Component{
         this.state = {
             emailValue: "",
             pwdValue: "",
-            open: "",
-            emailError: "",
-            pwdError: "",
+            open: false,
+            emailError: false,
+            pwdError: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -69,13 +69,13 @@ class Login extends React.Component{
           }).then((success) => {
 		          
              
-              if(localStorage.id == 1)
+              if(localStorage.id === 1)
                 console.log("Usuario logeado correctamente");
-              else if(localStorage.id == 2)
+              else if(localStorage.id === 2)
               {
                 console.log("Contraseña mal puesta")
               }
-              else if(localStorage.id == 0)
+              else if(localStorage.id === 0)
                 console.log("Email mal");
 	            else
       	        console.log("Error desconocido");
@@ -129,7 +129,7 @@ class Login extends React.Component{
               iniciar sesión prueba
             </Button>
             <Dialog
-              open ={this.state.open}
+              open={this.state.open}
               keepMounted
               onClose={this.handleClose}
               aria-labelledby="iniciar_sesion"

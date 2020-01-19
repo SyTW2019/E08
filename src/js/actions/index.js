@@ -31,11 +31,6 @@ export const userPostFetch = user => {
 
 }
 
-const updateLogged = userobj => ({
-    type: 'UPDATE_LOGGED',
-    payload: userobj
-})
-
 const registUser = userObj => ({
     type: 'ADD_USER',
     payload: userObj
@@ -113,28 +108,28 @@ export const userDataFetch = user => {
         dispatch(userData(data.user))
     }
 }
+
+export const saveStats = gameStats => {
+    return function(dispatch){
+        dispatch(userStats(gameStats))
+    }
+}
+const userStats = dataObj => ({
+    type: 'ADD_STATS',
+    payload: dataObj
+})
 const userData = dataObj => ({
     type: 'GET_DATA',
     payload: dataObj
 })
 
 export const saveData = gameData => {
-    return async function(dispatch){
-        const resp = await fetch("/user/save", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({ gameData })
-        })
-        const data = await resp.json()
-        localStorage.setItem("token", data.jwt)
-        dispatch(gameSave(data.gameData))
+    return function(dispatch){
+        dispatch(currentData(gameData))
     }
 }
 
-const gameSave = dataObj => ({
+const currentData = dataObj => ({
     type: 'SAVE_DATA',
     payload: dataObj
 })

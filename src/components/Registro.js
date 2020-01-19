@@ -29,9 +29,9 @@ class Registro extends React.Component{
             userValue: "",
             pwdValue: "",
             pwdConfValue: "",
-            emailError: "",
-            pwdError: "",
-            open: "",
+            emailError: false,
+            pwdError: false,
+            open: false,
 	        logged: false,
         }
 
@@ -64,7 +64,7 @@ class Registro extends React.Component{
     handleError = event =>{
         this.handleErrorEmail()
         this.handleErrorPwd()
-        if( this.state.pwdError == false && this.state.emailError == false)
+        if( this.state.pwdError === false && this.state.emailError === false)
         {
             event.preventDefault();
             //this.props.userPostFetch(this.state);
@@ -183,7 +183,7 @@ class Registro extends React.Component{
                 <TextField
                 required
                 id="email"
-                name = "emailValue"
+                name="emailValue"
                 label="Correo Electrónico"
                 value={this.state.emailValue}
                 ref={(input) => this.input = input}
@@ -204,7 +204,7 @@ class Registro extends React.Component{
                 required
                 id="username"
                 label="Nombre de Usuario"
-                name = "userValue"
+                name="userValue"
                 value={this.state.userValue}
                 ref={(input) => this.input = input}
                 onChange={this.handleChange}
@@ -221,7 +221,7 @@ class Registro extends React.Component{
                 <TextField
                 required
                 id="password"
-                name = "pwdValue"
+                name="pwdValue"
                 label="Contraseña"
                 type="password"
                 value={this.state.pwdValue}
@@ -240,7 +240,7 @@ class Registro extends React.Component{
                 <TextField
                 required
                 id="password_verify"
-                name= "pwdConfValue"
+                name="pwdConfValue"
                 label="Verificación de contraseña"
                 type="password"
                 value={this.state.pwdConfValue}
