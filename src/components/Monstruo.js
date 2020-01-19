@@ -4,6 +4,25 @@ import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from '@material-ui/core/Paper'
+import Monster from '../../public/img/monster.png';
+
+const mapStateToProps = state => {
+  return{
+    data: state.data,
+  }
+}
+
+const monsterType = {
+  regular: {
+    hp: 15,
+    gold: 4,
+  },
+  boss: {
+    hp: 35,
+    gold: 10 
+  }
+}
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -57,62 +76,43 @@ class Monstruo extends React.Component{
 
     constructor(props){
         super(props);
-
-        this.state = {
-            
-            vida: "",
-            oro: "",
-            boss: "",
-            tiempo: "",
-        }
-
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    
-    handleChange = event => {
-        event.preventDefault();
-        
-        const target = event.target;
-        const value = target.value;
-        const name = target.name
-        this.setState({
-          [name]: value
-        });
-      }
+    componentDidMount = () =>{      
+      this.dps_cycle = setInterval(this.dps_cycle, 1000)
+    }
 
-    matar_mosntruo(){
-
-        if(this.state.vida > 0){
-            this.state.vida -= this.props.clicks;
-            this.props.clicks = 0;
-        }
+    dps_cycle = () =>{
+      console.log("Monster= "+this.props.dps_data.cpower)
+      if(monsterType.regular.hp > 0 && this.props.dps_data.current_dps != 0)
+        monsterType.regular.hp-=this.props.dps_data.current_dps;
         else{
-
-            document.getElementById("monstruo").style.display = "none";  //cuando muere el monstruo el contador de vida desaparece
-            document.getElementById("vida").style.display = "none";
-            document.getElementById("mons").style.display = "none";
+          monsterType.regular.hp = 15;
+          //sumar oro y avanzar nivel
         }
-        
     }
 
-
-      render(){
-          return (
-            <div>
-                <h1> Vida Monstruo </h1>
-                <h2 id="monstruo"> 10 </h2>
-                <LinearProgress id= "vida" variant="determinate" value={completed} color="secondary" />
-                <img id="mons" src="./img/monstruo1.png" />
-                Dinero
-                buscar un dispaly para el dinero 
-                <MonetizationOnIcon />
-                boss
-                <CircularProgress variant="determinate" value={progress} />
-
-            </div>
-           
-          )
+    dmg_monster = () =>{
+      //Basado en el current lvl TODO
+      //console.log("DMG_MONSTER"+this.props.dps_data.cpower)
+      if(monsterType.regular.hp > 0)
+        monsterType.regular.hp-=this.props.dps_data.cpower;
+      else{
+        monsterType.regular.hp = 15;
+        //sumar oro y avanzar nivel
       }
-
     }
+
+    render(){
+        return (
+          <Paper>
+            <h1>VIDA: {monsterType.regular.hp}</h1>
+            Aqui podriamos poner la vida del bicho con lo del linear
+            <img src={Monster} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
+          </Paper>
+        )
+    }
+
+}
+
+export default connect(mapStateToProps)(Monstruo)

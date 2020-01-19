@@ -3,11 +3,16 @@
 const initialState = {
     users: [],
     items: [
-        {name:"Bebida Energetica",precio:10,cantidad:0,id:0},
-        {name:"Colegas",precio:20,cantidad:0,id:1},
-        {name:"Asistir a Clase",precio:30,cantidad:0,id:2},
-        {name:"Tutorias",precio:50,cantidad:0,id:3},
+        {name:"Bebida Energetica",precio:10,cantidad:0,id:0,dps:3},
+        {name:"Colegas",precio:20,cantidad:0,id:1,dps:5},
+        {name:"Asistir a Clase",precio:30,cantidad:0,id:2,dps:8},
+        {name:"Tutorias",precio:50,cantidad:0,id:3,dps:12},
     ],
+    data: {
+        currentLvl: 0,
+        money: 0,
+        kills: 0,
+    },
     logged: false,
 };
 
@@ -26,7 +31,7 @@ export default function reducer(state = initialState, action){
         case 'GET_LOGGED':
             return {...state, }
         case 'ADD_ITEM':
-            return {...state,items: action.payload}
+            return {...state, items: action.payload}
         default:
             return state;
     }
