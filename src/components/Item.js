@@ -25,8 +25,10 @@ class Item extends React.Component{
     }
 
     additem(){
+        console.log("En el additem")
         this.props.items[this.props.id].cantidad+=1;
         this.props.addItem(this.props.items)
+        
     }
 
     render(){

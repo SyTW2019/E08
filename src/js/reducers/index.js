@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action){
         case 'GET_LOGGED':
             return {...state, }
         case 'ADD_ITEM':
-            return {...state,items: action.payload}
+            return {...state, items: action.payload}
         default:
             return state;
     }
