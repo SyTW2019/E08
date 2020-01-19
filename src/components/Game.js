@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import User from './User';
 import Mounstro from './Monstruo';
 import ItemList2 from './ItemList2';
+import Logout from './Logout';
 window.store =store;
 
 console.log(store.users)
@@ -72,7 +73,6 @@ class Game extends React.Component{
 
         /*if(this.state.dps > 0)
             this.state.clickpower = 0.5*this.state.dps;*/
-
         /*if(this.monster.hp > 0)
         {
             this.monster.hp -= this.state.clickpower;
@@ -92,9 +92,7 @@ class Game extends React.Component{
             })
             this.monster.hp =10; 
         }*/
-            
-
-        //quitarle vida al bicho 
+        //quitarle vida al bicho
     }
 
     output(evt){
@@ -139,6 +137,7 @@ class Game extends React.Component{
                                 {logged === true && (
                                     <Grid>
                                         <User/>
+                                        <Logout/>
                                     </Grid>
                                 )}
                                 { logged === false && (
@@ -146,7 +145,7 @@ class Game extends React.Component{
                                         <Login/>
                                         <Registro/>
                                     </Grid>
-                                )}                                
+                                )}
                             </Grid>
                             STATS
                         </Paper>

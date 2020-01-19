@@ -12,7 +12,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {connect} from 'react-redux';
 import {userLoginFetch} from '../js/actions/index';
 
-
 function mapDispatchToProps(dispatch) {
   return {
       userLoginFetch: user => dispatch(userLoginFetch(user))
@@ -43,11 +42,11 @@ class Login extends React.Component{
         this.handleClose = this.handleClose.bind(this);
     }
 
-    
-    
+
+
     handleChange = event => {
         event.preventDefault();
-        
+
         const target = event.target;
         const value = target.value;
         const name = target.name
@@ -55,7 +54,7 @@ class Login extends React.Component{
           [name]: value
         });
       }
-    
+
       handleError = event => {
         if(this.get_value()){
           this.setState({
@@ -67,8 +66,8 @@ class Login extends React.Component{
           this.props.userLoginFetch({ email: this.state.emailValue,
                                       contrasena: this.state.pwdValue
           }).then((success) => {
-		          
-             
+
+
               if(localStorage.id == 1)
                 console.log("Usuario logeado correctamente");
               else if(localStorage.id == 2)
@@ -79,21 +78,21 @@ class Login extends React.Component{
                 console.log("Email mal");
 	            else
       	        console.log("Error desconocido");
-	            
-	            })	
+
+	            })
         }
         else
           this.setState({
             emailError:true,
           })
       }
-    
+
       handleOpen = event => {
         this.setState({
           open: true,
         })
-        
-        
+
+
 
       }
       handleClose = event => {
@@ -105,20 +104,20 @@ class Login extends React.Component{
       validateEmail(){
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
           return true;
-        else 
+        else
           return false;
       }
-    
+
       get_value(){
-        
-        
+
+
         if(this.validateEmail())
         {
           if(this.state.emailValue)
             return true;
           else
             return false
-        }   
+        }
       }
 
       render() {
@@ -189,6 +188,6 @@ class Login extends React.Component{
             </Grid>
         )
       }
-    } 
-      
+    }
+
     export default connect(mapStateToProps,mapDispatchToProps)(Login);

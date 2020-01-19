@@ -14,6 +14,8 @@ const initialState = {
         kills: 0,
     },
     logged: false,
+    email: [],
+    token: []
 };
 
 export default function reducer(state = initialState, action){
@@ -27,7 +29,11 @@ export default function reducer(state = initialState, action){
         case 'SAVE_DATA':
             return {...state, users: action.payload}
         case 'UPDATE_LOGGED':
-            return {...state, logged: true}
+            return {...state, logged: action.payload}
+        case 'ADD_EMAIL':
+            return {...state, email: action.payload}
+        case 'ADD_TOKEN':
+            return {...state, token: action.payload}
         case 'GET_LOGGED':
             return {...state, }
         case 'ADD_ITEM':
