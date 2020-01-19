@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 //import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper'
 import Monster from '../../public/img/monster.png';
+import PcImg from '../../public/img/pc.png'
 import {saveData, saveStats} from '../js/actions/index'
 
 const mapStateToProps = state => {
@@ -136,9 +137,16 @@ class Monstruo extends React.Component{
     render(){
       var vida = currentMonster.hp;
         return (
-          <Paper>
+         <Paper>
             <h1>VIDA:{vida}</h1>
-            <img src={Monster} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
+            {this.props.data.currentLvl%10 === 0 &&(
+                          <img src={Monster} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
+
+            )}
+            {this.props.data.currentLvl%10 != 0 &&(
+                          <img src={PcImg} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
+
+            )}
           </Paper>
         )
     }
