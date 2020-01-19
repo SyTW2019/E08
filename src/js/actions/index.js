@@ -19,26 +19,34 @@ export const userPostFetch = user => {
         if(data.id == 1)
         {
             localStorage.setItem("id", data.id);
-            localStorage.setItem("token", data.jwt)
-            dispatch(registUser(data.user))
+            localStorage.setItem("user", data.user);
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("email", data.email);
+
+            dispatch(registUser(data.user));
+            dispatch(registEmail(data.email));
+            dispatch(registToken(data.token));
         }
         else
         {
             localStorage.setItem("id", data.id);
         }
-
     }
-
 }
-
-const updateLogged = userobj => ({
-    type: 'UPDATE_LOGGED',
-    payload: userobj
-})
 
 const registUser = userObj => ({
     type: 'ADD_USER',
     payload: userObj
+})
+
+const registEmail = userObj => ({
+  type: 'ADD_EMAIL',
+  payload: userObj
+})
+
+const registToken = userObj => ({
+  type: 'ADD_TOKEN',
+  payload: userObj
 })
 //Login -> recibir los datos del juego guardados en la BBDD
 
@@ -60,12 +68,15 @@ export const userLoginFetch = user => {
         if(data.id == 1)
         {
             localStorage.setItem("id", data.id);
-	        localStorage.setItem("user", data.user);
-	        localStorage.setItem("token", data.jwt);
+	          localStorage.setItem("user", data.user);
+	          localStorage.setItem("token", data.token);
+            localStorage.setItem("email", data.email);
 
             dispatch(loginUser(data.user))
+            dispatch(registEmail(data.email));
+            dispatch(registToken(data.token));
             //dispatch(userData(user))
-	        return true;
+	          return true;
         }
         else
         {
@@ -83,7 +94,42 @@ export const userLoginFetch = user => {
 const loginUser = userObj => ({
     type: 'LOGIN_USER',
     payload: userObj
-    
+})
+
+export const userLogoutFetch = user => {
+  return async function (dispatch){
+    console.log('Valor del token en la accion');
+    console.log(user.token);
+    const resp = await fetch("/user/logout", {
+      method: "GET",
+      headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': user.token,
+          Accept: 'application/json',
+      },
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      if(data.id == 1)
+      {
+        console.log('Logout hecho satisfactoriamente.');
+        localStorage.setItem("id", "");
+        localStorage.setItem("user", []);
+        localStorage.setItem("token", "");
+        localStorage.setItem("items", [0,0,0,0]);
+        localStorage.setItem("email", "");
+      }
+    })
+    dispatch(logoutUser(false));
+    dispatch(registUser(""));
+    dispatch(registEmail(""));
+    dispatch(registToken(""));
+  }
+}
+
+const logoutUser = userObj => ({
+  type: 'UPDATE_LOGGED',
+  payload: userObj
 })
 
 export const userDataFetch = user => {
@@ -113,28 +159,28 @@ export const userDataFetch = user => {
         dispatch(userData(data.user))
     }
 }
+
+export const saveStats = gameStats => {
+    return function(dispatch){
+        dispatch(userStats(gameStats))
+    }
+}
+const userStats = dataObj => ({
+    type: 'ADD_STATS',
+    payload: dataObj
+})
 const userData = dataObj => ({
     type: 'GET_DATA',
     payload: dataObj
 })
 
 export const saveData = gameData => {
-    return async function(dispatch){
-        const resp = await fetch("/user/save", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({ gameData })
-        })
-        const data = await resp.json()
-        localStorage.setItem("token", data.jwt)
-        dispatch(gameSave(data.gameData))
+    return function(dispatch){
+        dispatch(currentData(gameData))
     }
 }
 
-const gameSave = dataObj => ({
+const currentData = dataObj => ({
     type: 'SAVE_DATA',
     payload: dataObj
 })

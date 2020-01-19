@@ -1,23 +1,30 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux';
-//import {saveData} from '../js/actions/index';
-import pcimg from '../../public/img/pc.png';
-import store from '../js/store/index';
 import ItemList from './ItemList';
 import StatList from './StatList';
 import Login from './Login';
 import Registro from './Registro';
 import Paper from '@material-ui/core/Paper';
 import User from './User';
-import ItemList2 from './ItemList2';
-window.store =store;
+import Mounstro from './Monstruo';
 
-console.log(store.users)
 
-function mapStateToProps(state) {
-    return {user: state.user}
-  }
+
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+        items: state.items,
+        data: state.data,
+    }
+}
+
+const mapDispatchToProps = (dipatch) =>{
+    return{
+        //saveStats: stats=> dispatch(saveStats(stats))
+    }
+}
 
 class Game extends React.Component{
     constructor(props){
@@ -25,16 +32,18 @@ class Game extends React.Component{
 
         this.state = {
             dps: 0,
-            oro: 0,
+            oro: this.props.money,
             i:0,
             currentLvl: 1,
-            count:0
+            count:0,
+            clickpower:10,
+            
         }
         this.output = this.output.bind(this);
     }
 
     monster = {
-        hp: 100,
+        hp: 10,
         oro_monster: 3,
         boss: false,
     }
@@ -52,47 +61,62 @@ class Game extends React.Component{
             currentLvl: this.state.currentLvl,
             hp: this.monster.hp,
             oro_monster: this.monster.oro,
-
+            clickpower: this.state.clickpower,
+            
         })
     }
 
     handleClick = () => {
 
-        if(this.state.dps === 0)
-            this.clickpower = 1;
-        else    
-            this.clickpower = 0.5*this.state.dps;
-
-        if(this.monster.hp > 0)
+        /*if(this.state.dps > 0)
+            this.state.clickpower = 0.5*this.state.dps;*/
+        /*if(this.monster.hp > 0)
         {
-            this.monster.hp -= this.clickpower;
-            
+            this.monster.hp -= this.state.clickpower;
+            this.monster.hp -= this.state.dps;
         }
         else
         {
-            this.state.oro += this.monster.oro_monster;
+            //this.state.oro += this.monster.oro_monster;
+            console.log(this.state.oro)
             this.setState({
-                oro: this.state.oro,
+                oro: this.state.oro+this.monster.oro_monster,
             })
 
             this.state.currentLvl++;
             this.setState({
                 currentLvl: this.state.currentLvl,
             })
-        }
-            
-
-        //quitarle vida al bicho 
+            this.monster.hp =10; 
+        }*/
+        //quitarle vida al bicho
     }
 
     output(evt){
-        console.log("Probando la función");
         this.setState({ count: this.state.count+evt})
     }
-    gameLoop = (event) =>{
-        this.state.i++;
+
+    calc_dps(){
+        var current_dps = 0;
+        for(var loop = 0; loop < 4; loop++)
+        {
+            var specific_dps = 0;
+            if(this.props.items[loop].cantidad > 0)
+            {
+                specific_dps = this.props.items[loop].cantidad*this.props.items[loop].dps
+                current_dps += specific_dps;
+            }
+        }
         this.setState({
-            i: this.state.i,
+            dps: current_dps,
+            clickpower: (current_dps >0)?current_dps: 1,
+        })
+    }
+
+    gameLoop = (event) =>{
+        this.calc_dps();
+        this.setState({
+            i: this.state.i+1
         })
     }
 
@@ -101,13 +125,14 @@ class Game extends React.Component{
         var logged = (localStorage.id ? true:false)
         return(
             <div id="Game">
-                <Grid container spacing={3} justify="space-evenly" alignItems="flex-start">
+                <Grid container spacing={2} justify="space-evenly" alignItems="flex-start">
                     <Grid item xs={3}>
                         <Paper>
                             <Grid container>
                                 {logged === true && (
                                     <Grid>
                                         <User/>
+                                        <Logout/>
                                     </Grid>
                                 )}
                                 { logged === false && (
@@ -115,24 +140,30 @@ class Game extends React.Component{
                                         <Login/>
                                         <Registro/>
                                     </Grid>
-                                )}                                
+                                )}
                             </Grid>
                             STATS
                         </Paper>
-                        <StatList />
+                        <StatList stats_data={{
+                            dps: this.state.dps,
+                            tiempo: this.state.i
+                        }
+
+                        }/>
                     </Grid>
                     <Grid item xs={6}>
-                        <p>Contador del juego -> {this.state.i}</p>
-                        <h1>ORO ACTUAL: {this.state.oro} </h1>
-                        <h2>VIDA: {this.monster.hp}</h2>
-                        <img src={pcimg} onClick={this.handleClick} alt="PC"/>
+                        <h1>ORO ACTUAL: {this.props.data.money.toFixed(0)} </h1>
+                        <h2>NIVEL ACTUAL: {this.props.data.currentLvl}</h2>
+                        <h3>DPS: {this.state.dps}</h3>                        
+                        <Mounstro 
+                            dps_data={{
+                                cpower:this.state.clickpower,
+                                current_dps:this.state.dps
+                            }}
+                        />
                     </Grid>
                     <Grid item xs={3}>
-                        <ItemList
-                            func={this.output}
-                           
-                        />
-                        <h1>{this.state.count}</h1>
+                        <ItemList/>
                     </Grid>
                 </Grid>
             </div>
@@ -140,4 +171,4 @@ class Game extends React.Component{
     }
 }
 
-export default connect(mapStateToProps,null)(Game);
+export default connect(mapStateToProps,mapDispatchToProps)(Game);

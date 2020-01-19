@@ -1,29 +1,31 @@
 
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+//import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+//import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {connect} from 'react-redux';
-import {userDataFetch} from '../js/actions/index';
+import {saveStats} from '../js/actions/index';
 
-const useStyles = makeStyles(theme => ({
+/*const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
-  }));
+  }));*/
+
+  const mapStateToProps = state => {
+    return{
+      stats: state.stats,
+    }
+  }
 
   function mapDispatchToProps(dispatch) {
       return {
-          userDataFetch: user => dispatch(userDataFetch(user))
+          saveStats: stats => dispatch(saveStats(stats)) 
       }
-  }
-
-  function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
   }
 
   class StatList extends React.Component {
@@ -32,6 +34,7 @@ const useStyles = makeStyles(theme => ({
 
           this.state = {
               bichos: "",
+              dps: "",
               //poner mas estados: tiempo jugado, clicks por segundo, etc
 
           }
@@ -52,13 +55,17 @@ const useStyles = makeStyles(theme => ({
             <div>
                 <List component="nav">
                     <ListItem>
-                        <ListItemText primary="Numero de Bichos Matados" />
+                        <ListItemText primary="Numero de Bichos Matados" secondary={this.props.stats.kills} />
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary="Stat nº2"/>
+                        <ListItemText primary="DPS" secondary={this.props.stats_data.dps}/>
+
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary="Stat nº3"/>
+                        <ListItemText primary="Número de clicks" secondary={this.props.stats.clicks}/>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary="Tiempo jugado" secondary={this.props.stats_data.tiempo}/>
                     </ListItem>
                 </List>
             </div>
@@ -66,4 +73,4 @@ const useStyles = makeStyles(theme => ({
       }
   }
 
-export default connect(null, mapDispatchToProps)(StatList);
+export default connect(mapStateToProps, mapDispatchToProps)(StatList);

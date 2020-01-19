@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
+const auth = require('../../middleware/auth');
 
 //Item model
 
@@ -50,7 +51,8 @@ router.post('/registro', (req, res) => {
                 res.send(JSON.stringify({
                   token,
                   id: 1,
-                  user: usuario.nombre
+                  user: usuario.nombre,
+                  email: usuario.email
                 }))
               })
           })
@@ -93,7 +95,8 @@ router.post('/login', (req, res) => {
             res.send(JSON.stringify({
               token,
               id: 1,
-              user: doc.nombre
+              user: doc.nombre,
+              email: doc.email
             }))
           }
         )
@@ -102,35 +105,17 @@ router.post('/login', (req, res) => {
   });
 });
 
-// // @route POST login user
-// router.post('/login', (req, res) => {
-//   console.log("Entrando al login....");
-//
-//   console.log(req.body.email);
-//   console.log(req.body.contrasena);
-//
-//   User.findOne({email: req.body.email}, function(err, usuario){
-//     if(err) throw err;
-//
-//     if(usuario.email == req.body.email)
-//     {
-//       if(usuario.password == req.body.contrasena)
-//       {
-//         console.log("Login correcto del usuario "+usuario.nombre+", con contraseña: "+usuario.password);
-//         res.send(JSON.stringify({id: 1, user: usuario.nombre}));
-//       }
-//       else
-//       {
-//         console.log("La contraseña es incorrecta.");
-//         res.send(JSON.stringify({id: 2, user: null}));
-//       }
-//     }
-//     else
-//     {
-//       console.log("El usuario buscado no existe.");
-//       res.send(JSON.stringify({id: 0, user: null}));
-//     }
-//   });
-// });
+// @route POST logout user
+router.get('/logout', auth, (req, res) => {
+  console.log("Entrando al logout....");
+
+  User.findById(req.user.id)
+    .select('-password')
+    .then(user => res.json({
+      id: 1,
+      user: user.nombre,
+      email: user.email
+    }));
+});
 
 module.exports = router;
