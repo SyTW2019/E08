@@ -18,6 +18,8 @@ const initialState = {
         tiempo_juego: 0,
     },
     logged: false,
+    email: [],
+    token: []
 };
 
 export default function reducer(state = initialState, action){
