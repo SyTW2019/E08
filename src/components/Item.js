@@ -1,9 +1,11 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Skeleton from '@material-ui/lab/Skeleton'
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import {addItem,saveData} from '../js/actions/index';
+import purple from '@material-ui/core/colors/purple';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -23,36 +25,63 @@ class Item extends React.Component{
 
     constructor(props){
         super(props);
-        this.additem = this.additem.bind(this);
+
         this.state = {
             items: this.props.items,
+            animation: false,
+            elevation: 1,
         } 
     }
     
-    additem(){
+    additem = () =>{
         if(this.props.data.money >=this.props.items[this.props.id].precio)
         {
-        this.props.data.money -=this.props.items[this.props.id].precio;
-        this.props.saveData(this.props.data);
-        this.props.items[this.props.id].cantidad+=1;
-        this.props.items[this.props.id].precio*=1.5;
-        this.setState({
-            items: this.props.items
-        })
-        this.props.addItem(this.state.items)
+            //Descontar el dinero
+            this.props.data.money -=this.props.items[this.props.id].precio;
+            this.props.saveData(this.props.data);
+            //Aumentar el precio y la cantidad del item comprado
+            this.props.items[this.props.id].cantidad+=1;
+            this.props.items[this.props.id].precio*=1.5;
+            this.setState({
+                items: this.props.items
+            })
+            this.props.addItem(this.state.items)
         }
+    }
+
+    mouseEnter = () =>{
+        this.setState({
+            animation:'pulse',
+            elevation:20,
+        })
+    }
+
+    mouseLeave = ()=>{
+        this.setState({
+            animation:false,
+            elevation:1,
+        })
     }
 
     render(){
         return(
             <Grid onClick={this.additem}>
-                <Paper >
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {this.props.items[this.props.id].name}-
-                        {(this.props.items[this.props.id].precio).toFixed(0)}
-                        -{this.props.items[this.props.id].cantidad}
-                    </Typography>
-                </Paper>
+                <Skeleton animation={this.state.animation} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} >
+                    <Paper variant="outlined" elevation={this.state.elevation} style={{backgroundColor:purple[200]}}>
+                        <Typography gutterBottom variant="h4" component="h2">
+                            {this.props.items[this.props.id].name}
+                        </Typography>
+                        <Typography gutterBottom variant="h6" component="h2">
+                            DPS:{this.props.items[this.props.id].dps}
+                        </Typography>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            Precio:{(this.props.items[this.props.id].precio).toFixed(0)}
+                            </Typography>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            Cantidad:{this.props.items[this.props.id].cantidad}
+                        </Typography>
+                    </Paper>
+                </Skeleton>
             </Grid>
         )
     }

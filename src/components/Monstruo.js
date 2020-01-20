@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 //import LinearProgress from '@material-ui/core/LinearProgress';
 //import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 //import CircularProgress from '@material-ui/core/CircularProgress';
-import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid';
 import Monster from '../../public/img/monster.png';
 import PcImg from '../../public/img/pc.png'
 import {saveData, saveStats} from '../js/actions/index'
@@ -26,10 +26,10 @@ const mapDispatchToProps = dispatch =>{
 const monsterType = {
   regular: {
     hp: 15,
-    gold: 4,
+    gold: 2,
   },
   boss: {
-    hp: 35,
+    hp: 100,
     gold: 10, 
   }
 }
@@ -88,15 +88,40 @@ class Monstruo extends React.Component{
 
     constructor(props){
         super(props);
+        
+        this.state = {
+          timer: 10,
+        }
     }
     componentDidMount = () =>{      
       this.dps_cycle = setInterval(this.dps_cycle, 1000)
     }
 
     dps_cycle = () =>{
+      
+      if((this.props.data.currentLvl%10 === 0))
+        this.setState({
+          timer: this.state.timer-=1
+        })
       if(currentMonster.hp > 0)
+      {
         currentMonster.hp-=this.props.dps_data.current_dps;
+        if(this.state.timer <= 0 && (this.props.data.currentLvl%10 === 0))
+        {
+          this.props.saveData({
+            currentLvl: this.props.data.currentLvl-=9,
+            money: this.props.data.money,
+          })
+          this.setState({
+            timer: 10,
+          })
+          this.calc_monster();
+        }
+      }
       else{
+          this.setState({
+            timer: 10,
+          })
           this.props.saveData({
             currentLvl: this.props.data.currentLvl+=1,
             money: this.props.data.money+=currentMonster.gold,
@@ -137,17 +162,21 @@ class Monstruo extends React.Component{
     render(){
       var vida = currentMonster.hp;
         return (
-         <Paper>
+         <Grid color='inherit'>
             <h1>VIDA:{vida}</h1>
+            
             {this.props.data.currentLvl%10 === 0 &&(
-                          <img src={Monster} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
-
+              <div>
+                <h1>Tiempo Restante: {this.state.timer}</h1>
+               <img src={Monster} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
+              </div>
             )}
             {this.props.data.currentLvl%10 != 0 &&(
-                          <img src={PcImg} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
-
+              <div>
+                <img src={PcImg} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
+              </div>
             )}
-          </Paper>
+          </Grid>
         )
     }
 }
