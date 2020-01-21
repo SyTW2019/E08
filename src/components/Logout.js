@@ -83,8 +83,11 @@ class Logout extends React.Component{
                                    data: this.props.data,
                                    stats : this.props.stats,
                                    token: this.state.tokenValue
-                                  
+
         })
+        .then((success) => {
+          console.log('BIEEEEEEEEEEEN');
+        }
         this.props.userLogoutFetch({ email: this.state.emailValue,
                                     token: this.state.tokenValue
         })
@@ -93,17 +96,18 @@ class Logout extends React.Component{
         .then((success) => {
 
 
-            if(localStorage.id == 1)
-              console.log("Usuario logeado correctamente");
-            else if(localStorage.id == 2)
-            {
-              console.log("Contraseña mal puesta")
-            }
-            else if(localStorage.id == 0)
-              console.log("Email mal");
-            else
-              console.log("Error desconocido");
-            })
+            // if(localStorage.id == 1)
+            //   console.log("Usuario logeado correctamente");
+            // else if(localStorage.id == 2)
+            // {
+            //   console.log("Contraseña mal puesta")
+            // }
+            // else if(localStorage.id == 0)
+            //   console.log("Email mal");
+            // else
+            //   console.log("Error desconocido");
+            // })
+            console.log('BIEEEEEEEEEEEN pero del logaut');
       }
 
       render() {

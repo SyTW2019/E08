@@ -125,6 +125,7 @@ export const userLogoutFetch = user => {
     dispatch(registUser(""));
     dispatch(registEmail(""));
     dispatch(registToken(""));
+    return true;
   }
 }
 
@@ -159,6 +160,7 @@ export const userDataFetch = user => {
         const data = await resp.json()
         localStorage.setItem("token", data.jwt)
         dispatch(userData(data.user))
+        return true;
     }
 }
 
@@ -197,4 +199,4 @@ export const addItem = itemData =>{
     {
         dispatch(addItemIndex(itemData));
     }
-} 
+}
