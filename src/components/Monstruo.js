@@ -126,7 +126,7 @@ class Monstruo extends React.Component{
       this.props.saveStats({
         kills: this.props.stats.kills,
         clicks: this.props.stats.clicks +=1,
-        tiempo_juego: this.props.stats.tiempo_jugado,
+        tiempo_juego: this.props.stats.tiempo_juego,
       })
 
 
