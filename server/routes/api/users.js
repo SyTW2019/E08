@@ -146,13 +146,13 @@ router.post('/save', auth, (req, res) => {
 
   User.findById(req.user.id)
     .then(user => {
-        user.items.forEach(function(elemento, indice, array) {
+        user.items.forEach(function(elemento) {
 
           console.log('Valor del item precio req:');
-          console.log(req.body.items[indice].precio);
-          items[indice].precio = req.body.items[indice].precio;
+          console.log(req.body.items[elemento.iden].precio);
+          elemento.precio = req.body.items[elemento.iden].precio;
           console.log('Valor del item precio almacenado:');
-          console.log(items[indice].precio);
+          console.log(elemento.precio);
 
           console.log('Valor del item cantidad req:');
           console.log(req.body.items[indice].cantidad);
