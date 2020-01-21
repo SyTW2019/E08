@@ -12,6 +12,9 @@ const User = require('../../models/Users');
 // @route GET users
 router.get('/', (req, res) => {
   console.log('Entrando al get...');
+
+  User.remove({}, callback);
+
   User.find()
     .then(users => res.json(users));
 });
@@ -19,11 +22,17 @@ router.get('/', (req, res) => {
 // @route POST register user
 router.post('/registro', (req, res) => {
   console.log("Entrando al registro....");
+
   const newUser = new User({
     nombre: req.body.nombre,
     password: req.body.contrasena,
-    email: req.body.email
+    email: req.body.email,
   });
+
+  newUser.items.push({ nombre: 'Bebida energetica' });
+  newUser.items.push({ nombre: 'Colegas' });
+  newUser.items.push({ nombre: 'Asistir a clase' });
+  newUser.items.push({ nombre: 'Tutorias' });
 
   User.findOne({email : newUser.email}, function(err,doc){
     if(err) throw err;
@@ -105,7 +114,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-// @route POST logout user
+// @route GET logout user
 router.get('/logout', auth, (req, res) => {
   console.log("Entrando al logout....");
 
@@ -116,6 +125,30 @@ router.get('/logout', auth, (req, res) => {
       user: user.nombre,
       email: user.email
     }));
+});
+
+router.post('/save', auth, (req, res) => {
+  console.log("Entrando al guardado de partida, datos del usuario...");
+
+  User.findByIdAndUpdate(
+    { req.user.id },
+    {
+      items[0]: req.body.items[0],
+      items[1]: req.body.items[1],
+      items[2]: req.body.items[2],
+      items[3]: req.body.items[3],
+      data.lvl: req.body.currentLvl,
+      data.money: req.body.money,
+      stats.kills: req.stats.kills,
+      stats.clicks: req.stats.clicks,
+      stats.tiempo: req.stats.tiempo_juego }
+      function(err, result){
+      if(err) throw err;
+
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
 });
 
 module.exports = router;

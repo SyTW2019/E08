@@ -5,6 +5,7 @@ import ItemList from './ItemList';
 import StatList from './StatList';
 import Login from './Login';
 import Registro from './Registro';
+import Logout from './Logout';
 import Paper from '@material-ui/core/Paper';
 import User from './User';
 import Mounstro from './Monstruo';
@@ -42,14 +43,8 @@ class Game extends React.Component{
             clickpower:10,
             
         }
-        this.output = this.output.bind(this);
     }
 
-    monster = {
-        hp: 10,
-        oro_monster: 3,
-        boss: false,
-    }
 
     componentDidMount = () => {
         this.gameloop = setInterval(this.gameLoop, 1000)
@@ -59,44 +54,11 @@ class Game extends React.Component{
     updateData = () => {
         this.setState({
             dps: this.state.dps,
-            oro: this.state.oro,
+            oro: this.props.money,
             i:this.state.i,
             currentLvl: this.state.currentLvl,
-            hp: this.monster.hp,
-            oro_monster: this.monster.oro,
             clickpower: this.state.clickpower,
-            
         })
-    }
-
-    handleClick = () => {
-
-        /*if(this.state.dps > 0)
-            this.state.clickpower = 0.5*this.state.dps;*/
-        /*if(this.monster.hp > 0)
-        {
-            this.monster.hp -= this.state.clickpower;
-            this.monster.hp -= this.state.dps;
-        }
-        else
-        {
-            //this.state.oro += this.monster.oro_monster;
-            console.log(this.state.oro)
-            this.setState({
-                oro: this.state.oro+this.monster.oro_monster,
-            })
-
-            this.state.currentLvl++;
-            this.setState({
-                currentLvl: this.state.currentLvl,
-            })
-            this.monster.hp =10; 
-        }*/
-        //quitarle vida al bicho
-    }
-
-    output(evt){
-        this.setState({ count: this.state.count+evt})
     }
 
     calc_dps(){
@@ -112,7 +74,7 @@ class Game extends React.Component{
         }
         this.setState({
             dps: current_dps,
-            clickpower: (current_dps >0)?current_dps: 1,
+            clickpower: (current_dps >0)?current_dps*0.5: 1,
         })
     }
 
@@ -131,36 +93,29 @@ class Game extends React.Component{
         return((level*100)/10)
     }
     render(){
-      
-        //var currentTime = this.state.i++;
         var logged = (localStorage.id ? true:false)
         return(
-            <div id="Game">
-                <Grid container spacing={2} justify="space-evenly" alignItems="flex-start">
+            <div id="Game" >
+                <Grid container spacing={2} justify="space-evenly" alignItems="flex-start" >
                     <Grid item xs={3}>
-                        <Paper>
-                            <Grid container>
-                                {logged === true && (
-                                    <Grid>
-                                        <User/>
-                                        <Logout/>
-                                    </Grid>
-                                )}
-                                { logged === false && (
-                                    <Grid>
-                                        <Login/>
-                                        <Registro/>
-                                    </Grid>
-                                )}
-                            </Grid>
-                            STATS
-                        </Paper>
+                        <Grid container text-align='center'>
+                            {logged === true && (
+                                <Grid>
+                                    <User/>
+                                    <Logout/>
+                                </Grid>
+                            )}
+                            {logged === false && (
+                                <Grid>
+                                    <Login/>
+                                    <Registro/>
+                                </Grid>
+                            )}
+                        </Grid>
                         <StatList stats_data={{
                             dps: this.state.dps,
                             tiempo: this.state.i
-                        }
-
-                        }/>
+                        }}/>
                     </Grid>
                     <Grid item xs={6}>
                          

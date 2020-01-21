@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import './App.css';
 import {connect} from 'react-redux'
 import Game from './components/Game';
+import purple from '@material-ui/core/colors/purple';
 
 /*const useStyles = makeStyles(theme => ({
   root: {
@@ -27,7 +28,7 @@ class App extends Component {
 
   render() {
     return (
-      <div >
+      <div style={{backgroundColor:purple[100]}}>
         <Grid>
             <Game />
         </Grid>

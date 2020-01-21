@@ -4,9 +4,9 @@ const initialState = {
     users: [],
     items: [
         {name:"Bebida Energetica",precio:10,cantidad:0,id:0,dps:3},
-        {name:"Colegas",precio:20,cantidad:0,id:1,dps:5},
-        {name:"Asistir a Clase",precio:30,cantidad:0,id:2,dps:8},
-        {name:"Tutorias",precio:50,cantidad:0,id:3,dps:12},
+        {name:"Colegas",precio:250,cantidad:0,id:1,dps:8},
+        {name:"Asistir a Clase",precio:750,cantidad:0,id:2,dps:15},
+        {name:"Tutorias",precio:3000,cantidad:0,id:3,dps:20},
     ],
     data: {
         currentLvl: 1,
