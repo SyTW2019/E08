@@ -10,21 +10,25 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {connect} from 'react-redux';
-import {userLogoutFetch} from '../js/actions/index';
+import {userLogoutFetch, userDataFetch} from '../js/actions/index';
 import configureStore from "../js/store/index";
 
 var store = configureStore();
 
 function mapDispatchToProps(dispatch) {
   return {
-      userLogoutFetch: user => dispatch(userLogoutFetch(user))
+      userLogoutFetch: user => dispatch(userLogoutFetch(user)),
+      userDataFetch: user => dispatch(userDataFetch(user))
   };
 }
 
 const mapStateToProps = (state) => {
     return{
         email: state.email,
-        token: state.token
+        token: state.token,
+        item: state.items,
+        data: state.data,
+        stats: state.stats
     }
 }
 
@@ -67,9 +71,17 @@ class Logout extends React.Component{
           logout: true
         })
         console.log(this.state.tokenValue);
+        this.props.userDataFetch({ items : this.props.items,
+                                   data: this.props.data,
+                                   stats : this.props.stats,
+                                   token: this.state.tokenValue
+                                  
+        })
         this.props.userLogoutFetch({ email: this.state.emailValue,
                                     token: this.state.tokenValue
         })
+
+
         .then((success) => {
 
 

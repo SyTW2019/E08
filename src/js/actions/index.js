@@ -135,9 +135,10 @@ const logoutUser = userObj => ({
 export const userDataFetch = user => {
     return async function (dispatch){
         const resp = await fetch("/user/save", {
-            method: "GET",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
+                'x-auth-token': user.token,
                 Accept: 'application/json',
             },
             body: JSON.stringify({user})

@@ -20,12 +20,14 @@ const mapStateToProps = (state) => {
         user: state.user,
         items: state.items,
         data: state.data,
+        stats: state.stats
     }
 }
 
 const mapDispatchToProps = (dipatch) =>{
     return{
         //saveStats: stats=> dispatch(saveStats(stats))
+        //userDataFetch = datos => dispatch(userDataFetch(datos))
     }
 }
 
