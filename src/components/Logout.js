@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
     return{
         email: state.email,
         token: state.token,
-        item: state.items,
+        items: state.items,
         data: state.data,
         stats: state.stats
     }
@@ -62,41 +62,52 @@ class Logout extends React.Component{
 
       handleClick = event => {
         console.log('En el handle click');
-        console.log('Valores de logout');
+/*        console.log('Valores de logout');
         console.log(this.state.emailValue);
         console.log(this.state.tokenValue);
         console.log(this.props.email);
-        console.log(this.props.token);
+        console.log(this.props.token);*/
         this.setState({
           logout: true
         })
-        console.log(this.state.tokenValue);
+//        console.log(this.state.tokenValue);
+	console.log('Valor de items');
+	console.log(this.props.items);
+	console.log('Valor de data');
+        console.log(this.props.data);
+	console.log('Valor de stats');
+        console.log(this.props.stats);
+	console.log('Valor de token');
+        console.log(this.props.tokenValue);
         this.props.userDataFetch({ items : this.props.items,
                                    data: this.props.data,
                                    stats : this.props.stats,
                                    token: this.state.tokenValue
-                                  
+
+        })
+        .then((success) => {
+          console.log('BIEEEEEEEEEEEN');
         })
         this.props.userLogoutFetch({ email: this.state.emailValue,
                                     token: this.state.tokenValue
         })
-
-
         .then((success) => {
 
 
-            if(localStorage.id == 1)
-              console.log("Usuario logeado correctamente");
-            else if(localStorage.id == 2)
-            {
-              console.log("Contraseña mal puesta")
-            }
-            else if(localStorage.id == 0)
-              console.log("Email mal");
-            else
-              console.log("Error desconocido");
-            })
-      }
+            // if(localStorage.id == 1)
+            //   console.log("Usuario logeado correctamente");
+            // else if(localStorage.id == 2)
+            // {
+            //   console.log("Contraseña mal puesta")
+            // }
+            // else if(localStorage.id == 0)
+            //   console.log("Email mal");
+            // else
+            //   console.log("Error desconocido");
+            // })
+            console.log('BIEEEEEEEEEEEN pero del logaut');
+      })
+    }
 
       render() {
         return(

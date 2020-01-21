@@ -48,6 +48,7 @@ const registToken = userObj => ({
   type: 'ADD_TOKEN',
   payload: userObj
 })
+
 //Login -> recibir los datos del juego guardados en la BBDD
 
 export const userLoginFetch = user => {
@@ -124,6 +125,7 @@ export const userLogoutFetch = user => {
     dispatch(registUser(""));
     dispatch(registEmail(""));
     dispatch(registToken(""));
+    return true;
   }
 }
 
@@ -133,6 +135,8 @@ const logoutUser = userObj => ({
 })
 
 export const userDataFetch = user => {
+  console.log('Valor del user en la accion');
+  console.log(user);
     return async function (dispatch){
         const resp = await fetch("/user/save", {
             method: "POST",
@@ -141,7 +145,7 @@ export const userDataFetch = user => {
                 'x-auth-token': user.token,
                 Accept: 'application/json',
             },
-            body: JSON.stringify({user})
+            body: JSON.stringify(user)
         })
 
             .then(resp => resp.json())
@@ -158,6 +162,7 @@ export const userDataFetch = user => {
         const data = await resp.json()
         localStorage.setItem("token", data.jwt)
         dispatch(userData(data.user))
+        return true;
     }
 }
 
@@ -196,4 +201,4 @@ export const addItem = itemData =>{
     {
         dispatch(addItemIndex(itemData));
     }
-} 
+}

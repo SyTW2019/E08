@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 function auth(req, res, next){
   console.log('Valores del req');
   console.log(req.header('x-auth-token'));
+  console.log('Done');
   const token = req.header('x-auth-token');
 
   if(!token) {res.status(401).json({ msg: 'No hay token, operación no válida' })};
