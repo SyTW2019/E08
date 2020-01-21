@@ -87,7 +87,7 @@ class Logout extends React.Component{
         })
         .then((success) => {
           console.log('BIEEEEEEEEEEEN');
-        }
+        })
         this.props.userLogoutFetch({ email: this.state.emailValue,
                                     token: this.state.tokenValue
         })
@@ -106,7 +106,8 @@ class Logout extends React.Component{
             //   console.log("Error desconocido");
             // })
             console.log('BIEEEEEEEEEEEN pero del logaut');
-      }
+      })
+    }
 
       render() {
         return(
