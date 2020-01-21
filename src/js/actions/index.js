@@ -191,7 +191,7 @@ const addItemIndex = dataObj => ({
 })
 
 export const addItem = itemData =>{
-    return function(dispatch)
+    return async function(dispatch)
     {
         dispatch(addItemIndex(itemData));
     }

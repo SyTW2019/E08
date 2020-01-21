@@ -9,6 +9,11 @@ import Logout from './Logout';
 import Paper from '@material-ui/core/Paper';
 import User from './User';
 import Mounstro from './Monstruo';
+import Logout from './Logout';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from "@material-ui/core/styles";
+
 
 const mapStateToProps = (state) => {
     return {
@@ -23,6 +28,7 @@ const mapDispatchToProps = (dipatch) =>{
         //saveStats: stats=> dispatch(saveStats(stats))
     }
 }
+
 
 class Game extends React.Component{
     constructor(props){
@@ -79,6 +85,13 @@ class Game extends React.Component{
         })
     }
 
+    calc_nivel(level){
+        if(level%10===0)
+            level = 0
+        if(level > 10)
+            level -= 10
+        return((level*100)/10)
+    }
     render(){
         var logged = (localStorage.id ? true:false)
         return(
@@ -105,6 +118,12 @@ class Game extends React.Component{
                         }}/>
                     </Grid>
                     <Grid item xs={6}>
+                         
+                         
+                        <CircularProgress variant="static" text={this.props.data.currentLvl} value={this.calc_nivel(this.props.data.currentLvl)}>
+                            HOLA
+                        </CircularProgress>   
+                        
                         <h1>ORO ACTUAL: {this.props.data.money.toFixed(0)} </h1>
                         <h2>NIVEL ACTUAL: {this.props.data.currentLvl}</h2>
                         <h3>DPS: {this.state.dps}</h3>                        
