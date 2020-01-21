@@ -91,8 +91,6 @@ class Logout extends React.Component{
         this.props.userLogoutFetch({ email: this.state.emailValue,
                                     token: this.state.tokenValue
         })
-
-
         .then((success) => {
 
 

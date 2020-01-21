@@ -128,40 +128,6 @@ router.get('/logout', auth, (req, res) => {
 router.post('/save', auth, (req, res) => {
   console.log("Entrando al guardado de partida, datos del usuario...");
 
-  // User.findByIdAndUpdate(
-  //   req.user.id,
-  //   {
-  //     items[0]: req.body.items[0],
-  //     items[1]: req.body.items[1],
-  //     items[2]: req.body.items[2],
-  //     items[3]: req.body.items[3],
-  //     data.lvl: req.body.currentLvl,
-  //     data.money: req.body.money,
-  //     stats.items: [
-  //       {name:"Bebida Energetica",precio:10,cantidad:0,id:0,dps:3},
-  //       {name:"Colegas",precio:250,cantidad:0,id:1,dps:8},
-  //       {name:"Asistir a Clase",precio:750,cantidad:0,id:2,dps:15},
-  //       {name:"Tutorias",precio:3000,cantidad:0,id:3,dps:20},
-  //   ],
-  //   data: {
-  //       currentLvl: 1,
-  //       money: 0
-  //   },
-  //   stats: {
-  //       kills: 0,
-  //       clicks: 0,
-  //       tiempo_juego: 0,
-  //   },kills: req.stats.kills,
-  //     stats.clicks: req.stats.clicks,
-  //     stats.tiempo: req.stats.tiempo_juego
-  //   }
-  //     function(err, result){
-  //     if(err) throw err;
-  //
-  //     console.log(result);
-  //     res.send(JSON.stringify(result));
-  //   }
-  // );
   // //v2
   // User.findById(req.user.id, function(err, data) {
   //   data.items[0].precio =
@@ -179,16 +145,29 @@ router.post('/save', auth, (req, res) => {
   //v3
   console.log('Valor del id en save:');
   console.log(req.user.id);
-  User.findOne({"_id": req.user.id}, function(document) {
-    console.log('Prueba del documento');
-    console.log(document);
-    document.items.forEach(function(elemento, indice, array) {
-      items[indice].precio = req.items[indice].precio;
-      items[indice].cantidad = req.items[indice].cantidad;
-      items[indice].dps = req.items[indice].dps;
+
+  User.findById(req.user.id)
+    .then(user => {
+        console.log('Quien soy?');
+        console.log(user);
+        user.items.forEach(function(elemento, indice, array) {
+        items[indice].precio = req.items[indice].precio;
+        items[indice].cantidad = req.items[indice].cantidad;
+        items[indice].dps = req.items[indice].dps;
+      })
+      User.save(document);
     })
-    User.save(document);
-  });
+
+  // User.findOne({"_id": req.user.id}, function(document) {
+  //   console.log('Prueba del documento');
+  //   console.log(document);
+  //   document.items.forEach(function(elemento, indice, array) {
+  //     items[indice].precio = req.items[indice].precio;
+  //     items[indice].cantidad = req.items[indice].cantidad;
+  //     items[indice].dps = req.items[indice].dps;
+  //   })
+  //   User.save(document);
+  // });
 
 });
 
