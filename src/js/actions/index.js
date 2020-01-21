@@ -48,6 +48,7 @@ const registToken = userObj => ({
   type: 'ADD_TOKEN',
   payload: userObj
 })
+
 //Login -> recibir los datos del juego guardados en la BBDD
 
 export const userLoginFetch = user => {
@@ -135,12 +136,13 @@ const logoutUser = userObj => ({
 export const userDataFetch = user => {
     return async function (dispatch){
         const resp = await fetch("/user/save", {
-            method: "GET",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
+                'x-auth-token': user.token,
                 Accept: 'application/json',
             },
-            body: JSON.stringify({user})
+            body: JSON.stringify(user)
         })
 
             .then(resp => resp.json())

@@ -2,13 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import LinearProgress from '@material-ui/core/LinearProgress';
 //import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-<<<<<<< HEAD
 
 import Paper from '@material-ui/core/Paper'
-=======
 //import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
->>>>>>> d511dc995161cf97e97c2db066d280d6dcfa711a
 import Monster from '../../public/img/monster.png';
 import PcImg from '../../public/img/pc.png'
 import {saveData, saveStats} from '../js/actions/index'
@@ -30,21 +27,11 @@ const mapDispatchToProps = dispatch =>{
 const monsterType = {
   regular: {
     hp: 15,
-<<<<<<< HEAD
-    gold: 4,
-    
-  },
-  boss: {
-    hp: 35,
-    gold: 10,
-    
-=======
     gold: 2,
   },
   boss: {
     hp: 100,
     gold: 10, 
->>>>>>> d511dc995161cf97e97c2db066d280d6dcfa711a
   }
 }
 
@@ -75,16 +62,10 @@ function CircularDeterminate() {
 class Monstruo extends React.Component{
 
     constructor(props){
-<<<<<<< HEAD
-        super(props)
-        this.state = {
-          monster_hp: 15,
-=======
         super(props);
         
         this.state = {
           timer: 10,
->>>>>>> d511dc995161cf97e97c2db066d280d6dcfa711a
         }
     }
     componentDidMount = () =>{      
@@ -92,13 +73,11 @@ class Monstruo extends React.Component{
     }
 
     dps_cycle = () =>{
-<<<<<<< HEAD
       if(currentMonster.hp > 0){
         currentMonster.hp-=this.props.dps_data.current_dps;
         if(currentMonster.hp < 0)
           currentMonster.hp = 0
-=======
-      
+      }
       if((this.props.data.currentLvl%10 === 0))
         this.setState({
           timer: this.state.timer-=1
@@ -117,7 +96,6 @@ class Monstruo extends React.Component{
           })
           this.calc_monster();
         }
->>>>>>> d511dc995161cf97e97c2db066d280d6dcfa711a
       }
       else{
           this.setState({
@@ -178,15 +156,9 @@ class Monstruo extends React.Component{
     render(){
       var vida = currentMonster.hp;
         return (
-<<<<<<< HEAD
          <Paper >
             <h1 >VIDA:{vida}</h1>
             <LinearProgress variant="determinate" value={this.calc_barra(vida)} color= "secondary"  style={{width: "50%"}}/>
-=======
-         <Grid color='inherit'>
-            <h1>VIDA:{vida}</h1>
-            
->>>>>>> d511dc995161cf97e97c2db066d280d6dcfa711a
             {this.props.data.currentLvl%10 === 0 &&(
               <div>
                 <h1>Tiempo Restante: {this.state.timer}</h1>
@@ -198,9 +170,10 @@ class Monstruo extends React.Component{
                 <img src={PcImg} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
               </div>
             )}
-          </Grid>
+          </Paper>
         )
     }
+  
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Monstruo)

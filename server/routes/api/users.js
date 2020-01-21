@@ -13,8 +13,6 @@ const User = require('../../models/Users');
 router.get('/', (req, res) => {
   console.log('Entrando al get...');
 
-  User.remove({}, callback);
-
   User.find()
     .then(users => res.json(users));
 });
