@@ -166,7 +166,7 @@ router.post('/save', auth, (req, res) => {
           console.log('Valor del item dps almacenado:');
           console.log(elemento.dps);
         })
-      User.save(user);
+      user.save();
       console.log('Valor del usuario almacenado:');
       console.log(user);
     })
