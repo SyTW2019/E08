@@ -178,6 +178,8 @@ router.post('/save', auth, (req, res) => {
 
   //v3
   User.findById(req.user.id, function(document) {
+    console.log('Prueba del documento');
+    console.log(document);
     document.items.forEach(function(elemento, indice, array) {
       items[indice].precio = req.items[indice].precio;
       items[indice].cantidad = req.items[indice].cantidad;

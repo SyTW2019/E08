@@ -31,7 +31,7 @@ const monsterType = {
   },
   boss: {
     hp: 100,
-    gold: 10, 
+    gold: 10,
   }
 }
 
@@ -44,13 +44,13 @@ var currentMonster = {...monsterType.regular};
 function CircularDeterminate() {
     const classes = useStyles();
     const [progress, setProgress] = React.useState(0);
-  
+
     React.useEffect(() => {
       function tick() {
         // reset when reaching 100%
         setProgress(oldProgress => (oldProgress >= 100 ? 0 : oldProgress + 1));
       }
-  
+
       const timer = setInterval(tick, 20);
       return () => {
         clearInterval(timer);
@@ -63,12 +63,12 @@ class Monstruo extends React.Component{
 
     constructor(props){
         super(props);
-        
+
         this.state = {
           timer: 10,
         }
     }
-    componentDidMount = () =>{      
+    componentDidMount = () =>{
       this.dps_cycle = setInterval(this.dps_cycle, 1000)
     }
 
@@ -106,31 +106,31 @@ class Monstruo extends React.Component{
             money: this.props.data.money+=currentMonster.gold,
           })
           this.calc_monster();
-          
+
       }
     }
     calc_monster = () =>{
       currentMonster = (this.props.data.currentLvl%10 === 0)? {...monsterType.boss} : {...monsterType.regular};
       currentMonster.hp*= this.props.data.currentLvl;
       currentMonster.gold*= this.props.data.currentLvl;
-      
+
       this.setState({
-        monster_hp: currentMonster.hp, 
+        monster_hp: currentMonster.hp,
       })
     }
-    
-    
+
+
 
     dmg_monster = () =>{
-     
+
       this.props.saveStats({
         kills: this.props.stats.kills,
         clicks: this.props.stats.clicks +=1,
         tiempo_juego: this.props.stats.tiempo_jugado,
       })
-      
-      
-      
+
+
+
       if(currentMonster.hp > 0)
         currentMonster.hp-=this.props.dps_data.cpower;
       else{
@@ -141,15 +141,15 @@ class Monstruo extends React.Component{
         this.props.saveStats({
           kills: this.props.stats.kills +=1,
           clicks: this.props.stats.clicks,
-          tiempo_juego: this.props.stats.tiempo_jugado,
+          tiempo_juego: this.props.stats.tiempo_juego,
         })
         this.calc_monster();
-        
+
       }
     }
-   
+
     calc_barra(vida){
-     
+
       return ((vida*100)/this.state.monster_hp);
     }
 
@@ -173,7 +173,7 @@ class Monstruo extends React.Component{
           </Paper>
         )
     }
-  
+
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Monstruo)
