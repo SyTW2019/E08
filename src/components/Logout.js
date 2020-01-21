@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
     return{
         email: state.email,
         token: state.token,
-        item: state.items,
+        items: state.items,
         data: state.data,
         stats: state.stats
     }
@@ -62,15 +62,23 @@ class Logout extends React.Component{
 
       handleClick = event => {
         console.log('En el handle click');
-        console.log('Valores de logout');
+/*        console.log('Valores de logout');
         console.log(this.state.emailValue);
         console.log(this.state.tokenValue);
         console.log(this.props.email);
-        console.log(this.props.token);
+        console.log(this.props.token);*/
         this.setState({
           logout: true
         })
-        console.log(this.state.tokenValue);
+//        console.log(this.state.tokenValue);
+	console.log('Valor de items');
+	console.log(this.props.items);
+	console.log('Valor de data');
+        console.log(this.props.data);
+	console.log('Valor de stats');
+        console.log(this.props.stats);
+	console.log('Valor de token');
+        console.log(this.props.tokenValue);
         this.props.userDataFetch({ items : this.props.items,
                                    data: this.props.data,
                                    stats : this.props.stats,

@@ -13,8 +13,6 @@ const User = require('../../models/Users');
 router.get('/', (req, res) => {
   console.log('Entrando al get...');
 
-  User.remove({}, callback);
-
   User.find()
     .then(users => res.json(users));
 });
@@ -179,7 +177,7 @@ router.post('/save', auth, (req, res) => {
   //   )
 
     //v3
-  User.findById(req.user.id, function(document) {
+  User.find({_id: req.user.id}, function(document) {
     document.items.forEach(function(elemento, indice, array) {
       items[indice].precio = req.items[indice].precio;
       items[indice].cantidad = req.items[indice].cantidad;

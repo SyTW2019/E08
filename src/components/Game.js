@@ -9,7 +9,6 @@ import Logout from './Logout';
 import Paper from '@material-ui/core/Paper';
 import User from './User';
 import Mounstro from './Monstruo';
-import Logout from './Logout';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from "@material-ui/core/styles";
@@ -81,10 +80,15 @@ class Game extends React.Component{
     }
 
     gameLoop = (event) =>{
+//	console.log('data en game');
+//	console.log(this.props.items);
+//	console.log('stats en game');
+//	console.log(this.props.stats);
         this.calc_dps();
         this.setState({
             i: this.state.i+1
         })
+//	console.log('i:' + this.state.i);
     }
 
     calc_nivel(level){
