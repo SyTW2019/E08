@@ -143,19 +143,32 @@ router.post('/save', auth, (req, res) => {
   //   )
 
   //v3
-  console.log('Valor del id en save:');
-  console.log(req.user.id);
 
   User.findById(req.user.id)
     .then(user => {
-        console.log('Quien soy?');
-        console.log(user);
         user.items.forEach(function(elemento, indice, array) {
-        items[indice].precio = req.items[indice].precio;
-        items[indice].cantidad = req.items[indice].cantidad;
-        items[indice].dps = req.items[indice].dps;
-      })
-      User.save(document);
+
+          console.log('Valor del item precio req:');
+          console.log(req.items[indice].precio);
+          items[indice].precio = req.items[indice].precio;
+          console.log('Valor del item precio almacenado:');
+          console.log(items[indice].precio);
+
+          console.log('Valor del item cantidad req:');
+          console.log(req.items[indice].cantidad);
+          items[indice].cantidad = req.items[indice].cantidad;
+          console.log('Valor del item cantidad almacenado:');
+          console.log(items[indice].cantidad);
+
+          console.log('Valor del item dps req:');
+          console.log(req.items[indice].dps);
+          items[indice].dps = req.items[indice].dps;
+          console.log('Valor del item dps almacenado:');
+          console.log(items[indice].dps);
+        })
+      User.save(user);
+      console.log('Valor del usuario almacenado:');
+      console.log(user);
     })
 
   // User.findOne({"_id": req.user.id}, function(document) {
