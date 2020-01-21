@@ -135,6 +135,8 @@ const logoutUser = userObj => ({
 })
 
 export const userDataFetch = user => {
+  console.log('Valor del user en la accion');
+  console.log(user);
     return async function (dispatch){
         const resp = await fetch("/user/save", {
             method: "POST",

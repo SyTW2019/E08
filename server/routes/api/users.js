@@ -149,7 +149,7 @@ router.post('/save', auth, (req, res) => {
         user.items.forEach(function(elemento, indice, array) {
 
           console.log('Valor del item precio req:');
-          console.log(req.items[indice].precio);
+          console.log(req.items);
           items[indice].precio = req.items[indice].precio;
           console.log('Valor del item precio almacenado:');
           console.log(items[indice].precio);
