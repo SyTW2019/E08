@@ -155,16 +155,16 @@ router.post('/save', auth, (req, res) => {
           console.log(elemento.precio);
 
           console.log('Valor del item cantidad req:');
-          console.log(req.body.items[indice].cantidad);
-          items[indice].cantidad = req.body.items[indice].cantidad;
+          console.log(req.body.items[elemento.iden].cantidad);
+          elemento.cantidad = req.body.items[elemento.iden].cantidad;
           console.log('Valor del item cantidad almacenado:');
-          console.log(items[indice].cantidad);
+          console.log(elemento.cantidad);
 
           console.log('Valor del item dps req:');
-          console.log(req.body.items[indice].dps);
-          items[indice].dps = req.body.items[indice].dps;
+          console.log(req.body.items[elemento.iden].dps);
+          elemento.dps = req.body.items[elemento.iden].dps;
           console.log('Valor del item dps almacenado:');
-          console.log(items[indice].dps);
+          console.log(elemento.dps);
         })
       User.save(user);
       console.log('Valor del usuario almacenado:');
