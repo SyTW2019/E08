@@ -178,7 +178,7 @@ router.post('/save', auth, (req, res) => {
   //     }
   //   )
 
-    //v3
+  //v3
   User.findById(req.user.id, function(document) {
     document.items.forEach(function(elemento, indice, array) {
       items[indice].precio = req.items[indice].precio;
