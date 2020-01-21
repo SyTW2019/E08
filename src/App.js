@@ -28,7 +28,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{backgroundColor:purple[100]}}>
+      <div style={{backgroundColor:purple[50]}}>
         <Grid>
             <Game />
         </Grid>
