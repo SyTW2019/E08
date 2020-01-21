@@ -126,7 +126,7 @@ class Monstruo extends React.Component{
       this.props.saveStats({
         kills: this.props.stats.kills,
         clicks: this.props.stats.clicks +=1,
-        tiempo_juego: this.props.stats.tiempo_jugado,
+        tiempo_juego: this.props.stats.tiempo_juego,
       })
       
       
@@ -141,7 +141,7 @@ class Monstruo extends React.Component{
         this.props.saveStats({
           kills: this.props.stats.kills +=1,
           clicks: this.props.stats.clicks,
-          tiempo_juego: this.props.stats.tiempo_jugado,
+          tiempo_juego: this.props.stats.tiempo_juego,
         })
         this.calc_monster();
         
