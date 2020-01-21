@@ -149,20 +149,20 @@ router.post('/save', auth, (req, res) => {
         user.items.forEach(function(elemento, indice, array) {
 
           console.log('Valor del item precio req:');
-          console.log(req.items);
-          items[indice].precio = req.items[indice].precio;
+          console.log(req.body.items[indice].precio);
+          items[indice].precio = req.body.items[indice].precio;
           console.log('Valor del item precio almacenado:');
           console.log(items[indice].precio);
 
           console.log('Valor del item cantidad req:');
-          console.log(req.items[indice].cantidad);
-          items[indice].cantidad = req.items[indice].cantidad;
+          console.log(req.body.items[indice].cantidad);
+          items[indice].cantidad = req.body.items[indice].cantidad;
           console.log('Valor del item cantidad almacenado:');
           console.log(items[indice].cantidad);
 
           console.log('Valor del item dps req:');
-          console.log(req.items[indice].dps);
-          items[indice].dps = req.items[indice].dps;
+          console.log(req.body.items[indice].dps);
+          items[indice].dps = req.body.items[indice].dps;
           console.log('Valor del item dps almacenado:');
           console.log(items[indice].dps);
         })
