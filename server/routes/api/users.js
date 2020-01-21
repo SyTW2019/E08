@@ -177,6 +177,8 @@ router.post('/save', auth, (req, res) => {
   //   )
 
   //v3
+  console.log('Valor del id en save:');
+  console.log(req.user.id);
   User.findOne({"_id": req.user.id}, function(document) {
     console.log('Prueba del documento');
     console.log(document);
