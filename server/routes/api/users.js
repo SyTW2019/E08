@@ -177,7 +177,7 @@ router.post('/save', auth, (req, res) => {
   //   )
 
   //v3
-  User.findById(req.user.id, function(document) {
+  User.findOne({"_id": req.user.id}, function(document) {
     console.log('Prueba del documento');
     console.log(document);
     document.items.forEach(function(elemento, indice, array) {
