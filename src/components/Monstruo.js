@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-//import { makeStyles } from '@material-ui/core/styles';
-//import LinearProgress from '@material-ui/core/LinearProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 //import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-//import CircularProgress from '@material-ui/core/CircularProgress';
+
 import Paper from '@material-ui/core/Paper'
 import Monster from '../../public/img/monster.png';
 import PcImg from '../../public/img/pc.png'
@@ -27,46 +26,21 @@ const monsterType = {
   regular: {
     hp: 15,
     gold: 4,
+    
   },
   boss: {
     hp: 35,
-    gold: 10, 
+    gold: 10,
+    
   }
 }
 
 var currentMonster = {...monsterType.regular};
 
-/*const useStyles = makeStyles(theme => ({
-    root: {
-      width: '100%',
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
-    },
-  }));
 
-/*function LinearDeterminate() {
-    const classes = useStyles();
-    const [completed, setCompleted] = React.useState(0);
-  
-    React.useEffect(() => {
-      function progress() {
-        setCompleted(oldCompleted => {
-          if (oldCompleted === 100) {
-            return 0;
-          }
-          const diff = Math.random() * 10;
-          return Math.min(oldCompleted + diff, 100);
-        });
-      }
-  
-      const timer = setInterval(progress, 500);
-      return () => {
-        clearInterval(timer);
-      };
-    }, []);
-}
 
+
+/*
 function CircularDeterminate() {
     const classes = useStyles();
     const [progress, setProgress] = React.useState(0);
@@ -84,31 +58,45 @@ function CircularDeterminate() {
     }, []);
 }*/
 
+
 class Monstruo extends React.Component{
 
     constructor(props){
-        super(props);
+        super(props)
+        this.state = {
+          monster_hp: 15,
+        }
     }
     componentDidMount = () =>{      
       this.dps_cycle = setInterval(this.dps_cycle, 1000)
     }
 
     dps_cycle = () =>{
-      if(currentMonster.hp > 0)
+      if(currentMonster.hp > 0){
         currentMonster.hp-=this.props.dps_data.current_dps;
+        if(currentMonster.hp < 0)
+          currentMonster.hp = 0
+      }
       else{
           this.props.saveData({
             currentLvl: this.props.data.currentLvl+=1,
             money: this.props.data.money+=currentMonster.gold,
           })
           this.calc_monster();
+          
       }
     }
     calc_monster = () =>{
       currentMonster = (this.props.data.currentLvl%10 === 0)? {...monsterType.boss} : {...monsterType.regular};
       currentMonster.hp*= this.props.data.currentLvl;
       currentMonster.gold*= this.props.data.currentLvl;
+      
+      this.setState({
+        monster_hp: currentMonster.hp, 
+      })
     }
+    
+    
 
     dmg_monster = () =>{
      
@@ -117,6 +105,8 @@ class Monstruo extends React.Component{
         clicks: this.props.stats.clicks +=1,
         tiempo_juego: this.props.stats.tiempo_jugado,
       })
+      
+      
       
       if(currentMonster.hp > 0)
         currentMonster.hp-=this.props.dps_data.cpower;
@@ -131,14 +121,21 @@ class Monstruo extends React.Component{
           tiempo_juego: this.props.stats.tiempo_jugado,
         })
         this.calc_monster();
+        
       }
+    }
+   
+    calc_barra(vida){
+     
+      return ((vida*100)/this.state.monster_hp);
     }
 
     render(){
       var vida = currentMonster.hp;
         return (
-         <Paper>
-            <h1>VIDA:{vida}</h1>
+         <Paper >
+            <h1 >VIDA:{vida}</h1>
+            <LinearProgress variant="determinate" value={this.calc_barra(vida)} color= "secondary"  style={{width: "50%"}}/>
             {this.props.data.currentLvl%10 === 0 &&(
                           <img src={Monster} onClick={this.dmg_monster} alt="BIG SPOOKY MONSTER"/>
 
