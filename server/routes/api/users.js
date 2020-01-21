@@ -128,22 +128,6 @@ router.get('/logout', auth, (req, res) => {
 router.post('/save', auth, (req, res) => {
   console.log("Entrando al guardado de partida, datos del usuario...");
 
-  // //v2
-  // User.findById(req.user.id, function(err, data) {
-  //   data.items[0].precio =
-  //   data.items[0].cantidad =
-  //   data.items[0].dps =
-  // })
-  // for (int i = 0; i < req.body.items.size; i++)
-  //   User.update(
-  //     { "_id": req.user.id },
-  //     {
-  //       $set: {"items.i.precio": req.body.items[i].precio, "items.i.cantidad": req.body.items[i].cantidad, "items.i.dps": req.body.items[i].dps}
-  //     }
-  //   )
-
-  //v3
-
   User.findById(req.user.id)
     .then(user => {
         user.items.forEach(function(elemento) {
@@ -166,22 +150,15 @@ router.post('/save', auth, (req, res) => {
           console.log('Valor del item dps almacenado:');
           console.log(elemento.dps);
         })
+      user.data.lvl = req.body.data.currentLvl;
+      user.data.money = req.body.data.money;
+      user.stats.kills = req.body.stats.kills;
+      user.stats.clicks = req.body.stats.clicks;
+      user.stats.tiempo = req.body.stats.tiempo_juego;
       user.save();
       console.log('Valor del usuario almacenado:');
       console.log(user);
     })
-
-  // User.findOne({"_id": req.user.id}, function(document) {
-  //   console.log('Prueba del documento');
-  //   console.log(document);
-  //   document.items.forEach(function(elemento, indice, array) {
-  //     items[indice].precio = req.items[indice].precio;
-  //     items[indice].cantidad = req.items[indice].cantidad;
-  //     items[indice].dps = req.items[indice].dps;
-  //   })
-  //   User.save(document);
-  // });
-
 });
 
 module.exports = router;
