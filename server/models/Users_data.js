@@ -5,11 +5,13 @@ const Schema = mongoose.Schema;
 const UserDataSchema = new Schema({
   lvl: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   money: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   }
 });
 

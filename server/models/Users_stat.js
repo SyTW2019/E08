@@ -5,15 +5,18 @@ const Schema = mongoose.Schema;
 const UserStatsSchema = new Schema({
   kills: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   clicks: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
-  tiempo_juego: {
+  tiempo: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   }
 });
 

@@ -22,20 +22,17 @@ router.get('/', (req, res) => {
 // @route POST register user
 router.post('/registro', (req, res) => {
   console.log("Entrando al registro....");
+
   const newUser = new User({
     nombre: req.body.nombre,
     password: req.body.contrasena,
     email: req.body.email,
-    items[0]: req.body.items[0],
-    items[1]: req.body.items[1],
-    items[2]: req.body.items[2],
-    items[3]: req.body.items[3],
-    data.lvl: req.body.currentLvl,
-    data.money: req.body.money,
-    stats.kills: req.stats.kills,
-    stats.clicks: req.stats.clicks,
-    stats.tiempo: req.stats.tiempo_juego
   });
+
+  newUser.items.push({ nombre: 'Bebida energetica' });
+  newUser.items.push({ nombre: 'Colegas' });
+  newUser.items.push({ nombre: 'Asistir a clase' });
+  newUser.items.push({ nombre: 'Tutorias' });
 
   User.findOne({email : newUser.email}, function(err,doc){
     if(err) throw err;
@@ -135,7 +132,8 @@ router.post('/save', auth, (req, res) => {
 
   User.findByIdAndUpdate(
     { req.user.id },
-    { items[0]: req.body.items[0],
+    {
+      items[0]: req.body.items[0],
       items[1]: req.body.items[1],
       items[2]: req.body.items[2],
       items[3]: req.body.items[3],
@@ -143,7 +141,7 @@ router.post('/save', auth, (req, res) => {
       data.money: req.body.money,
       stats.kills: req.stats.kills,
       stats.clicks: req.stats.clicks,
-      stats.tiempo: req.stats.tiempo_juego },
+      stats.tiempo: req.stats.tiempo_juego }
       function(err, result){
       if(err) throw err;
 

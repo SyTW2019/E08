@@ -5,23 +5,28 @@ const Schema = mongoose.Schema;
 const UserItemSchema = new Schema({
   nombre: {
     type: String,
-    required: true
+    required: true,
+    default: ''
   },
   precio: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   cantidad: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
-  id: {
+  iden: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   dps: {
     type: Number,
-    required: true
+    required: true,
+    default: 0
   }
 });
 
