@@ -42,7 +42,7 @@ class Game extends React.Component{
             currentLvl: 1,
             count:0,
             clickpower:10,
-            
+
         }
     }
 
@@ -124,16 +124,17 @@ class Game extends React.Component{
                         }}/>
                     </Grid>
                     <Grid item xs={6}>
-                         
-                         
+
+
                         <CircularProgress variant="static" text={this.props.data.currentLvl} value={this.calc_nivel(this.props.data.currentLvl)}>
                             HOLA
-                        </CircularProgress>   
-                        
+                        </CircularProgress>
+
                         <h1>ORO ACTUAL: {this.props.data.money.toFixed(0)} </h1>
                         <h2>NIVEL ACTUAL: {this.props.data.currentLvl}</h2>
-                        <h3>DPS: {this.state.dps}</h3>                        
-                        <Mounstro 
+                        <h3>DPS: {this.state.dps}</h3>
+                        <Mounstro
+                            tiempo = {this.state.i}
                             dps_data={{
                                 cpower:this.state.clickpower,
                                 current_dps:this.state.dps
