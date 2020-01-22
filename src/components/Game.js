@@ -52,7 +52,7 @@ class Game extends React.Component{
     this.setState({
       dps: this.state.dps,
       oro: this.props.money,
-      i: this.state.i,
+      // i: this.state.i,
       currentLvl: this.state.currentLvl,
       clickpower: this.state.clickpower,
     })
