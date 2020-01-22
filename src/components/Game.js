@@ -36,7 +36,7 @@ class Game extends React.Component{
     this.state = {
       dps: 0,
       oro: this.props.money,
-      i:0,
+      i:this.props.stats.tiempo_jugado,
       currentLvl: 1,
       count:0,
       clickpower:10,
