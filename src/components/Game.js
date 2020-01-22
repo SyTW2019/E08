@@ -34,7 +34,6 @@ class Game extends React.Component{
     super(props)
 
     this.state = {
-      dps: 0,
       oro: this.props.money,
       i: this.props.stats.tiempo_juego,
       currentLvl: this.props.data.currentLvl,
@@ -42,6 +41,7 @@ class Game extends React.Component{
       clickpower: 10,
     }
   }
+  this.dps = 0;
 
   componentDidMount = () => {
     this.gameloop = setInterval(this.gameLoop, 1000)
@@ -51,7 +51,7 @@ class Game extends React.Component{
   updateData = () => {
     this.calc_dps();
     this.setState({
-      dps: this.state.dps,
+      dps: this.dps,
       oro: this.props.money,
       // i: this.state.i,
       currentLvl: this.state.currentLvl,
@@ -70,8 +70,8 @@ class Game extends React.Component{
         current_dps += specific_dps;
       }
     }
+    this.dps = current_dps;
     this.setState({
-      dps: current_dps,
       clickpower: (current_dps >0)?current_dps*0.5: 1,
     })
   }
@@ -111,7 +111,7 @@ class Game extends React.Component{
               )}
             </Grid>
             <StatList stats_data={{
-              dps: this.state.dps,
+              dps: this.dps,
               tiempo: this.state.i
             }}/>
           </Grid>
@@ -119,12 +119,12 @@ class Game extends React.Component{
 
             <h1>ORO ACTUAL: {this.props.data.money.toFixed(0)} </h1>
             <h2>NIVEL ACTUAL: {this.props.data.currentLvl}</h2>
-            <h3>DPS: {this.state.dps}</h3>
+            <h3>DPS: {this.dps}</h3>
             <Mounstro
               tiempo = {this.state.i}
               dps_data={{
                 cpower:this.state.clickpower,
-                current_dps:this.state.dps
+                current_dps:this.dps
               }}
             />
             <img src={Logo} align="middle" alt="logo ull clicker"/>
