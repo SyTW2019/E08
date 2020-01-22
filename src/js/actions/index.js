@@ -205,8 +205,14 @@ const addItemIndex = dataObj => ({
 })
 
 export const addItem = itemData =>{
-  return async function(dispatch)
+  return function(dispatch)
   {
     dispatch(addItemIndex(itemData));
+  }
+}
+
+export const updateLogged = boolLogged => {
+  return function (dispatch) {
+    dispatch(logoutUser(itemData));
   }
 }

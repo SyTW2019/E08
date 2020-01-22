@@ -10,11 +10,12 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {connect} from 'react-redux';
-import {userLoginFetch} from '../js/actions/index';
+import {userLoginFetch, updateLogged} from '../js/actions/index';
 
 function mapDispatchToProps(dispatch) {
   return {
-    userLoginFetch: user => dispatch(userLoginFetch(user))
+    userLoginFetch: user => dispatch(userLoginFetch(user)),
+    updateLogged: logged => dispatch(updateLogged(logged)),
   };
 }
 
@@ -66,6 +67,7 @@ class Login extends React.Component{
         contrasena: this.state.pwdValue
       })
       .then((success) => {
+        this.props.updateLogged({ logged:true});
 
         if(localStorage.id === 1)
           console.log("Usuario logeado correctamente");
@@ -77,7 +79,10 @@ class Login extends React.Component{
             console.log("Email mal");
 	        else
             console.log("Error desconocido");
-	    })
+      })
+      .error(function(data,status){
+        this.props.updateLogged({logged:false});
+      })
     }
     else
       this.setState({
