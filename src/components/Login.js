@@ -46,13 +46,14 @@ class Login extends React.Component{
 
     handleChange = event => {
         event.preventDefault();
-
+       
         const target = event.target;
         const value = target.value;
         const name = target.name
         this.setState({
           [name]: value
         });
+        this.handleError();
       }
 
       handleError = event => {
@@ -125,7 +126,7 @@ class Login extends React.Component{
           <Grid>
             <Button variant="outlined" color="primary" value={this.state.open} onClick={this.handleOpen}>
               <AccountCircle />
-              iniciar sesión prueba
+              iniciar sesión
             </Button>
             <Dialog
               open={this.state.open}

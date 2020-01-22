@@ -34,12 +34,12 @@ export default function reducer(state = initialState, action){
             return {...state, items: action.payload}
         case 'ADD_STATS':
             return {...state, stats: action.payload}
-	case 'ADD_EMAIL':
-	    return {...state, email: action.paylaod}
-	case 'ADD_TOKEN':
-	    return {...state, token: action.payload}
-	case 'UPDATE_LOGGED':
-	    return {...state, logged: action.payload}
+	    case 'ADD_EMAIL':
+	        return {...state, email: action.paylaod}
+        case 'ADD_TOKEN':
+            return {...state, token: action.payload}
+        case 'UPDATE_LOGGED':
+            return {...state, logged: action.payload}
         default:
             return state;
     }
