@@ -179,7 +179,7 @@ router.post('/save', auth, (req, res) => {
           // console.log(elemento.dps);
         })
       //Se almacenan el resto de datos y stats
-      user.data.currentlvl = req.body.data.currentLvl;
+      user.data.currentLvl = req.body.data.currentLvl;
       user.data.money = req.body.data.money;
       user.stats.kills = req.body.stats.kills;
       user.stats.clicks = req.body.stats.clicks;
