@@ -50,12 +50,12 @@ class Item extends React.Component{
       this.props.saveData(this.props.data);
 
       //Aumentar el precio y la cantidad del item comprado
-      this.state.items[this.props.iden].cantidad+=1;
-      this.state.items[this.props.iden].precio*=1.5;
+      this.props.items[this.props.iden].cantidad+=1;
+      this.props.items[this.props.iden].precio*=1.5;
       this.setState({
         items: this.state.items
       })
-      this.props.addItem(this.state.items)
+      this.props.addItem(this.props.items)
 
       console.log('Valores despues: ');
       console.log('Nombre');
