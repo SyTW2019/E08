@@ -40,8 +40,8 @@ class Game extends React.Component{
       count: 0,
       clickpower: 10,
     }
+    this.dps = 0;
   }
-  this.dps = 0;
 
   componentDidMount = () => {
     this.gameloop = setInterval(this.gameLoop, 1000)
