@@ -8,84 +8,82 @@ import {addItem,saveData} from '../js/actions/index';
 import purple from '@material-ui/core/colors/purple';
 
 function mapDispatchToProps(dispatch) {
-    return {
-        addItem: items => dispatch(addItem(items)),
-        saveData: data => dispatch(saveData(data))
-    };
-  }
+  return {
+    addItem: items => dispatch(addItem(items)),
+    saveData: data => dispatch(saveData(data))
+  };
+}
 
 const mapStateToProps = (state) => {
-    return{
-        items: state.items,
-        data: state.data
-    }
+  return{
+    items: state.items,
+    data: state.data
+  }
 }
 
 class Item extends React.Component{
+  constructor(props){
+    super(props);
 
-    constructor(props){
-        super(props);
-
-        this.state = {
-            items: this.props.items,
-            animation: false,
-            elevation: 1,
-        } 
+    this.state = {
+      items: this.props.items,
+      animation: false,
+      elevation: 1,
     }
-    
-    additem = () =>{
-        if(this.props.data.money >=this.props.items[this.props.id].precio)
-        {
-            //Descontar el dinero
-            this.props.data.money -=this.props.items[this.props.id].precio;
-            this.props.saveData(this.props.data);
-            //Aumentar el precio y la cantidad del item comprado
-            this.props.items[this.props.id].cantidad+=1;
-            this.props.items[this.props.id].precio*=1.5;
-            this.setState({
-                items: this.props.items
-            })
-            this.props.addItem(this.state.items)
-        }
-    }
+  }
 
-    mouseEnter = () =>{
-        this.setState({
-            animation:'pulse',
-            elevation:20,
-        })
+  additem = () =>{
+    if(this.props.data.money >=this.props.items[this.props.iden].precio)
+    {
+      //Descontar el dinero
+      this.props.data.money -=this.props.items[this.props.iden].precio;
+      this.props.saveData(this.props.data);
+      //Aumentar el precio y la cantidad del item comprado
+      this.props.items[this.props.iden].cantidad+=1;
+      this.props.items[this.props.iden].precio*=1.5;
+      this.setState({
+        items: this.props.items
+      })
+      this.props.addItem(this.state.items)
     }
+  }
 
-    mouseLeave = ()=>{
-        this.setState({
-            animation:false,
-            elevation:1,
-        })
-    }
+  mouseEnter = () =>{
+    this.setState({
+      animation:'pulse',
+      elevation:20,
+    })
+  }
 
-    render(){
-        return(
-            <Grid onClick={this.additem}>
-                <Skeleton animation={this.state.animation} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} >
-                    <Paper variant="outlined" elevation={this.state.elevation} style={{backgroundColor:purple[100]}}>
-                        <Typography gutterBottom variant="h4" component="h2">
-                            {this.props.items[this.props.id].name}
-                        </Typography>
-                        <Typography gutterBottom variant="h6" component="h2">
-                            DPS:{this.props.items[this.props.id].dps}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Precio:{(this.props.items[this.props.id].precio).toFixed(0)}
-                            </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Cantidad:{this.props.items[this.props.id].cantidad}
-                        </Typography>
-                    </Paper>
-                </Skeleton>
-            </Grid>
-        )
-    }
+  mouseLeave = ()=>{
+    this.setState({
+      animation:false,
+      elevation:1,
+    })
+  }
 
-    
+  render(){
+    return(
+      <Grid onClick={this.additem}>
+        <Skeleton animation={this.state.animation} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} >
+          <Paper variant="outlined" elevation={this.state.elevation} style={{backgroundColor:purple[100]}}>
+            <Typography gutterBottom variant="h4" component="h2">
+              {this.props.items[this.props.iden].name}
+            </Typography>
+            <Typography gutterBottom variant="h6" component="h2">
+              DPS:{this.props.items[this.props.iden].dps}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="h2">
+              Precio:{(this.props.items[this.props.iden].precio).toFixed(0)}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="h2">
+              Cantidad:{this.props.items[this.props.iden].cantidad}
+            </Typography>
+          </Paper>
+        </Skeleton>
+      </Grid>
+    )
+  }
 }
+
 export default connect(mapStateToProps,mapDispatchToProps)(Item);
