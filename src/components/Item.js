@@ -50,7 +50,7 @@ class Item extends React.Component{
       this.props.saveData(this.props.data);
 
       console.log('Valores despues: ');
-      onsole.log('Nombre');
+      console.log('Nombre');
       console.log(this.props.items[this.props.iden].name);
       console.log('Precio');
       console.log(this.props.items[this.props.iden].precio);
