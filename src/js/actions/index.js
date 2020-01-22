@@ -62,22 +62,21 @@ export const userLoginFetch = user => {
             body: JSON.stringify(user)
         })
         const data = await resp.json()
-        console.log("Datos recibidos");
-        console.log(data.token);
-        console.log(data.id);
-        console.log(data.user);
+
         if(data.id == 1)
         {
             localStorage.setItem("id", data.id);
-	          localStorage.setItem("user", data.user);
-	          localStorage.setItem("token", data.token);
+	        localStorage.setItem("user", data.user);
+	        localStorage.setItem("token", data.token);
             localStorage.setItem("email", data.email);
 
             dispatch(loginUser(data.user))
             dispatch(registEmail(data.email));
             dispatch(registToken(data.token));
-            //dispatch(userData(user))
-	          return true;
+            dispatch(saveData(data.data));
+            dispatch(saveStats(data.stats))
+
+	        return true;
         }
         else
         {
