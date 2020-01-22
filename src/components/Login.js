@@ -131,7 +131,6 @@ class Login extends React.Component{
           <DialogTitle id="iniciar_sesion">{"Inicio de sesión"}</DialogTitle>
             <DialogContent>
             <Grid>
->>>>>>> 7a5aa8c3a37dac1fd505daa0f14247073b291a75
               <TextField
                 required
                 id="email"
