@@ -70,20 +70,14 @@ class Monstruo extends React.Component{
       this.dps_cycle = setInterval(this.dps_cycle, 1000)
     }
 
-    dps_cycle = () =>{
-
-      if(currentMonster.hp > 0){
-        currentMonster.hp-=this.props.dps_data.current_dps;
-        if(currentMonster.hp < 0)
-          currentMonster.hp = 0
-      }
+    dps_cycle = () => {
       if((this.props.data.currentLvl%10 === 0))
         this.setState({
           timer: this.state.timer-=1
         })
       if(currentMonster.hp > 0)
       {
-        currentMonster.hp-=this.props.dps_data.current_dps;
+        currentMonster.hp -= this.props.dps_data.current_dps;
         if(this.state.timer <= 0 && (this.props.data.currentLvl%10 === 0))
         {
           this.props.saveData({
