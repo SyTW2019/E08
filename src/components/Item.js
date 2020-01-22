@@ -33,10 +33,10 @@ class Item extends React.Component{
   }
 
   additem = () =>{
-    if(this.props.data.money >=this.props.items[this.props.iden].precio)
+    if(this.props.data.money >= this.props.items[this.props.iden].precio)
     {
       //Descontar el dinero
-      this.props.data.money -=this.props.items[this.props.iden].precio;
+      this.props.data.money -= this.props.items[this.props.iden].precio;
       this.props.saveData(this.props.data);
       //Aumentar el precio y la cantidad del item comprado
       this.props.items[this.props.iden].cantidad+=1;

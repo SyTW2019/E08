@@ -179,15 +179,15 @@ router.post('/save', auth, (req, res) => {
           // console.log(elemento.dps);
         })
       //Se almacenan el resto de datos y stats
-      user.data.lvl = req.body.data.currentLvl;
+      user.data.currentLvl = req.body.data.currentLvl;
       user.data.money = req.body.data.money;
       user.stats.kills = req.body.stats.kills;
       user.stats.clicks = req.body.stats.clicks;
-      user.stats.tiempo = req.body.stats.tiempo_juego;
+      user.stats.tiempo_juego = req.body.stats.tiempo_juego;
       user.save();
       console.log('Valor del usuario almacenado:');
       console.log(user);
-      //Se envñia al front end un 1 de confirmación, y los datos almacenados para que se compruebe.
+      //Se envia al front end un 1 de confirmación, y los datos almacenados para que se compruebe.
       res.json({
         id: 1,
         items: user.items,
