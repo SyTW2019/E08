@@ -49,6 +49,14 @@ class Item extends React.Component{
       this.props.data.money -= this.props.items[this.props.iden].precio;
       this.props.saveData(this.props.data);
 
+      //Aumentar el precio y la cantidad del item comprado
+      this.state.items[this.props.iden].cantidad+=1;
+      this.state.items[this.props.iden].precio*=1.5;
+      this.setState({
+        items: this.state.items
+      })
+      this.props.addItem(this.state.items)
+
       console.log('Valores despues: ');
       console.log('Nombre');
       console.log(this.props.items[this.props.iden].name);
@@ -58,14 +66,6 @@ class Item extends React.Component{
       console.log(this.props.items[this.props.iden].cantidad);
       console.log('DPS');
       console.log(this.props.items[this.props.iden].dps);
-
-      //Aumentar el precio y la cantidad del item comprado
-      this.props.items[this.props.iden].cantidad+=1;
-      this.props.items[this.props.iden].precio*=1.5;
-      this.setState({
-        items: this.props.items
-      })
-      this.props.addItem(this.state.items)
     }
   }
 
