@@ -141,9 +141,9 @@ class Monstruo extends React.Component{
       }
     }
 
-    calc_barra(vida){
+    calc_barra = () => {
 
-      return ((vida*100)/this.state.monster_hp);
+      return ((currentMonster.hp*100)/currentMonster.hp);
     }
 
     render(){
@@ -151,7 +151,7 @@ class Monstruo extends React.Component{
         return (
          <Paper >
             <h1 >VIDA:{vida}</h1>
-            <LinearProgress variant="determinate" value={this.calc_barra(vida)} color= "secondary"  style={{width: "50%"}}/>
+            <LinearProgress variant="determinate" value={this.calc_barra()} color= "secondary"  style={{width: "50%"}}/>
             {this.props.data.currentLvl%10 === 0 &&(
               <div>
                 <h1>Tiempo Restante: {this.state.timer}</h1>
