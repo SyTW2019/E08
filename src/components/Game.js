@@ -45,19 +45,19 @@ class Game extends React.Component{
 
   componentDidMount = () => {
     this.gameloop = setInterval(this.gameLoop, 1000)
-    this.handleclick = setInterval(this.updateData, 33)
+    // this.handleclick = setInterval(this.updateData, 33)
   }
 
-  updateData = () => {
-    this.calc_dps();
-    this.setState({
-      dps: this.dps,
-      oro: this.props.money,
-      // i: this.state.i,
-      currentLvl: this.state.currentLvl,
-      clickpower: this.state.clickpower,
-    })
-  }
+  // updateData = () => {
+  //   this.calc_dps();
+  //   this.setState({
+  //     dps: this.dps,
+  //     oro: this.props.money,
+  //     // i: this.state.i,
+  //     currentLvl: this.state.currentLvl,
+  //     clickpower: this.state.clickpower,
+  //   })
+  // }
 
   calc_dps(){
     var current_dps = 0;
@@ -81,7 +81,7 @@ class Game extends React.Component{
     //	console.log(this.props.items);
     //	console.log('stats en game');
     //	console.log(this.props.stats);
-
+    this.calc_dps();
     this.setState({
       i: this.state.i+1
     })
