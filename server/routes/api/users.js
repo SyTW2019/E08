@@ -117,13 +117,6 @@ router.post('/login', (req, res) => {
             //console.log(token);
 
             //Se envía al front end el token y los datos del usuario menos el id y la passwd
-            console.log('items almacenados del usuario:');
-            console.log(doc.items);
-            console.log('data almacenados del usuario:');
-            console.log(doc.data);
-            console.log('stats almacenados del usuario:');
-            console.log(doc.stats);
-
             res.send(JSON.stringify({
               token,
               id: 1,
