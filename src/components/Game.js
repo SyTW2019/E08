@@ -36,10 +36,10 @@ class Game extends React.Component{
     this.state = {
       dps: 0,
       oro: this.props.money,
-      i:0,
+      i: this.props.stats.tiempo_juego,
       currentLvl: 1,
-      count:0,
-      clickpower:10,
+      count: 0,
+      clickpower: 10,
     }
   }
 
@@ -52,7 +52,7 @@ class Game extends React.Component{
     this.setState({
       dps: this.state.dps,
       oro: this.props.money,
-      i:this.state.i,
+      i: this.state.i,
       currentLvl: this.state.currentLvl,
       clickpower: this.state.clickpower,
     })
