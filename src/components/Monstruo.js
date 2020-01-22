@@ -38,8 +38,6 @@ const monsterType = {
 var currentMonster = {...monsterType.regular};
 
 
-
-
 /*
 function CircularDeterminate() {
     const classes = useStyles();
