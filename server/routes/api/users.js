@@ -31,10 +31,10 @@ router.post('/registro', (req, res) => {
   });
 
   //Inicializamos los items a 0 de los usuarios.
-  newUser.items.push({ nombre: 'Bebida energetica', iden: 0 });
-  newUser.items.push({ nombre: 'Colegas', iden: 1 });
-  newUser.items.push({ nombre: 'Asistir a clase', iden: 2 });
-  newUser.items.push({ nombre: 'Tutorias', iden: 3 });
+  newUser.items.push({ name: 'Bebida energetica', iden: 0 });
+  newUser.items.push({ name: 'Colegas', iden: 1 });
+  newUser.items.push({ name: 'Asistir a clase', iden: 2 });
+  newUser.items.push({ name: 'Tutorias', iden: 3 });
 
   //Revisamos que el usuario no exista ya
   User.findOne({email : newUser.email}, function(err,doc){
