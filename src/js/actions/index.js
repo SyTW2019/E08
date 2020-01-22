@@ -78,9 +78,9 @@ export const userLoginFetch = user => {
       dispatch(loginUser(data.user))
       dispatch(registEmail(data.email));
       dispatch(registToken(data.token));
-      // dispatch(addItemIndex(data.items));
-      // dispatch(currentData(data.data));
-      // dispatch(userStats(data.stats))
+      dispatch(addItemIndex(data.items));
+      dispatch(currentData(data.data));
+      dispatch(userStats(data.stats))
 
 	    return true;
     }
