@@ -81,7 +81,7 @@ class Game extends React.Component{
     //	console.log(this.props.items);
     //	console.log('stats en game');
     //	console.log(this.props.stats);
-
+    this.calc_dps();
     this.setState({
       i: this.state.i+1
     })
