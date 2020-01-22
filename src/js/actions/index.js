@@ -125,6 +125,7 @@ export const userLogoutFetch = user => {
     dispatch(registUser(""));
     dispatch(registEmail(""));
     dispatch(registToken(""));
+    return true;
   }
 }
 
@@ -134,6 +135,8 @@ const logoutUser = userObj => ({
 })
 
 export const userDataFetch = user => {
+  console.log('Valor del user en la accion');
+  console.log(user);
     return async function (dispatch){
         const resp = await fetch("/user/save", {
             method: "POST",
@@ -159,6 +162,7 @@ export const userDataFetch = user => {
         const data = await resp.json()
         localStorage.setItem("token", data.jwt)
         dispatch(userData(data.user))
+        return true;
     }
 }
 
@@ -197,4 +201,4 @@ export const addItem = itemData =>{
     {
         dispatch(addItemIndex(itemData));
     }
-} 
+}

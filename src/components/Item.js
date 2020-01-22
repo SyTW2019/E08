@@ -67,7 +67,7 @@ class Item extends React.Component{
         return(
             <Grid onClick={this.additem}>
                 <Skeleton animation={this.state.animation} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} >
-                    <Paper variant="outlined" elevation={this.state.elevation} style={{backgroundColor:purple[200]}}>
+                    <Paper variant="outlined" elevation={this.state.elevation} style={{backgroundColor:purple[100]}}>
                         <Typography gutterBottom variant="h4" component="h2">
                             {this.props.items[this.props.id].name}
                         </Typography>
