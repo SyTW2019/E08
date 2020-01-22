@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     required: true
   },
   items: [{
-    nombre: {
+    name: {
       type: String,
       required: true,
       default: ''
