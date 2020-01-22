@@ -14,6 +14,7 @@ const mapStateToProps = state => {
   return{
     data: state.data,
     stats: state.stats,
+    logged :state.logged,
   }
 }
 
@@ -68,6 +69,11 @@ class Monstruo extends React.Component{
     }
     componentDidMount = () =>{
       this.dps_cycle = setInterval(this.dps_cycle, 1000)
+    }
+
+    componentDidUpdate(prevProps){
+      if(this.props.logged !== prevProps.logged)
+        this.calc_monster();
     }
 
     dps_cycle = () => {
