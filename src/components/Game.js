@@ -49,6 +49,7 @@ class Game extends React.Component{
   }
 
   updateData = () => {
+    this.calc_dps();
     this.setState({
       dps: this.state.dps,
       oro: this.props.money,
@@ -81,7 +82,6 @@ class Game extends React.Component{
     //	console.log('stats en game');
     //	console.log(this.props.stats);
 
-    this.calc_dps();
     this.setState({
       i: this.state.i+1
     })
