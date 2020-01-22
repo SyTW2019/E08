@@ -72,12 +72,6 @@ class Monstruo extends React.Component{
 
     dps_cycle = () =>{
 
-      this.props.saveStats({
-        kills: this.props.stats.kills,
-        clicks: this.props.stats.clicks,
-        tiempo_juego: this.props.tiempo,
-      })
-
       if(currentMonster.hp > 0){
         currentMonster.hp-=this.props.dps_data.current_dps;
         if(currentMonster.hp < 0)
