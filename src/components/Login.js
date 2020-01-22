@@ -57,7 +57,8 @@ class Login extends React.Component{
       }
 
       handleError = event => {
-        if(this.get_value()){
+       console.log("en el handleError");
+	if(this.get_value()){
           this.setState({
             emailError:false,
           })
@@ -103,6 +104,7 @@ class Login extends React.Component{
       }
 
       validateEmail(){
+	      console.log("en el validate email")
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
           return true;
         else
@@ -110,10 +112,11 @@ class Login extends React.Component{
       }
 
       get_value(){
-
+	console.log("En el getvalue");
 
         if(this.validateEmail())
         {
+		console.log("ha pasado el validate email")
           if(this.state.emailValue)
             return true;
           else
