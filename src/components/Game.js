@@ -6,12 +6,9 @@ import StatList from './StatList';
 import Login from './Login';
 import Registro from './Registro';
 import Logout from './Logout';
-import Paper from '@material-ui/core/Paper';
 import User from './User';
 import Mounstro from './Monstruo';
 import Logo from '../../public/img/logo_clicker.png';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from "@material-ui/core/styles";
 
 const mapStateToProps = (state) => {
   return {
@@ -122,13 +119,16 @@ class Game extends React.Component{
             <h2>NIVEL ACTUAL: {this.props.data.currentLvl}</h2>
             <h3>DPS: {this.dps}</h3>
             <Mounstro
-              tiempo = {this.state.i}
+              tiempo={this.state.i}
               dps_data={{
                 cpower:this.state.clickpower,
                 current_dps:this.dps
               }}
             />
-            <img src={Logo} align="middle" alt="logo ull clicker"/>
+            <div align="center">
+              <img src={Logo} align="middle" alt="logo ull clicker"/>
+            </div>
+           
           </Grid>
           <Grid item xs={3}>
             <ItemList/>

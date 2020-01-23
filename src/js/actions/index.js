@@ -1,4 +1,76 @@
 //import { ADD_USER } from "../constants/action-types";
+const registUser = userObj => ({
+  type: 'ADD_USER',
+  payload: userObj
+})
+
+const registEmail = userObj => ({
+  type: 'ADD_EMAIL',
+  payload: userObj
+})
+
+const registToken = userObj => ({
+  type: 'ADD_TOKEN',
+  payload: userObj
+})
+
+const loginUser = userObj => ({
+  type: 'LOGIN_USER',
+  payload: userObj
+})
+
+const logoutUser = userObj => ({
+  type: 'UPDATE_LOGGED',
+  payload: userObj
+})
+
+const userStats = dataObj => ({
+  type: 'ADD_STATS',
+  payload: dataObj
+})
+
+const userData = dataObj => ({
+  type: 'GET_DATA',
+  payload: dataObj
+})
+
+const currentData = dataObj => ({
+  type: 'SAVE_DATA',
+  payload: dataObj
+})
+
+const addItemIndex = dataObj => ({
+  type: 'ADD_ITEM',
+  payload: dataObj
+})
+
+export const saveStats = gameStats => {
+  return function(dispatch){
+    dispatch(userStats(gameStats))
+  }
+}
+
+
+export const saveData = gameData => {
+  return function(dispatch){
+    dispatch(currentData(gameData))
+  }
+}
+
+
+export const addItem = itemData =>{
+  return function(dispatch)
+  {
+    dispatch(addItemIndex(itemData));
+  }
+}
+
+export const updateLogged = boolLogged => {
+  return function (dispatch) {
+    dispatch(logoutUser(logoutUser));
+  }
+}
+
 
 export const userPostFetch = user => {
   console.log("Entro a peticion");
@@ -16,7 +88,7 @@ export const userPostFetch = user => {
     console.log(data.token);
     console.log(data.id);
     console.log(data.user);
-    if(data.id == 1)
+    if(data.id === 1)
     {
       localStorage.setItem("id", data.id);
       localStorage.setItem("user", data.user);
@@ -36,20 +108,7 @@ export const userPostFetch = user => {
   }
 }
 
-const registUser = userObj => ({
-  type: 'ADD_USER',
-  payload: userObj
-})
 
-const registEmail = userObj => ({
-  type: 'ADD_EMAIL',
-  payload: userObj
-})
-
-const registToken = userObj => ({
-  type: 'ADD_TOKEN',
-  payload: userObj
-})
 
 //Login -> recibir los datos del juego guardados en la BBDD
 
@@ -65,7 +124,7 @@ export const userLoginFetch = user => {
     })
     const data = await resp.json()
 
-    if(data.id == 1)
+    if(data.id === 1)
     {
       localStorage.setItem("id", data.id);
 	    localStorage.setItem("user", data.user);
@@ -95,10 +154,7 @@ export const userLoginFetch = user => {
 }
 
 
-const loginUser = userObj => ({
-  type: 'LOGIN_USER',
-  payload: userObj
-})
+
 
 export const userLogoutFetch = user => {
   return async function (dispatch){
@@ -114,7 +170,7 @@ export const userLogoutFetch = user => {
     })
     .then(resp => resp.json())
     .then(data => {
-      if(data.id == 1)
+      if(data.id === 1)
       {
         console.log('Logout hecho satisfactoriamente.');
         localStorage.setItem("id", "");
@@ -132,10 +188,6 @@ export const userLogoutFetch = user => {
   }
 }
 
-const logoutUser = userObj => ({
-  type: 'UPDATE_LOGGED',
-  payload: userObj
-})
 
 export const userDataFetch = user => {
   console.log('Valor del user en la accion');
@@ -170,47 +222,3 @@ export const userDataFetch = user => {
   }
 }
 
-export const saveStats = gameStats => {
-  return function(dispatch){
-    dispatch(userStats(gameStats))
-  }
-}
-
-const userStats = dataObj => ({
-  type: 'ADD_STATS',
-  payload: dataObj
-})
-
-const userData = dataObj => ({
-  type: 'GET_DATA',
-  payload: dataObj
-})
-
-export const saveData = gameData => {
-  return function(dispatch){
-    dispatch(currentData(gameData))
-  }
-}
-
-const currentData = dataObj => ({
-  type: 'SAVE_DATA',
-  payload: dataObj
-})
-
-const addItemIndex = dataObj => ({
-  type: 'ADD_ITEM',
-  payload: dataObj
-})
-
-export const addItem = itemData =>{
-  return function(dispatch)
-  {
-    dispatch(addItemIndex(itemData));
-  }
-}
-
-export const updateLogged = boolLogged => {
-  return function (dispatch) {
-    dispatch(logoutUser(logoutUser));
-  }
-}
