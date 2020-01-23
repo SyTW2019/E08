@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     required: true
   },
   items: [{
-    nombre: {
+    name: {
       type: String,
       required: true,
       default: ''
@@ -47,7 +47,7 @@ const UserSchema = new Schema({
     }
   }],
   data: {
-    lvl: {
+    currentLvl: {
       type: Number,
       required: true,
       default: 0
@@ -69,7 +69,7 @@ const UserSchema = new Schema({
       required: true,
       default: 0
     },
-    tiempo: {
+    tiempo_juego: {
       type: Number,
       required: true,
       default: 0

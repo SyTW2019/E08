@@ -14,6 +14,7 @@ const mapStateToProps = state => {
   return{
     data: state.data,
     stats: state.stats,
+    logged :state.logged,
   }
 }
 
@@ -36,8 +37,6 @@ const monsterType = {
 }
 
 var currentMonster = {...monsterType.regular};
-
-
 
 
 /*
@@ -72,19 +71,19 @@ class Monstruo extends React.Component{
       this.dps_cycle = setInterval(this.dps_cycle, 1000)
     }
 
-    dps_cycle = () =>{
-      if(currentMonster.hp > 0){
-        currentMonster.hp-=this.props.dps_data.current_dps;
-        if(currentMonster.hp < 0)
-          currentMonster.hp = 0
-      }
+    componentDidUpdate(prevProps){
+      if(this.props.logged !== prevProps.logged)
+        this.calc_monster();
+    }
+
+    dps_cycle = () => {
       if((this.props.data.currentLvl%10 === 0))
         this.setState({
           timer: this.state.timer-=1
         })
       if(currentMonster.hp > 0)
       {
-        currentMonster.hp-=this.props.dps_data.current_dps;
+        currentMonster.hp -= this.props.dps_data.current_dps;
         if(this.state.timer <= 0 && (this.props.data.currentLvl%10 === 0))
         {
           this.props.saveData({
@@ -148,9 +147,9 @@ class Monstruo extends React.Component{
       }
     }
 
-    calc_barra(vida){
+    calc_barra = () => {
 
-      return ((vida*100)/this.state.monster_hp);
+      return ((currentMonster.hp*100)/currentMonster.hp);
     }
 
     render(){
@@ -158,7 +157,7 @@ class Monstruo extends React.Component{
         return (
          <Paper >
             <h1 >VIDA:{vida}</h1>
-            <LinearProgress variant="determinate" value={this.calc_barra(vida)} color= "secondary"  style={{width: "50%"}}/>
+            <LinearProgress variant="determinate" value={this.calc_barra()} color= "secondary"  style={{width: "50%"}}/>
             {this.props.data.currentLvl%10 === 0 &&(
               <div>
                 <h1>Tiempo Restante: {this.state.timer}</h1>

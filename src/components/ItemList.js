@@ -3,28 +3,24 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import Item from './Item';
 
-
 const mapStateToProps = (state) => {
-    return{
-        items: state.items
-    }
+  return{
+    items: state.items
+  }
 }
 
-
-
 class ItemList extends React.Component{
-    
-    render()
-    {
-        return(
-            <Grid>
-                <Item id={this.props.items[0].id}/>
-                <Item id={this.props.items[1].id}/>
-                <Item id={this.props.items[2].id}/>
-                <Item id={this.props.items[3].id}/>
-            </Grid>
-        )
-    }
+  render()
+  {
+    return(
+      <Grid>
+        <Item iden={this.props.items[0].iden}/>
+        <Item iden={this.props.items[1].iden}/>
+        <Item iden={this.props.items[2].iden}/>
+        <Item iden={this.props.items[3].iden}/>
+      </Grid>
+    )
+  }
 }
 
 export default connect(mapStateToProps,null)(ItemList);

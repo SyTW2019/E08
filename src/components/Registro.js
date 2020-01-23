@@ -19,6 +19,12 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+const mapStateToProps = state => {
+    return{
+        logged: state.logged,
+    }
+}
+
 class Registro extends React.Component{
     
     constructor(props){
@@ -64,7 +70,8 @@ class Registro extends React.Component{
     handleError = event =>{
         this.handleErrorEmail()
         this.handleErrorPwd()
-        if( this.state.pwdError === false && this.state.emailError === false)
+        //if( this.state.pwdError === false && this.state.emailError === false)
+        if(this.handleErrorEmail() && this.handleErrorPwd())
         {
             event.preventDefault();
             //this.props.userPostFetch(this.state);
@@ -72,11 +79,11 @@ class Registro extends React.Component{
                                       nombre: this.state.userValue,
                                       contrasena: this.state.pwdValue                            
             });
-//            if(localStorage.id == 1)
-//                console.log("Usuario logeado correctamente")
-                //Usuario logeado correctamente
-//            else   
-//            console.log("Fallo en el registro")
+            if(!this.props.logged)
+                this.setState({
+                    emailError:true,
+                    pwdError:true,
+                })
         }
     }
 
@@ -84,27 +91,37 @@ class Registro extends React.Component{
 
     handleErrorEmail = event => {
         if(this.validateEmail())
+        {
             this.setState({
                 emailError:false,
                
             })
+            return true;
+        }
         else
+        {
             this.setState({
                 emailError:true,
-                
             })
+            return false;
+        }
         
     }
     handleErrorPwd = event => {
         if(this.check_pwd())
+        {
             this.setState({
                 pwdError:false,
             })
+            return true;
+        }
         else
+        {
             this.setState({
-                
                 pwdError:true,
             })
+            return false;
+        }
         
     }
 
@@ -271,4 +288,4 @@ class Registro extends React.Component{
     }
 }
 
-export default connect(null, mapDispatchToProps)(Registro);
+export default connect(mapStateToProps, mapDispatchToProps)(Registro);

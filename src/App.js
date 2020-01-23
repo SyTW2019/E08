@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <div style={{backgroundColor:purple[50]}}>
         <Grid>
-            <Game />
+          <Game />
         </Grid>
       </div>
     );
