@@ -71,25 +71,8 @@ class Login extends React.Component{
       if(!this.props.logged)
       this.setState({
         emailError:true,
+        pwdError:true,
       })
-      /*
-      .then((success) => {
-        this.props.updateLogged({ logged:true});
-
-        if(localStorage.id === 1)
-          console.log("Usuario logeado correctamente");
-          else if(localStorage.id === 2)
-          {
-            console.log("Contraseña mal puesta")
-          }
-          else if(localStorage.id === 0)
-            console.log("Email mal");
-	        else
-            console.log("Error desconocido");
-      })
-      .error(function(data,status){
-        this.props.updateLogged({logged:false});
-      })*/
     }
     else
       this.setState({

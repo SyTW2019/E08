@@ -19,6 +19,12 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+const mapStateToProps = state => {
+    return{
+        logged: state.logged,
+    }
+}
+
 class Registro extends React.Component{
     
     constructor(props){
@@ -72,6 +78,11 @@ class Registro extends React.Component{
                                       nombre: this.state.userValue,
                                       contrasena: this.state.pwdValue                            
             });
+            if(!this.props.logged)
+                this.setState({
+                    emailError:true,
+                    pwdError:true,
+                })
 //            if(localStorage.id == 1)
 //                console.log("Usuario logeado correctamente")
                 //Usuario logeado correctamente
@@ -271,4 +282,4 @@ class Registro extends React.Component{
     }
 }
 
-export default connect(null, mapDispatchToProps)(Registro);
+export default connect(mapStateToProps, mapDispatchToProps)(Registro);

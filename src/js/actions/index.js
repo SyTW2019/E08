@@ -26,9 +26,11 @@ export const userPostFetch = user => {
       dispatch(registUser(data.user));
       dispatch(registEmail(data.email));
       dispatch(registToken(data.token));
+      dispatch(updateLogged(true))
     }
     else
     {
+      dispatch(updateLogged(false))
       localStorage.setItem("id", data.id);
     }
   }
