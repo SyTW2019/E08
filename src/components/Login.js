@@ -20,7 +20,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-  return {user: state.user}
+  return {
+    user: state.user,
+    logged: state.logged,
+  }
 }
 
 
@@ -65,6 +68,11 @@ class Login extends React.Component{
         email: this.state.emailValue,
         contrasena: this.state.pwdValue
       })
+      if(this.props.logged)
+        console.log("Logeado");
+      else 
+        console.log("Fail al logear")
+      /*
       .then((success) => {
         this.props.updateLogged({ logged:true});
 
@@ -81,7 +89,7 @@ class Login extends React.Component{
       })
       .error(function(data,status){
         this.props.updateLogged({logged:false});
-      })
+      })*/
     }
     else
       this.setState({

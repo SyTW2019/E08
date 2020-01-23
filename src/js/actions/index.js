@@ -76,11 +76,12 @@ export const userLoginFetch = user => {
       dispatch(addItemIndex(data.items));
       dispatch(currentData(data.data));
       dispatch(userStats(data.stats))
-
+      dispatch(updateLogged(true));
 	    return true;
     }
     else
     {
+      dispatch(updateLogged(false));
       //0 Email no existe 1 Constraseña mal puesta
       localStorage.setItem("id", data.id);
 	    return false;
