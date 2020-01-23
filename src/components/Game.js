@@ -18,7 +18,8 @@ const mapStateToProps = (state) => {
     user: state.user,
     items: state.items,
     data: state.data,
-    stats: state.stats
+    stats: state.stats,
+    logged: state.logged,
   }
 }
 
@@ -91,19 +92,19 @@ class Game extends React.Component{
 
 
   render(){
-    var logged = (localStorage.id ? true:false)
+    //var logged = (localStorage.id ? true:false)
     return(
       <div id="Game" >
         <Grid container spacing={2} justify="space-evenly" alignItems="flex-start" >
           <Grid item xs={3}>
             <Grid container text-align='center'>
-              {logged === true && (
+              {this.props.logged === true && (
                 <Grid>
                   <User/>
                   <Logout/>
                 </Grid>
               )}
-              {logged === false && (
+              {this.props.logged === false && (
                 <Grid>
                   <Login/>
                   <Registro/>
