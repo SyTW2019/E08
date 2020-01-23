@@ -19,6 +19,12 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
+const mapStateToProps = state => {
+    return{
+        logged: state.logged,
+    }
+}
+
 class Registro extends React.Component{
     
     constructor(props){
@@ -29,9 +35,9 @@ class Registro extends React.Component{
             userValue: "",
             pwdValue: "",
             pwdConfValue: "",
-            emailError: "",
-            pwdError: "",
-            open: "",
+            emailError: false,
+            pwdError: false,
+            open: false,
 	        logged: false,
         }
 
@@ -64,7 +70,8 @@ class Registro extends React.Component{
     handleError = event =>{
         this.handleErrorEmail()
         this.handleErrorPwd()
-        if( this.state.pwdError == false && this.state.emailError == false)
+        //if( this.state.pwdError === false && this.state.emailError === false)
+        if(this.handleErrorEmail() && this.handleErrorPwd())
         {
             event.preventDefault();
             //this.props.userPostFetch(this.state);
@@ -72,11 +79,11 @@ class Registro extends React.Component{
                                       nombre: this.state.userValue,
                                       contrasena: this.state.pwdValue                            
             });
-//            if(localStorage.id == 1)
-//                console.log("Usuario logeado correctamente")
-                //Usuario logeado correctamente
-//            else   
-//            console.log("Fallo en el registro")
+            if(!this.props.logged)
+                this.setState({
+                    emailError:true,
+                    pwdError:true,
+                })
         }
     }
 
@@ -84,27 +91,37 @@ class Registro extends React.Component{
 
     handleErrorEmail = event => {
         if(this.validateEmail())
+        {
             this.setState({
                 emailError:false,
                
             })
+            return true;
+        }
         else
+        {
             this.setState({
                 emailError:true,
-                
             })
+            return false;
+        }
         
     }
     handleErrorPwd = event => {
         if(this.check_pwd())
+        {
             this.setState({
                 pwdError:false,
             })
+            return true;
+        }
         else
+        {
             this.setState({
-                
                 pwdError:true,
             })
+            return false;
+        }
         
     }
 
@@ -183,7 +200,7 @@ class Registro extends React.Component{
                 <TextField
                 required
                 id="email"
-                name = "emailValue"
+                name="emailValue"
                 label="Correo Electrónico"
                 value={this.state.emailValue}
                 ref={(input) => this.input = input}
@@ -204,7 +221,7 @@ class Registro extends React.Component{
                 required
                 id="username"
                 label="Nombre de Usuario"
-                name = "userValue"
+                name="userValue"
                 value={this.state.userValue}
                 ref={(input) => this.input = input}
                 onChange={this.handleChange}
@@ -221,7 +238,7 @@ class Registro extends React.Component{
                 <TextField
                 required
                 id="password"
-                name = "pwdValue"
+                name="pwdValue"
                 label="Contraseña"
                 type="password"
                 value={this.state.pwdValue}
@@ -240,7 +257,7 @@ class Registro extends React.Component{
                 <TextField
                 required
                 id="password_verify"
-                name= "pwdConfValue"
+                name="pwdConfValue"
                 label="Verificación de contraseña"
                 type="password"
                 value={this.state.pwdConfValue}
@@ -271,4 +288,4 @@ class Registro extends React.Component{
     }
 }
 
-export default connect(null, mapDispatchToProps)(Registro);
+export default connect(mapStateToProps, mapDispatchToProps)(Registro);

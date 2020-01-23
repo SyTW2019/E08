@@ -1,144 +1,142 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import {connect} from 'react-redux';
-//import {saveData} from '../js/actions/index';
-import pcimg from '../../public/img/pc.png';
-import store from '../js/store/index';
 import ItemList from './ItemList';
 import StatList from './StatList';
 import Login from './Login';
 import Registro from './Registro';
-import Paper from '@material-ui/core/Paper';
-import User from './User';
 import Logout from './Logout';
-window.store =store;
+import User from './User';
+import Mounstro from './Monstruo';
+import Logo from '../../public/img/logo_clicker.png';
 
-console.log(store.users)
-
-function mapStateToProps(state) {
-    return {user: state.user}
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    items: state.items,
+    data: state.data,
+    stats: state.stats,
+    logged: state.logged,
   }
-
-class Game extends React.Component{
-    constructor(props){
-        super(props)
-
-        this.state = {
-            dps: 0,
-            oro: 0,
-            i:0,
-            currentLvl: 1,
-            count:0
-        }
-        this.output = this.output.bind(this);
-    }
-
-    monster = {
-        hp: 100,
-        oro_monster: 3,
-        boss: false,
-    }
-
-    componentDidMount = () => {
-        this.gameloop = setInterval(this.gameLoop, 1000)
-        this.handleclick = setInterval(this.updateData, 33)
-    }
-
-    updateData = () => {
-        this.setState({
-            dps: this.state.dps,
-            oro: this.state.oro,
-            i:this.state.i,
-            currentLvl: this.state.currentLvl,
-            hp: this.monster.hp,
-            oro_monster: this.monster.oro,
-
-        })
-    }
-
-    handleClick = () => {
-
-        if(this.state.dps === 0)
-            this.clickpower = 1;
-        else
-            this.clickpower = 0.5*this.state.dps;
-
-        if(this.monster.hp > 0)
-        {
-            this.monster.hp -= this.clickpower;
-
-        }
-        else
-        {
-            this.state.oro += this.monster.oro_monster;
-            this.setState({
-                oro: this.state.oro,
-            })
-
-            this.state.currentLvl++;
-            this.setState({
-                currentLvl: this.state.currentLvl,
-            })
-        }
-
-
-        //quitarle vida al bicho
-    }
-
-    output(evt){
-        console.log("Probando la función");
-        this.setState({ count: this.state.count+evt})
-    }
-    gameLoop = (event) =>{
-        this.state.i++;
-        this.setState({
-            i: this.state.i,
-        })
-    }
-
-    render(){
-        //var currentTime = this.state.i++;
-        var logged = (localStorage.id ? true:false)
-        return(
-            <div id="Game">
-                <Grid container spacing={3} justify="space-evenly" alignItems="flex-start">
-                    <Grid item xs={3}>
-                        <Paper>
-                            <Grid container>
-                                {logged === true && (
-                                    <Grid>
-                                        <User/>
-                                        <Logout/>
-                                    </Grid>
-                                )}
-                                { logged === false && (
-                                    <Grid>
-                                        <Login/>
-                                        <Registro/>
-                                    </Grid>
-                                )}
-                            </Grid>
-                            STATS
-                        </Paper>
-                        <StatList />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <p>Contador del juego -> {this.state.i}</p>
-                        <h1>ORO ACTUAL: {this.state.oro} </h1>
-                        <h2>VIDA: {this.monster.hp}</h2>
-                        <img src={pcimg} onClick={this.handleClick} alt="PC"/>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ItemList
-                            func={this.output}
-
-                        />
-                        <h1>{this.state.count}</h1>
-                    </Grid>
-                </Grid>
-            </div>
-        )
-    }
 }
 
-export default connect(mapStateToProps,null)(Game);
+const mapDispatchToProps = (dipatch) =>{
+  return{
+    //saveStats: stats=> dispatch(saveStats(stats))
+    //userDataFetch = datos => dispatch(userDataFetch(datos))
+  }
+}
+
+class Game extends React.Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      oro: this.props.money,
+      i: this.props.stats.tiempo_juego,
+      currentLvl: this.props.data.currentLvl,
+      count: 0,
+      clickpower: 10,
+    }
+    this.dps = 0;
+  }
+
+  componentDidMount = () => {
+    this.gameloop = setInterval(this.gameLoop, 1000)
+    // this.handleclick = setInterval(this.updateData, 33)
+  }
+
+  // updateData = () => {
+  //   this.calc_dps();
+  //   this.setState({
+  //     dps: this.dps,
+  //     oro: this.props.money,
+  //     // i: this.state.i,
+  //     currentLvl: this.state.currentLvl,
+  //     clickpower: this.state.clickpower,
+  //   })
+  // }
+
+  calc_dps(){
+    var current_dps = 0;
+    for(var loop = 0; loop < 4; loop++)
+    {
+      var specific_dps = 0;
+      if(this.props.items[loop].cantidad > 0)
+      {
+        specific_dps = this.props.items[loop].cantidad*this.props.items[loop].dps
+        current_dps += specific_dps;
+      }
+    }
+    this.dps = current_dps;
+    this.setState({
+      clickpower: (current_dps >0)?current_dps*0.5: 1,
+    })
+  }
+
+  gameLoop = (event) =>{
+    //	console.log('data en game');
+    //	console.log(this.props.items);
+    //	console.log('stats en game');
+    //	console.log(this.props.stats);
+    this.calc_dps();
+    this.setState({
+      i: this.state.i+1
+    })
+
+    //	console.log('i:' + this.state.i);
+  }
+
+
+  render(){
+    //var logged = (localStorage.id ? true:false)
+    return(
+      <div id="Game" >
+        <Grid container spacing={2} justify="space-evenly" alignItems="flex-start" >
+          <Grid item xs={3}>
+            <Grid container text-align='center'>
+              {this.props.logged === true && (
+                <Grid>
+                  <User/>
+                  <Logout/>
+                </Grid>
+              )}
+              {this.props.logged === false && (
+                <Grid>
+                  <Login/>
+                  <Registro/>
+                </Grid>
+              )}
+            </Grid>
+            <StatList stats_data={{
+              dps: this.dps,
+              tiempo: this.state.i
+            }}/>
+          </Grid>
+          <Grid item xs={6}>
+
+            <h1>ORO ACTUAL: {this.props.data.money.toFixed(0)} </h1>
+            <h2>NIVEL ACTUAL: {this.props.data.currentLvl}</h2>
+            <h3>DPS: {this.dps}</h3>
+            <Mounstro
+              tiempo={this.state.i}
+              dps_data={{
+                cpower:this.state.clickpower,
+                current_dps:this.dps
+              }}
+            />
+            <div align="center">
+              <img src={Logo} align="middle" alt="logo ull clicker"/>
+            </div>
+           
+          </Grid>
+          <Grid item xs={3}>
+            <ItemList/>
+          </Grid>
+        </Grid>
+      </div>
+    )
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Game);

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import './App.css';
 import {connect} from 'react-redux'
 import Game from './components/Game';
+import purple from '@material-ui/core/colors/purple';
 
 /*const useStyles = makeStyles(theme => ({
   root: {
@@ -16,10 +17,6 @@ import Game from './components/Game';
   },
 }));*/
 
-const mapDispatchToProps = dispatch => ({
-  //getProfileFetch: () => dispatch(getProfileFetch())
-})
-
 class App extends Component {
   constructor(props){
     super(props);
@@ -31,9 +28,9 @@ class App extends Component {
 
   render() {
     return (
-      <div >
+      <div style={{backgroundColor:purple[50]}}>
         <Grid>
-            <Game />
+          <Game />
         </Grid>
       </div>
     );

@@ -10,133 +10,124 @@ import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {connect} from 'react-redux';
-import {userLoginFetch} from '../js/actions/index';
+import {userLoginFetch, updateLogged} from '../js/actions/index';
 
 function mapDispatchToProps(dispatch) {
   return {
-      userLoginFetch: user => dispatch(userLoginFetch(user))
+    userLoginFetch: user => dispatch(userLoginFetch(user)),
+    updateLogged: logged => dispatch(updateLogged(logged)),
   };
 }
 
 function mapStateToProps(state) {
-  return {user: state.user}
+  return {
+    user: state.user,
+    logged: state.logged,
+  }
 }
 
 
 class Login extends React.Component{
+  constructor(props){
+    super(props);
 
-    constructor(props){
-        super(props);
-
-        this.state = {
-            emailValue: "",
-            pwdValue: "",
-            open: "",
-            emailError: "",
-            pwdError: "",
-        }
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleError = this.handleError.bind(this);
-        this.handleOpen = this.handleOpen.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+    this.state = {
+      emailValue: "",
+      pwdValue: "",
+      open: false,
+      emailError: false,
+      pwdError: false,
     }
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleError = this.handleError.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
 
+  handleChange = event => {
+    event.preventDefault();
 
-    handleChange = event => {
-        event.preventDefault();
+    const target = event.target;
+    const value = target.value;
+    const name = target.name
+    this.setState({
+      [name]: value
+    });
+    this.handleError();
+  }
 
-        const target = event.target;
-        const value = target.value;
-        const name = target.name
-        this.setState({
-          [name]: value
-        });
-      }
+  handleError = event => {
 
-      handleError = event => {
-        if(this.get_value()){
-          this.setState({
-            emailError:false,
-          })
+    if(this.get_value()){
+      this.setState({
+        emailError:false,
+      })
+      event.preventDefault()
+      this.props.userLoginFetch({
+        email: this.state.emailValue,
+        contrasena: this.state.pwdValue
+      })
+      if(!this.props.logged)
+      this.setState({
+        emailError:true,
+        pwdError:true,
+      })
+    }
+    else
+      this.setState({
+        emailError:true,
+      })
+  }
 
-          event.preventDefault()
-          //this.props.userLoginFetch(this.state)
-          this.props.userLoginFetch({ email: this.state.emailValue,
-                                      contrasena: this.state.pwdValue
-          }).then((success) => {
+  handleOpen = event => {
+    this.setState({
+      open: true,
+    })
+  }
 
+  handleClose = event => {
+    this.setState({
+      open: false,
+    })
+  }
 
-              if(localStorage.id == 1)
-                console.log("Usuario logeado correctamente");
-              else if(localStorage.id == 2)
-              {
-                console.log("Contraseña mal puesta")
-              }
-              else if(localStorage.id == 0)
-                console.log("Email mal");
-	            else
-      	        console.log("Error desconocido");
+  validateEmail(){
+    console.log("validating email")
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
+      return true;
+    else
+      return false;
+  }
 
-	            })
-        }
-        else
-          this.setState({
-            emailError:true,
-          })
-      }
+  get_value(){
+    if(this.validateEmail())
+    {
+      console.log("Inside get_value")
+      if(this.state.emailValue)
+        return true;
+      else
+        return false
+    }
+  }
 
-      handleOpen = event => {
-        this.setState({
-          open: true,
-        })
-
-
-
-      }
-      handleClose = event => {
-        this.setState({
-          open: false,
-        })
-      }
-
-      validateEmail(){
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
-          return true;
-        else
-          return false;
-      }
-
-      get_value(){
-
-
-        if(this.validateEmail())
-        {
-          if(this.state.emailValue)
-            return true;
-          else
-            return false
-        }
-      }
-
-      render() {
-        return(
-          <Grid>
-            <Button variant="outlined" color="primary" value={this.state.open} onClick={this.handleOpen}>
-              <AccountCircle />
-              iniciar sesión prueba
-            </Button>
-            <Dialog
-              open ={this.state.open}
-              keepMounted
-              onClose={this.handleClose}
-              aria-labelledby="iniciar_sesion"
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle id="iniciar_sesion">{"Inicio de sesión"}</DialogTitle>
-              <DialogContent>
-              <Grid>
+  render() {
+    return(
+      <Grid>
+        <Button variant="outlined" color="primary" value={this.state.open} onClick={this.handleOpen}>
+          <AccountCircle />
+            iniciar sesión
+        </Button>
+        <Dialog
+          open={this.state.open}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="iniciar_sesion"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="iniciar_sesion">{"Inicio de sesión"}</DialogTitle>
+            <DialogContent>
+            <Grid>
               <TextField
                 required
                 id="email"

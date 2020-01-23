@@ -1,7 +1,7 @@
 const express  = require('express');
 const mongoose  = require('mongoose');
 const path = require('path');
-const config = require('config');
+const config = require('config'); //para almacenar el jwtsecret y la uri de mongo
 var cors = require('cors');
 
 const users = require('./routes/api/users');
@@ -16,16 +16,17 @@ const db = config.get('mongoURI');
 
 //Connect to mongo
 mongoose.connect(db, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log('MongoDB connection stablished...'))
-  .catch(err => console.log(err));
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connection stablished...'))
+.catch(err => console.log(err));
 
 //Use routes
 app.use(express.static(path.join(__dirname, '../build')));
 
+//Se envía la build hecha del front end
 app.get('/', function(req,res){
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
