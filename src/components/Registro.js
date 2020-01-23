@@ -79,11 +79,11 @@ class Registro extends React.Component{
                                       nombre: this.state.userValue,
                                       contrasena: this.state.pwdValue                            
             });
-            /*if(!this.props.logged)
+            if(!this.props.logged)
                 this.setState({
                     emailError:true,
                     pwdError:true,
-                })*/
+                })
         }
     }
 
