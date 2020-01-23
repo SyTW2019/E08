@@ -78,16 +78,11 @@ class Registro extends React.Component{
                                       nombre: this.state.userValue,
                                       contrasena: this.state.pwdValue                            
             });
-            if(!this.props.logged)
+            /*if(!this.props.logged)
                 this.setState({
                     emailError:true,
                     pwdError:true,
-                })
-//            if(localStorage.id == 1)
-//                console.log("Usuario logeado correctamente")
-                //Usuario logeado correctamente
-//            else   
-//            console.log("Fallo en el registro")
+                })*/
         }
     }
 
@@ -102,7 +97,6 @@ class Registro extends React.Component{
         else
             this.setState({
                 emailError:true,
-                
             })
         
     }
@@ -113,7 +107,6 @@ class Registro extends React.Component{
             })
         else
             this.setState({
-                
                 pwdError:true,
             })
         
