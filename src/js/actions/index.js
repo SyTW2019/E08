@@ -70,11 +70,6 @@ export const userLoginFetch = user => {
 	    localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
 
-      console.log("dani chupaculos");
-      console.log(data.items);
-      console.log(data.data);
-      console.log(data.stats);
-
       dispatch(loginUser(data.user))
       dispatch(registEmail(data.email));
       dispatch(registToken(data.token));
@@ -213,6 +208,6 @@ export const addItem = itemData =>{
 
 export const updateLogged = boolLogged => {
   return function (dispatch) {
-    dispatch(logoutUser(itemData));
+    dispatch(logoutUser(logoutUser));
   }
 }

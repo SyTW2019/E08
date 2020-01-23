@@ -129,7 +129,11 @@ router.post('/login', (req, res) => {
           }
         )
       })
-
+      .error(error =>{
+        res.send(JSON.stringify({
+          id:0
+        }))
+      })
   });
 });
 

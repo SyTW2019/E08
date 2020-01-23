@@ -55,13 +55,12 @@ class Login extends React.Component{
   }
 
   handleError = event => {
+
     if(this.get_value()){
       this.setState({
         emailError:false,
       })
-
       event.preventDefault()
-      //this.props.userLoginFetch(this.state)
       this.props.userLoginFetch({
         email: this.state.emailValue,
         contrasena: this.state.pwdValue
@@ -103,6 +102,7 @@ class Login extends React.Component{
   }
 
   validateEmail(){
+    console.log("validating email")
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailValue))
       return true;
     else
@@ -112,6 +112,7 @@ class Login extends React.Component{
   get_value(){
     if(this.validateEmail())
     {
+      console.log("Inside get_value")
       if(this.state.emailValue)
         return true;
       else
