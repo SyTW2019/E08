@@ -70,7 +70,8 @@ class Registro extends React.Component{
     handleError = event =>{
         this.handleErrorEmail()
         this.handleErrorPwd()
-        if( this.state.pwdError === false && this.state.emailError === false)
+        //if( this.state.pwdError === false && this.state.emailError === false)
+        if(this.handleErrorEmail() && this.handleErrorPwd())
         {
             event.preventDefault();
             //this.props.userPostFetch(this.state);
@@ -90,25 +91,37 @@ class Registro extends React.Component{
 
     handleErrorEmail = event => {
         if(this.validateEmail())
+        {
             this.setState({
                 emailError:false,
                
             })
+            return true;
+        }
         else
+        {
             this.setState({
                 emailError:true,
             })
+            return false;
+        }
         
     }
     handleErrorPwd = event => {
         if(this.check_pwd())
+        {
             this.setState({
                 pwdError:false,
             })
+            return true;
+        }
         else
+        {
             this.setState({
                 pwdError:true,
             })
+            return false;
+        }
         
     }
 
