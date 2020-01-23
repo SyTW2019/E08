@@ -68,10 +68,10 @@ class Login extends React.Component{
         email: this.state.emailValue,
         contrasena: this.state.pwdValue
       })
-      if(this.props.logged)
-        console.log("Logeado");
-      else 
-        console.log("Fail al logear")
+      if(!this.props.logged)
+      this.setState({
+        emailError:true,
+      })
       /*
       .then((success) => {
         this.props.updateLogged({ logged:true});
