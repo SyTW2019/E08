@@ -69,10 +69,10 @@ class Login extends React.Component{
         contrasena: this.state.pwdValue
       })
       if(!this.props.logged)
-      this.setState({
-        emailError:true,
-        pwdError:true,
-      })
+        this.setState({
+          emailError:true,
+          pwdError:true,
+        })
     }
     else
       this.setState({

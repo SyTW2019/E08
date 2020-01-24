@@ -46,17 +46,6 @@ class Game extends React.Component{
     // this.handleclick = setInterval(this.updateData, 33)
   }
 
-  // updateData = () => {
-  //   this.calc_dps();
-  //   this.setState({
-  //     dps: this.dps,
-  //     oro: this.props.money,
-  //     // i: this.state.i,
-  //     currentLvl: this.state.currentLvl,
-  //     clickpower: this.state.clickpower,
-  //   })
-  // }
-
   calc_dps(){
     var current_dps = 0;
     for(var loop = 0; loop < 4; loop++)
