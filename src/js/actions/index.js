@@ -67,7 +67,7 @@ export const addItem = itemData =>{
 
 export const updateLogged = boolLogged => {
   return function (dispatch) {
-    dispatch(logoutUser(logoutUser));
+    dispatch(logoutUser(boolLogged));
   }
 }
 
